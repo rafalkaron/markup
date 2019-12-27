@@ -1,5 +1,5 @@
 # coding: utf-8
-__version__ = "0.2"
+__version__ = "0.2.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com.com>"
 
 """
@@ -17,12 +17,11 @@ import datetime
 _md = mistune.Markdown()
 _timestamp = datetime.datetime.now()
 
-
 def intro():
     print("Convert your Markdown files to HTML5.")
 
 def feed():
-    _input_type = input("Do you want to select a Markdown file? [Y/N]")
+    _input_type = input("Do you want to select a Markdown file? \n [Y] - Enables you to select the Markdown file that you want to convert. \n [N] - Enables you to write or paste Markdown syntax without the need to have a Markdown file. \n Enter [Y/N] ")
     if _input_type == "Y":
         load_file()
         exit()

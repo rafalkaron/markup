@@ -1,0 +1,51 @@
+<h1>coding: utf-8</h1>
+<p><strong>version</strong> = "0.2"
+<strong>author</strong> = "Rafał Karoń <a href="mailto:rafalkaron@gmail.com.com">rafalkaron@gmail.com.com</a>"</p>
+<p>"""
+    markdown2html (Codename: Asymetric Flamingo)
+    <del>~</del><del>~</del><del>~</del><del>~</del><del>~</del><del>~</del><del>~</del></p>
+<pre><code>Convert Markdown to HTML5.
+Uses mistune to parse the markdown.
+</code></pre>
+<p>"""</p>
+<h1>Libraries</h1>
+<p>import mistune
+import datetime</p>
+<h1>Global Variables</h1>
+<p>_md = mistune.Markdown()
+_timestamp = datetime.datetime.now()</p>
+<p>def intro():
+    print("Convert your Markdown files to HTML5.")</p>
+<p>def feed():
+    _input_type = input("Do you want to select a Markdown file? \n [Y] - Enables you to provide a full path to the file that you want to convert. \n [N] - Enables you to write or paste Markdown syntax without the need to have Markdown file. \n Enter [Y/N] ")
+    if _input_type == "Y":
+        load_file()
+        exit()
+    elif _input_type =="y":
+        load_file()
+        exit()
+    if _input_type =="N":
+        new_file()
+        exit()
+    elif _input_type =="n":
+        new_file()
+        exit()
+    else:
+        print("Try answering the following question again by entering the \"Y\" or \"N\" characters withour quotation marks.")
+        feed()</p>
+<p>def new_file():
+    _input_text = input("Enter Markdown syntax: ")
+    out()
+    _out_file.write(_md(_input_text))
+    exit()</p>
+<p>def load_file():
+    _file_location = input("Provide a full path to the Markdown file: ")
+    _input_file = open(_file_location)
+    out()
+    _out_file.write(_md(_input_file.read()))</p>
+<p>def out():
+    global _out_file
+    _out<em>file = open("out</em>" +str(<em>timestamp.strftime("%d</em>%m_%y-%H-%M-%S")) + ".html", "w")</p>
+<h1>Function calls</h1>
+<p>intro()
+feed()</p>
