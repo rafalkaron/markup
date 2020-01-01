@@ -3,7 +3,7 @@ __version__ = "0.7"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com.com>"
 
 """
-    MarkUP (Codename: Structured Broccoli)
+    MarkUP (Codename: Writing Broccoli)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Convert Markdown to HTML5 or DITA.
@@ -14,8 +14,14 @@ __author__ = "Rafał Karoń <rafalkaron@gmail.com.com>"
 
     Upcoming features:
     - Multiline input support
+    - Batch-convert files
     - CLI
     - GUI
+    - one exe file
+    - log file with time elapsed
+
+    Other ideas:
+    - safe words generator (machine learning)
 """
 
 #Libraries
@@ -29,11 +35,9 @@ import shutil               #Needed to remove files in the tmp folder
 _md = mistune.Markdown()
 _timestamp = datetime.datetime.now()
 _out_folder = Path("out")
-_out_folder_str = str(_out_folder)    
 _src_folder = Path("src")
-_src_folder_str = str(_src_folder)
 _tmp_folder = Path("tmp")
-_tmp_folder_str = str(_tmp_folder)
+_log_folder = Path("log")
 
 #Functions
 def intro():
@@ -80,7 +84,7 @@ def convert_md_to_dita():
     global _convert_md_to_dita_called
     _convert_md_to_dita_called = True
     _file_location = input("Provide a full path to the Markdown file: ")
-    _md_to_dita = os.system("markdown2dita -i " + _file_location + " -o " + _out_folder_str + "/" + "out_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".dita")
+    _md_to_dita = os.system("markdown2dita -i " + _file_location + " -o " + str(_out_folder) + "/" + "out_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".dita")
 _new_md_to_dita_called = False
 
 def new_md_to_html5():
@@ -98,15 +102,21 @@ def new_md_to_dita():
     _new_md_to_dita_called = True
     tmp_folder()
     md_input()
-    _tmp_file = open(_tmp_folder_str + "/" + "tmp.md", "w")
-    _tmp_file.write(_md(_md_input))
-    _md_to_dita = os.system("markdown2dita -i " + _tmp_folder_str + "/" + "tmp.md" + " -o " + _out_folder_str + "/" + "out_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".dita")
+    tmp_file()
+    _tmp_file.write(_md_input)
+    _tmp_file.close
+    _md_to_dita = os.system("markdown2dita -i " + str(tmp_folder) + "/" + "tmp.md" + " -o " + str(_out_folder) + "/" + "out_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".dita")
     src_file()
+    tmp_folder_del()
 _new_md_to_dita_called = False
 
 def tmp_folder():
     if not os.path.exists(_tmp_folder):
-        os.mkdir(_tmp_folder)    
+        os.mkdir(_tmp_folder)
+
+def tmp_file():
+    global _tmp_file
+    _tmp_file = open(str(_tmp_folder) + "/" + "tmp.md", "w")
 
 def tmp_folder_del():
     if os.path.exists(_tmp_folder):
@@ -119,10 +129,10 @@ def src_file():
         print("The source Markdown file will not be saved.")
     elif _save_source == "Y" or _save_source =="y":
         global _src_file
-        _src_file = open(_src_folder_str + "/" + "src_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".md", "w")
+        _src_file = open(str(_src_folder) + "/" + "src_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".md", "w")
         _src_file.write(_md_input)
         _src_file.close
-        print("The source Markdown file will be saved in the " + _src_folder_str + " directory.")
+        print("The source Markdown file will be saved in the " + str(_src_folder) + " directory.")
     else: 
         print("Try answering the following question again by entering the \"Y\" or \"N\" characters withour quotation marks.")
         src_file()
@@ -137,7 +147,7 @@ def src_folder():
 
 def out_html5():
     global _out_html5
-    _out_html5 = open(_out_folder_str + "/" + "out_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".html", "w")
+    _out_html5 = open(str(_out_folder) + "/" + "out_" +str(_timestamp.strftime("%d_%m_%y-%H-%M-%S")) + ".html", "w")
 
 def out_folder():
     if not os.path.exists(_out_folder):         #If the directory does not exist...
@@ -145,10 +155,18 @@ def out_folder():
 
 def summary():
     if _new_md_to_html5_called == True:
-        print("The Markdown syntax that you provided was rednered to the HTML5 file and put in the " + _out_folder_str + " folder.")
+        print("The Markdown syntax that you provided was rednered to the HTML5 file and put in the " + str(_out_folder) + " folder.")
     elif _convert_md_to_html5_called == True:
-        print("Your converted Markdown file was put to the " + _out_folder_str +" folder.")
+        print("Your converted Markdown file was put to the " + str(_out_folder) +" folder.")
     print("Thank you for using my software!")
+
+def log():
+    if not os.path.exists(_log_folder):
+        os.mkdir(_log_folder)
+    _log_file = open(str(_log_folder) + "/" + "log.txt", "a")
+    if _new_md_to_html5_called == True:
+            _log_file.write("\nNew Markdown file created in: ")
+    _log_file.close
 
 #Function calls
 intro()
@@ -156,5 +174,5 @@ out_folder()
 src_folder()
 feed()
 summary()
-tmp_folder_del()
+log()
 exit()
