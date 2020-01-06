@@ -312,6 +312,9 @@
   ('stringprep', 'c:\\python38\\lib\\stringprep.py', 'PYMODULE'),
   ('_py_abc', 'c:\\python38\\lib\\_py_abc.py', 'PYMODULE'),
   ('tracemalloc', 'c:\\python38\\lib\\tracemalloc.py', 'PYMODULE'),
+  ('markdown2dita',
+   'c:\\python38\\lib\\site-packages\\markdown2dita.py',
+   'PYMODULE'),
   ('glob', 'c:\\python38\\lib\\glob.py', 'PYMODULE'),
   ('os', 'c:\\python38\\lib\\os.py', 'PYMODULE'),
   ('mistune', 'c:\\python38\\lib\\site-packages\\mistune.py', 'PYMODULE')])
