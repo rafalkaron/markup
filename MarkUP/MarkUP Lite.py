@@ -1,8 +1,8 @@
-__version__ = "0.1"
+__version__ = "0.2"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com.com>"
 
 """
-    MarkUP Lite (Codename: Flamingo Parts)
+    MarkUP Lite (Codename: Modest Flamingo)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Convert all Markdown files in the MarkUP Lite directory to DITA.
@@ -20,6 +20,6 @@ _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\",
 _markdown_files = glob.glob(_markup_directory + "/*.md")
 
 for _markdown_file in _markdown_files:
-    _md_to_dita = os.system("markdown2dita -i " + _markdown_file + " -o " + _markdown_file + ".dita")
+    _md_to_dita = os.system("markdown2dita -i " + _markdown_file + " -o " + _markdown_file.replace("md", "dita"))
 
 exit()
