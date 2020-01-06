@@ -70,6 +70,17 @@ def multiline():
     _md_input = '\n'.join(MultiLine)
     """
 
+def convert_folder_md_to_html5():
+    global _convert_folder_md_to_html5_called
+    _convert_folder_md_to_html5_called = True
+    _folder_location = input("Provide a full path to the directory with Markdown files: ")
+    _md_in_folder = str(_folder_location + "\*.md")
+    for file in _md_in_folder:
+        out_html5()
+        _out_html5.write(_md(_input_file.read()))
+        _out_html5.close
+_convert_folder_md_to_html5_called = False
+
 def convert_md_to_html5():
     global _convert_md_to_html5_called
     _convert_md_to_html5_called = True #checks if the function was run
@@ -165,7 +176,9 @@ def log():
         os.mkdir(_log_folder)
     _log_file = open(str(_log_folder) + "/" + "log.txt", "a")
     if _new_md_to_html5_called == True:
-            _log_file.write("\nNew Markdown file created in: ")
+        _log_file.write("\nNew Markdown file created in: ")
+    elif _convert_md_to_html5_called == True:
+        _log_file.write("\nConverted Markdown file to HTML5 and placed in: ")
     _log_file.close
 
 #Function calls
