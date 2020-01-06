@@ -17,11 +17,9 @@ import mistune, os, glob
 _markup_filepath = os.path.abspath(__file__)
 _markup_filename = os.path.basename(__file__)
 _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")  
-
 _markdown_files = glob.glob(_markup_directory + "/*.md")
 
 for _markdown_file in _markdown_files:
-    _md_to_dita = os.system("markdown2dita -i " + _markdown_file + " -o " + str(_markup_directory) + ".dita")
+    _md_to_dita = os.system("markdown2dita -i " + _markdown_file + " -o " + _markdown_file + ".dita")
 
-    
 exit()
