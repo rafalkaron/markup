@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['MarkUP Lite.py'],
-             pathex=['C:\\LocalFiles\\GitHub\\MarkUP\\MarkUP'],
+             pathex=['/Users/rafalkaron/GitHub/MarkUP/MarkUP'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , icon='C:\\LocalFiles\\GitHub\\MarkUP\\MarkUP\\MarkUP Lite.ico')
+          console=True , icon='/Users/rafalkaron/GitHub/MarkUP/MarkUP/MarkUP Lite.ico')
