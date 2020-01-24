@@ -209,7 +209,7 @@ def main():
     parsed_args = _parse_args(sys.argv[1:])
 
     if parsed_args.input_file:
-        input_str = open(parsed_args.input_file, 'r').read()
+        input_str = open(parsed_args.input_file, 'r').read()                            #MODIFY
     elif not sys.stdin.isatty():
         input_str = ''.join(line for line in sys.stdin)
     else:
@@ -222,7 +222,7 @@ def main():
     dita_output = markdown(input_str)
 
     if parsed_args.output_file:
-        with open(parsed_args.output_file, 'w') as output_file:
+        with open(parsed_args.output_file, 'w') as output_file:                        #MODIFY
             output_file.write(dita_output)
     else:
         print(dita_output)
