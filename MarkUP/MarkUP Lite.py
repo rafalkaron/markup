@@ -1,6 +1,6 @@
 #coding: utf-8
 """
-    MarkUP Lite (Codename: Adolescent Flamingo)
+    MarkUP Lite (Codename: Independent Flamingo)
     ****************************************************************
 
     Convert all Markdown files in the MarkUP Lite directory to DITA.
@@ -16,7 +16,7 @@ import argparse, sys, mistune
 #Markup Lite Modules
 import os, glob, time, re
 
-__version__ = "0.7"
+__version__ = "1.0"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
 #markdown2dita code
@@ -204,37 +204,36 @@ def _parse_args(args):
 def markdown(text, escape=True, **kwargs):
     return Markdown(escape=escape, **kwargs)(text)
 
-#MarkUP Lite Global Variables
+#MarkUP Lite Variables
+##Markup Lite executable location
 _markup_filepath = os.path.abspath(__file__)
 _markup_filename = os.path.basename(__file__)
 _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
-_markdown_files = glob.glob(_markup_directory + "/*.md")
-_markdown_files_uppercase = glob.glob(_markup_directory + "/*.MD")
-_markdown_files_full = glob.glob(_markup_directory + "/*.markdown")
-_markdown_files_full_uppercase = glob.glob(_markup_directory + "/*.MARKDOWN")
-_markdown_files_all = list(set(_markdown_files + _markdown_files_uppercase + _markdown_files_full + _markdown_files_full_uppercase))
+##Markdown files in the Markup Lite location with different extensions
+_md_files = glob.glob(_markup_directory + "/*.md")
+_md_files_upper = glob.glob(_markup_directory + "/*.MD")
+_markdown_files = glob.glob(_markup_directory + "/*.markdown")
+_markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
+###Aggregation of every Markup file in the Markup Lite location
+_markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 
-#MarkUP Lite code
+#MarkUP Lite Code
 def intro():
     print("Converting your Markdown files to DITA...")
-"""
-def convert():
-    for _markdown_file in _markdown_files_all:
-        os.system("markdown2dita -i " + "\"" + _markdown_file + "\"" + " -o " + "\"" + re.sub("md", "dita", _markdown_file, flags=re.IGNORECASE) + "\"")
-"""
 
 def convert():
     for _markdown_file in _markdown_files_all:
         input_str = open(_markdown_file, 'r').read()
         markdown = Markdown()
         dita_output = markdown(input_str)
-        with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file: #add to re.sub md or markdown
+        with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
             output_file.write(dita_output)
-     
+
 def summary():
     print("Conversion successful!\nThis window will close automatically in 5 seconds.")
     time.sleep(5)
 
+#Invocations
 intro()
 convert()
 summary()
