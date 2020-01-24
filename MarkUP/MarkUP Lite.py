@@ -228,35 +228,12 @@ def convert():
         input_str = open(_markdown_file, 'r').read()
         markdown = Markdown()
         dita_output = markdown(input_str)
-        with open(re.sub("md", "dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
+        with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file: #add to re.sub md or markdown
             output_file.write(dita_output)
      
 def summary():
     print("Conversion successful!\nThis window will close automatically in 5 seconds.")
     time.sleep(5)
-
-#markdown2dita code
-def main():
-    parsed_args = _parse_args(sys.argv[1:])
-    
-    if parsed_args.input_file:
-        input_str = open(parsed_args.input_file, 'r').read()                            #MODIFY
-    elif not sys.stdin.isatty():
-        input_str = ''.join(line for line in sys.stdin)
-    else:
-        print('No input file specified and unable to read input on stdin.\n'
-              "Use the '-h' or '--help' flag to see usage information",
-              file=sys.stderr)
-        exit(1)
-
-    markdown = Markdown()
-    dita_output = markdown(input_str)
-
-    if parsed_args.output_file:
-        with open(parsed_args.output_file, 'w') as output_file:                        #MODIFY
-            output_file.write(dita_output)
-    else:
-        print(dita_output)
 
 intro()
 convert()
