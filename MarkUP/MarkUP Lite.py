@@ -36,33 +36,35 @@ _dita_files = glob.glob(_markup_directory + "/*.dita")
 # Timestamps
 _timestamp = datetime.datetime.now()
 # MarkUP Lite Code
+
 def intro():
     print("Converting your Markdown files to DITA...")
 
-def log_title():
-    with open(_markup_directory + "/" + "log_markup.txt", "a") as log_file:
-        log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
-
 def convert():
-    log_title()
     for _markdown_file in _markdown_files_all:
         global _topic_id
         _topic_id = "\"topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
-
         _input_str = open(_markdown_file, 'r').read()
         _markdown = Markdown()
         _dita_output = _markdown(_input_str)
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
             output_file.write(_dita_output)
         global _log_converted
-        _log_converted = _markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)
+        _log_converted = (_markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)).replace("\\", "/")
         global _log_topic_id
         _log_topic_id =  _topic_id
-        print(_log_converted)
-        print(_log_topic_id)
-        log()        
+        print(_log_converted + " [@ID=" + _log_topic_id +"]")
+        if _log_called == True:
+            log_items()        
 
 def log():
+    global _log_called
+    _log_called = True
+    with open(_markup_directory + "/" + "log_markup.txt", "a") as log_file:
+        log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
+_log_called = False
+
+def log_items():
     with open(_markup_directory + "/" + "log_markup.txt", "a+") as log_file:
         i = 1
         log_file_lines = log_file.readlines()
@@ -252,5 +254,6 @@ def markdown(text, escape=True, **kwargs):
 
 # Invocations
 intro()
+log()
 convert()
 summary()
