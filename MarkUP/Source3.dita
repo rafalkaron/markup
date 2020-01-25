@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-        <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-        <concept xml:lang="en-us" id="topic_nqrl7916">
-        <title>Source3</title>
-        <conbody>
-        <section>
-<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd"&gt;</p>
-<p>&lt;concept xml:lang="en-us" id="enter-id-here"&gt;</p>
-<p><title>Enter the page title here</title></p>
-<p><shortdesc>Enter the short description for this page here</shortdesc></p>
-<p><conbody></p>
-<codeblock><p><section><title>heading</title><p><i>test</i></p>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept xml:lang="en-us" id="topic_ikd82ve7">
+<title>Source3</title>
+<conbody>
+><section><title>title</title></section><section><title>heading 2</title><p>text</p>
 </section>
-&lt;/conbody&gt;
-&lt;/concept&gt;</p>
-</codeblock></section>
-        </conbody>
-        </concept>
+</conbody>
+</concept>
