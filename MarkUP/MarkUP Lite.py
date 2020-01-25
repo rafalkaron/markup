@@ -1,4 +1,4 @@
-#coding: utf-8
+# coding: utf-8
 """
     MarkUP Lite (Codename: Independent Flamingo)
     ****************************************************************
@@ -10,22 +10,76 @@
     Uses "markdown2dita" to convert Markdown to DITA. 
     "markdown2dita" uses "misuse" to parse Markdown.
 """
-#Markdown2dita Modules
+# Markdown2dita Modules
 from __future__ import print_function
 import argparse, sys, mistune
-#Markup Lite Modules
+# Markup Lite Modules
 import os, glob, time, re, random, string, datetime
 
 __version__ = "1.0"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
+# MarkUP Lite Variables
+## Markup Lite executable location
+_markup_filepath = os.path.abspath(__file__)
+_markup_filename = os.path.basename(__file__)
+_markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
+## Markdown files in the Markup Lite location with different extensions
+_md_files = glob.glob(_markup_directory + "/*.md")
+_md_files_upper = glob.glob(_markup_directory + "/*.MD")
+_markdown_files = glob.glob(_markup_directory + "/*.markdown")
+_markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
+### Aggregation of every Markup file in the Markup Lite location
+_markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
+## Converted DITA files
+_dita_files = glob.glob(_markup_directory + "/*.dita")
+# Timestamps
 _timestamp = datetime.datetime.now()
-_topic_id = "\"topic_" + _timestamp.strftime("%d-%m-%y-%H-%M-%S") + "_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
-print(_topic_id)
+# MarkUP Lite Code
+def intro():
+    print("Converting your Markdown files to DITA...")
 
-#markdown2dita code
+def log_title():
+    with open(_markup_directory + "/" + "log_markup.txt", "a") as log_file:
+        log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
+
+def convert():
+    log_title()
+    for _markdown_file in _markdown_files_all:
+        global _topic_id
+        _topic_id = "\"topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
+
+        _input_str = open(_markdown_file, 'r').read()
+        _markdown = Markdown()
+        _dita_output = _markdown(_input_str)
+        with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
+            output_file.write(_dita_output)
+        global _log_converted
+        _log_converted = _markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)
+        global _log_topic_id
+        _log_topic_id =  _topic_id
+        print(_log_converted)
+        print(_log_topic_id)
+        log()        
+
+def log():
+    with open(_markup_directory + "/" + "log_markup.txt", "a+") as log_file:
+        i = 1
+        log_file_lines = log_file.readlines()
+        for line in log_file_lines:
+            if line.startswith(r"["):
+                i += 1
+        log_file.write("[%s] " %i + _log_converted + " [@ID=" + _log_topic_id +"]" + "\n")
+
+def summary():
+    print("Conversion successful!\nThis window will close automatically in 5 seconds.")
+    time.sleep(5)
+
+# markdown2dita code
 class Renderer(mistune.Renderer):
-
+    for _markdown_file in _markdown_files_all:
+        global _topic_id
+        _topic_id = "\"topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
     def codespan(self, text):
         return '<codeph>{0}</codeph>'.format(escape(text.rstrip()))
 
@@ -44,7 +98,7 @@ class Renderer(mistune.Renderer):
         return '<codeblock>{0}</codeblock>'.format(text)
 
     def header(self, text, level, raw=None):
-        # Dita only supports one title per section
+        #  Dita only supports one title per section
         title_level = self.options.get('title_level', 2)
         if level <= title_level:
             return '</section><section><title>{0}</title>'.format(text)
@@ -140,8 +194,8 @@ class Markdown(mistune.Markdown):
         super(Markdown, self).__init__(
             renderer=renderer, inline=inline, block=block)
 
-    def parse(self, text, page_id=_topic_id,
-              title='Title'):               #that's where the title text is being generated
+    def parse(self, text, page_id= _topic_id,
+              title='Title'):               # that's where the title text is being generated
         output = super(Markdown, self).parse(text)
 
         if output.startswith('</section>'):
@@ -189,43 +243,14 @@ class Markdown(mistune.Markdown):
 
         return self.renderer.table(header, body, cols)
 
-#markdown2dita code
+# markdown2dita code
 def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
 
 def markdown(text, escape=True, **kwargs):
     return Markdown(escape=escape, **kwargs)(text)
 
-#MarkUP Lite Variables
-##Markup Lite executable location
-_markup_filepath = os.path.abspath(__file__)
-_markup_filename = os.path.basename(__file__)
-_markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
-##Markdown files in the Markup Lite location with different extensions
-_md_files = glob.glob(_markup_directory + "/*.md")
-_md_files_upper = glob.glob(_markup_directory + "/*.MD")
-_markdown_files = glob.glob(_markup_directory + "/*.markdown")
-_markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-###Aggregation of every Markup file in the Markup Lite location
-_markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
-
-#MarkUP Lite Code
-def intro():
-    print("Converting your Markdown files to DITA...")
-
-def convert():
-    for _markdown_file in _markdown_files_all:
-        input_str = open(_markdown_file, 'r').read()
-        markdown = Markdown()
-        dita_output = markdown(input_str)
-        with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
-            output_file.write(dita_output)
-
-def summary():
-    print("Conversion successful!\nThis window will close automatically in 5 seconds.")
-    time.sleep(5)
-
-#Invocations
+# Invocations
 intro()
 convert()
 summary()

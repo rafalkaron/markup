@@ -1,0 +1,15 @@
+Converted on 01/25/20 at 14:46:18
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source2.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source2.dita [@ID="topic_duxivf2k"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source3.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source3.dita [@ID="topic_4cajitk0"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source1.dita [@ID="topic_7y7spg6i"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source4Markdown.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source4Markdown.dita [@ID="topic_n1t1ueqx"]
+Converted on 01/25/20 at 14:46:27
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source4Markdown.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source4Markdown.dita [@ID="topic_t31i1ere"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source2.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source2.dita [@ID="topic_z1b27svz"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source1.dita [@ID="topic_n0ij22c1"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source3.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source3.dita [@ID="topic_irad0qmg"]
+Converted on 01/25/20 at 14:53:53
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source2.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source2.dita [@ID="topic_0e4kcg1c"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source4Markdown.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source4Markdown.dita [@ID="topic_ppxg56lw"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source3.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source3.dita [@ID="topic_o5ojsqqt"]
+[1] c:/LocalFiles/GitHub/MarkUP/MarkUP\Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP\Source1.dita [@ID="topic_4zdnd925"]
