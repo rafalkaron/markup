@@ -45,10 +45,71 @@ def convert():
         global _topic_id
         _topic_id = "\"topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
         _input_str = open(_markdown_file, 'r').read()
+        class Markdown(mistune.Markdown):
+
+            def __init__(self, renderer=None, inline=None, block=None, **kwargs):
+                if not renderer:
+                    renderer = Renderer(**kwargs)
+                else:
+                    kwargs.update(renderer.options)
+
+                super(Markdown, self).__init__(
+                    renderer=renderer, inline=inline, block=block)
+
+            def parse(self, text, page_id= _topic_id,
+                    title='Title'):               # that's where the title text is being generated
+                output = super(Markdown, self).parse(text)
+
+                if output.startswith('</section>'):
+                    output = output[9:]
+                else:
+                    output = '<section>\n' + output
+
+                output = """<?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+        <concept xml:lang="en-us" id="{0}">
+        <title>{1}</title>
+        <conbody>
+        {2}</section>
+        </conbody>
+        </concept>""".format(page_id, title, output)
+                return output
+
+            def output_table(self):
+
+                # Derived from the mistune library source code
+                aligns = self.token['align']
+                aligns_length = len(aligns)
+
+                cell = self.renderer.placeholder()
+
+                # header part
+                header = self.renderer.placeholder()
+                cols = len(self.token['header'])
+                for i, value in enumerate(self.token['header']):
+                    align = aligns[i] if i < aligns_length else None
+                    flags = {'header': True, 'align': align}
+                    cell += self.renderer.table_cell(self.inline(value), **flags)
+
+                header += self.renderer.table_row(cell)
+
+                # body part
+                body = self.renderer.placeholder()
+                for i, row in enumerate(self.token['cells']):
+                    cell = self.renderer.placeholder()
+                    for j, value in enumerate(row):
+                        align = aligns[j] if j < aligns_length else None
+                        flags = {'header': False, 'align': align}
+                        cell += self.renderer.table_cell(self.inline(value), **flags)
+                    body += self.renderer.table_row(cell)
+
+                return self.renderer.table(header, body, cols)
         _markdown = Markdown()
         _dita_output = _markdown(_input_str)
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
             output_file.write(_dita_output)
+        
+        # Logs
         global _log_converted
         _log_converted = (_markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)).replace("\\", "/")
         global _log_topic_id
@@ -185,65 +246,7 @@ class Renderer(mistune.Renderer):
     def strikethrough(self, text):
         return text
 
-class Markdown(mistune.Markdown):
 
-    def __init__(self, renderer=None, inline=None, block=None, **kwargs):
-        if not renderer:
-            renderer = Renderer(**kwargs)
-        else:
-            kwargs.update(renderer.options)
-
-        super(Markdown, self).__init__(
-            renderer=renderer, inline=inline, block=block)
-
-    def parse(self, text, page_id= _topic_id,
-              title='Title'):               # that's where the title text is being generated
-        output = super(Markdown, self).parse(text)
-
-        if output.startswith('</section>'):
-            output = output[9:]
-        else:
-            output = '<section>\n' + output
-
-        output = """<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept xml:lang="en-us" id="{0}">
-<title>{1}</title>
-<conbody>
-{2}</section>
-</conbody>
-</concept>""".format(page_id, title, output)
-        return output
-
-    def output_table(self):
-
-        # Derived from the mistune library source code
-        aligns = self.token['align']
-        aligns_length = len(aligns)
-
-        cell = self.renderer.placeholder()
-
-        # header part
-        header = self.renderer.placeholder()
-        cols = len(self.token['header'])
-        for i, value in enumerate(self.token['header']):
-            align = aligns[i] if i < aligns_length else None
-            flags = {'header': True, 'align': align}
-            cell += self.renderer.table_cell(self.inline(value), **flags)
-
-        header += self.renderer.table_row(cell)
-
-        # body part
-        body = self.renderer.placeholder()
-        for i, row in enumerate(self.token['cells']):
-            cell = self.renderer.placeholder()
-            for j, value in enumerate(row):
-                align = aligns[j] if j < aligns_length else None
-                flags = {'header': False, 'align': align}
-                cell += self.renderer.table_cell(self.inline(value), **flags)
-            body += self.renderer.table_row(cell)
-
-        return self.renderer.table(header, body, cols)
 
 # markdown2dita code
 def escape(text, quote=False, smart_amp=True):
