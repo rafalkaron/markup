@@ -10,11 +10,8 @@
     Uses "markdown2dita" to convert Markdown to DITA. 
     "markdown2dita" uses "misuse" to parse Markdown.
 """
-# Markdown2dita Modules
 from __future__ import print_function
-import argparse, sys, mistune
-# Markup Lite Modules
-import os, glob, time, re, random, string, datetime
+import argparse, sys, mistune, os, glob, time, re, random, string, datetime, xml.dom.minidom
 
 __version__ = "1.0"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
@@ -43,7 +40,7 @@ def intro():
 def convert():
     for _markdown_file in _markdown_files_all:
         global _topic_id
-        _topic_id = "\"topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
+        _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
         _input_str = open(_markdown_file, 'r').read()
         class Markdown(mistune.Markdown):
 
@@ -56,8 +53,8 @@ def convert():
                 super(Markdown, self).__init__(
                     renderer=renderer, inline=inline, block=block)
 
-            def parse(self, text, page_id= _topic_id,
-                    title='Title'):               # that's where the title text is being generated
+            def parse(self, text, page_id = _topic_id,
+                    title=_markdown_file.strip(_markup_directory)):               # that's where the title text is being generated// take the first # from the output? filename?
                 output = super(Markdown, self).parse(text)
 
                 if output.startswith('</section>'):
@@ -104,6 +101,7 @@ def convert():
                     body += self.renderer.table_row(cell)
 
                 return self.renderer.table(header, body, cols)
+                
         _markdown = Markdown()
         _dita_output = _markdown(_input_str)
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
