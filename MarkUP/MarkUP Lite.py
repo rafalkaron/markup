@@ -39,23 +39,21 @@ def intro():
 
 def convert():
     for _markdown_file in _markdown_files_all:
-        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE)
+        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")
         global _topic_id
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
         _input_str = open(_markdown_file, 'r').read()
         class Markdown(mistune.Markdown):
-
             def __init__(self, renderer=None, inline=None, block=None, **kwargs):
                 if not renderer:
                     renderer = Renderer(**kwargs)
                 else:
                     kwargs.update(renderer.options)
-
                 super(Markdown, self).__init__(
                     renderer=renderer, inline=inline, block=block)
 
             def parse(self, text, page_id = _topic_id,
-                    title= _file_title.strip(_markup_directory)):               # that's where the title text is being generated// take the first # from the output? filename?
+                    title= _file_title.strip(_markup_directory)):  # The first header as a title?
                 output = super(Markdown, self).parse(text)
 
                 if output.startswith('</section>'):
@@ -251,8 +249,7 @@ class Renderer(mistune.Renderer):
 def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
 
-def markdown(text, escape=True, **kwargs):
-    return Markdown(escape=escape, **kwargs)(text)
+
 
 # Invocations
 intro()
