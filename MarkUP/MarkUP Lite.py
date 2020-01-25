@@ -14,10 +14,14 @@
 from __future__ import print_function
 import argparse, sys, mistune
 #Markup Lite Modules
-import os, glob, time, re
+import os, glob, time, re, random, string, datetime
 
 __version__ = "1.0"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
+
+_timestamp = datetime.datetime.now()
+_topic_id = "\"topic_" + _timestamp.strftime("%d-%m-%y-%H-%M-%S") + "_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)]) + "\""
+print(_topic_id)
 
 #markdown2dita code
 class Renderer(mistune.Renderer):
@@ -136,8 +140,8 @@ class Markdown(mistune.Markdown):
         super(Markdown, self).__init__(
             renderer=renderer, inline=inline, block=block)
 
-    def parse(self, text, page_id='enter-id-here',
-              title='Enter the page title here'):
+    def parse(self, text, page_id=_topic_id,
+              title='Title'):               #that's where the title text is being generated
         output = super(Markdown, self).parse(text)
 
         if output.startswith('</section>'):
@@ -149,7 +153,6 @@ class Markdown(mistune.Markdown):
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept xml:lang="en-us" id="{0}">
 <title>{1}</title>
-<shortdesc>Enter the short description for this page here</shortdesc>
 <conbody>
 {2}</section>
 </conbody>
@@ -186,20 +189,9 @@ class Markdown(mistune.Markdown):
 
         return self.renderer.table(header, body, cols)
 
-
+#markdown2dita code
 def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
-
-def _parse_args(args):
-    parser = argparse.ArgumentParser(description='markdown2dita - a markdown '
-                                     'to dita-ot CLI conversion tool.')
-    parser.add_argument('-i', '--input-file',
-                        help='input markdown file to be converted.'
-                             'If omitted, input is taken from stdin.')
-    parser.add_argument('-o', '--output-file',
-                        help='output file for the converted dita content.'
-                             'If omitted, output is sent to stdout.')
-    return parser.parse_args(args)
 
 def markdown(text, escape=True, **kwargs):
     return Markdown(escape=escape, **kwargs)(text)
