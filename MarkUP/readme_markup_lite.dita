@@ -1,11 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept xml:lang="en-us" id="topic_ely7sk4w">
-<title>dme_markup_</title>
-<conbody>
-><section><title>Description</title><p>MarkUP Lite enables you to convert your Markdown files to DITA by performing the following actions:</p>
-<ol><li>Move the <b>MarkUP Lite.exe</b> file to the directory that contains your Markdown <i>(.md, .MD, .markdown, .MARKDOWN)</i> files.</li><li>Open the <b>MarkUP Lite.exe</b> and accept all security prompts that may appear.</li></ol><p><b>Dependencies</b></p><p>MarkUP Lite uses "markdown2dita" to convert Markdown to DITA. 
-"markdown2dita" uses "mustune" to parse Markdown.</p>
-</section>
-</conbody>
+<?xml version="1.0" ?>
+<!DOCTYPE concept
+  PUBLIC '-//OASIS//DTD DITA Concept//EN'
+  'concept.dtd'>
+<concept xml:lang="en-us" id="topic_d7nlk0lu">
+	
+
+	<title>dme_markup_</title>
+	
+
+	<conbody>
+		
+&gt;
+		<section>
+			<title>Description</title>
+			<p>MarkUP Lite enables you to convert your Markdown files to DITA by performing the following actions:</p>
+			
+
+			<ol>
+				<li>
+					Move the 
+					<b>MarkUP Lite.exe</b>
+					 file to the directory that contains your Markdown 
+					<i>(.md, .MD, .markdown, .MARKDOWN)</i>
+					 files.
+				</li>
+				<li>
+					Open the 
+					<b>MarkUP Lite.exe</b>
+					 and accept all security prompts that may appear.
+				</li>
+			</ol>
+			<p>
+				<b>Dependencies</b>
+			</p>
+			<p>MarkUP Lite uses &quot;markdown2dita&quot; to convert Markdown to DITA. 
+&quot;markdown2dita&quot; uses &quot;mustune&quot; to parse Markdown.</p>
+			
+
+		</section>
+		
+
+	</conbody>
+	
+
 </concept>
