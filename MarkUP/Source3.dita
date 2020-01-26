@@ -2,14 +2,9 @@
 <!DOCTYPE concept
   PUBLIC '-//OASIS//DTD DITA Concept//EN'
   'concept.dtd'>
-<concept xml:lang="en-us" id="topic_gdwhgja6">
-	
-
+<concept xml:lang="en-us" id="topic_u4djb1w1">
 	<title>Source3</title>
-	
-
 	<conbody>
-		
 &gt;
 		<section>
 			<title>title</title>
@@ -17,12 +12,6 @@
 		<section>
 			<title>heading 2</title>
 			<p>text</p>
-			
-
 		</section>
-		
-
 	</conbody>
-	
-
 </concept>

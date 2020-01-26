@@ -2,20 +2,13 @@
 <!DOCTYPE concept
   PUBLIC '-//OASIS//DTD DITA Concept//EN'
   'concept.dtd'>
-<concept xml:lang="en-us" id="topic_d7nlk0lu">
-	
-
+<concept xml:lang="en-us" id="topic_wm5y4ic5">
 	<title>dme_markup_</title>
-	
-
 	<conbody>
-		
 &gt;
 		<section>
 			<title>Description</title>
 			<p>MarkUP Lite enables you to convert your Markdown files to DITA by performing the following actions:</p>
-			
-
 			<ol>
 				<li>
 					Move the 
@@ -35,12 +28,6 @@
 			</p>
 			<p>MarkUP Lite uses &quot;markdown2dita&quot; to convert Markdown to DITA. 
 &quot;markdown2dita&quot; uses &quot;mustune&quot; to parse Markdown.</p>
-			
-
 		</section>
-		
-
 	</conbody>
-	
-
 </concept>
