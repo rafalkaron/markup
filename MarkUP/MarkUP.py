@@ -17,6 +17,7 @@
     - Log fixes (consecutive numbers)
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
     - Console should count-down to exit
+    - pretty-printing parser does not support MARKDOWN and markdown extensions
 """
 from __future__ import print_function
 import argparse, sys, mistune, os, glob, time, re, random, string, datetime, xml.dom.minidom
