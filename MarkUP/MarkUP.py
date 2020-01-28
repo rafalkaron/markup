@@ -13,17 +13,17 @@
     Coming soon:
     - Settable topictypes
     - MacOS version
-    - UI
-    - Log fixes (consecutive numbers)
+    - CLI
+    - File explorer?
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
-    - Console should count-down to exit
     - Program crashes if there's a file with markdown extension that actually contains the XML code (cannot be processed by the parser) - test out if that happens with codeblocks
     - Additional ">" characher after conbody is sometimes inserted
     - Set read-only to input files?
     - Error msg if sth goes wrong
+    - Table in the console output
 """
 from __future__ import print_function
-import argparse, sys, mistune, os, glob, time, re, random, string, datetime
+import argparse, sys, mistune, os, glob, re, random, string, datetime
 from xml.dom.minidom import parseString, xml
 
 __version__ = "1.1"
@@ -144,12 +144,7 @@ _log_called = False
 
 def log_items():
     with open(_markup_directory + "/" + "log_markup.txt", "a+") as log_file:
-        i = 1
-        log_file_lines = log_file.readlines()
-        for line in log_file_lines:
-            if line.startswith(r"["):
-                i += 1
-        log_file.write("[%s] " %i + _log_converted + " [@ID=" + _log_topic_id +"]" + "\n")
+        log_file.write(" - " + _log_converted + " [@ID=" + _log_topic_id +"]" + "\n")
 
 def summary():
     if _log_called == False:
