@@ -120,11 +120,14 @@ def convert():
         # Output
         _markdown = Markdown()
         _dita_output = _markdown(_input_str)
-        _dita_output_parse = xml.dom.minidom.parseString(_dita_output)
-        _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
-        _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
-            output_file.write(_dita_output_prettier)
+            try:
+                _dita_output_parse = xml.dom.minidom.parseString(_dita_output)
+                _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
+                _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
+                output_file.write(_dita_output_prettier)
+            except xml.parsers.expat.ExpatError:
+                output_file.write(_dita_output)
 
         # Logs
         global _log_converted
