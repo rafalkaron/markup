@@ -19,7 +19,8 @@
     - Program crashes if there's a file with markdown extension that actually contains the XML code (cannot be processed by the parser) - test out if that happens with codeblocks
     - Additional ">" characher after conbody is sometimes inserted
     - Set read-only to input files?
-    - Table in the console output
+    - Justify report
+    - Summary that informs you about errors
 """
 from __future__ import print_function
 import argparse, sys, mistune, os, glob, re, random, string, datetime
@@ -27,6 +28,21 @@ from xml.dom.minidom import parseString, xml
 
 __version__ = "1.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
+
+# Terminal Styling
+class term:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   MAGENTA = '\033[35m'
+   RED = '\033[91m'
+   GRAY = '\033[90m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
 
 # MarkUP Variables
 ## Markup executable location
@@ -42,23 +58,27 @@ _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
 _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 # Timestamps for logs
 _timestamp = datetime.datetime.now()
-
+#_markdown_directory = input(term.BOLD + "Enter a full path to the directory that contains the Markdown files that you want to convert: " + term.END)
+_log_markup = _markup_directory + "log_markup.txt"
 _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
 for _markdown_file in _markdown_files_all:
     _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")        
 
-class Markdown(mistune.Markdown):
+_parser_error_msg = "Not pretty-printed as the file is not parseable!"
+
+
+class render(mistune.Markdown):
     def __init__(self, renderer=None, inline=None, block=None, **kwargs):
         if not renderer:
             renderer = Renderer(**kwargs)
         else:
             kwargs.update(renderer.options)
-        super(Markdown, self).__init__(
+        super(render, self).__init__(
             renderer=renderer, inline=inline, block=block)
 
     def parse(self, text, page_id = _topic_id,
             title= _file_title.replace(_markup_directory, "")):
-        output = super(Markdown, self).parse(text)
+        output = super(render, self).parse(text)
         if output.startswith('</section>'):
             output = output[9:]
         else:
@@ -97,32 +117,53 @@ class Markdown(mistune.Markdown):
             body += self.renderer.table_row(cell)
         return self.renderer.table(header, body, cols)
 
-# Terminal Styling
-class termcolor:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
+class terminal():            
+    def intro():
+        if os.name == "nt":
+            print(term.BOLD + "Converting the Markdown files to DITA from: " + term.UNDERLINE + _markup_directory + term.END)
+        #if os.name == "posix":
+            #print(term.BOLD + "Converting the Markdown files to DITA from: " + term.UNDERLINE + _markdown_directory + term.END)
 
-# MarkUP Code
-def intro():
-    print(termcolor.CYAN + "Converting the following Markdown files from " + termcolor.UNDERLINE + _markup_directory + termcolor.END + termcolor.CYAN + " to DITA" + termcolor.END)
+    def report():
+        if _pretty_printing == True:
+            print(term.GREEN + term.BOLD + " [\u2713] " + term.END + _log_converted.replace(_markup_directory, "") + term.GRAY + " @ID=" + _log_topic_id + term.END)
+        if _pretty_printing == False:
+            print(term.YELLOW + term.BOLD + " [!] " + term.END + _log_converted.replace(_markup_directory, "") + term.GRAY + " @ID=" + _log_topic_id +term. END + term.YELLOW + " [" + _parser_error_msg + "]" + term.END)
+
+    def summary():
+        if _pretty_printing == True:
+            print(term.GREEN + term.BOLD + "Conversion completed successfully!" + term.END) 
+        if _pretty_printing == False:
+            print(term.YELLOW + "Conversion completed with warnings!" + term.END)
+        if _log_called == True:
+            print("For detailed information, see: " + _log_markup)
+        _exit_prompt = input(term.BOLD + term.MAGENTA + "To exit, press [Enter]" + term.END)
+        if _exit_prompt:
+            exit(0)
+
+class log():
+    def log():
+        global _log_called
+        _log_called = True
+        with open(_log_markup, "a") as log_file:
+            log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
+    _log_called = False
+
+    def log_items():
+        with open(_log_markup, "a+", encoding ="utf-8") as log_file:
+            if _pretty_printing == True:
+                log_file.write(" [\u2713] " + _log_converted + " @ID=" + _log_topic_id + "\n")
+            if _pretty_printing == False:
+                log_file.write(" [!] " + _log_converted + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]" + "\n")
 
 def convert():
     for _markdown_file in _markdown_files_all:
         global _file_title
         _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")        
         _input_str = open(_markdown_file, 'r').read()
-        Markdown()
         # Output
-        _markdown = Markdown()
-        _dita_output = _markdown(_input_str)
+        _render = render()
+        _dita_output = _render(_input_str)
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
             global _pretty_printing
             try:
@@ -134,41 +175,13 @@ def convert():
             except xml.parsers.expat.ExpatError:
                 output_file.write(_dita_output)
                 _pretty_printing = False
-
-        # Logs
         global _log_converted
         _log_converted = (_markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)).replace("\\", "/")
         global _log_topic_id
         _log_topic_id =  _topic_id
-        if _pretty_printing == True:
-            print(" \u2713 " + _log_converted.replace(_markup_directory, "") + " [@ID=" + _log_topic_id + "]")
-        if _pretty_printing == False:
-            print(" ! " + _log_converted.replace(_markup_directory, "") + " [@ID=" + _log_topic_id + "]" + termcolor.YELLOW + " [No prettyprinting applied due to the parser error!]" + termcolor.END)
+        terminal.report()
         if _log_called == True:
-            log_items()        
-
-def log():
-    global _log_called
-    _log_called = True
-    with open(_markup_directory + "/" + "log_markup.txt", "a") as log_file:
-        log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
-_log_called = False
-
-def log_items():
-    with open(_markup_directory + "/" + "log_markup.txt", "a+", encoding ="utf-8") as log_file:
-        if _pretty_printing == True:
-            log_file.write(" \u2713 " + _log_converted + " [@ID=" + _log_topic_id +"]" + "\n")
-        if _pretty_printing == False:
-            log_file.write(" ! " + _log_converted + " [@ID=" + _log_topic_id +"]" + " [No prettyprinting applied due to the parser error!]" + "\n")
-
-def summary():
-    if _log_called == False:
-        print(termcolor.GREEN + "Conversion successful!" + termcolor.END) 
-    if _log_called == True:
-        print(termcolor.GREEN + "Conversion successful! For detailed information, see log_markup.txt" + termcolor.END)
-    _exit_prompt = input(termcolor.BOLD + termcolor.CYAN + "To exit, press [Enter]" + termcolor.END)
-    if _exit_prompt:
-        exit(0)
+            log.log_items()
 
 # markdown2dita code
 class Renderer(mistune.Renderer):
@@ -275,7 +288,7 @@ def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
 
 # Invocations
-intro()
-log()
+terminal.intro()
+log.log()
 convert()
-summary()
+terminal.summary()
