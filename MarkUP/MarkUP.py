@@ -12,14 +12,13 @@
 
     Coming soon:
     - Settable topictypes
-    - MacOS version
+    - MacOS version (NT vs POSIX)
     - CLI
     - File explorer?
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
     - Program crashes if there's a file with markdown extension that actually contains the XML code (cannot be processed by the parser) - test out if that happens with codeblocks
     - Additional ">" characher after conbody is sometimes inserted
     - Set read-only to input files?
-    - Error msg if sth goes wrong
     - Table in the console output
 """
 from __future__ import print_function
@@ -44,6 +43,61 @@ _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _
 # Timestamps for logs
 _timestamp = datetime.datetime.now()
 
+_topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
+for _markdown_file in _markdown_files_all:
+    _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")        
+
+class Markdown(mistune.Markdown):
+    def __init__(self, renderer=None, inline=None, block=None, **kwargs):
+        if not renderer:
+            renderer = Renderer(**kwargs)
+        else:
+            kwargs.update(renderer.options)
+        super(Markdown, self).__init__(
+            renderer=renderer, inline=inline, block=block)
+
+    def parse(self, text, page_id = _topic_id,
+            title= _file_title.replace(_markup_directory, "")):
+        output = super(Markdown, self).parse(text)
+        if output.startswith('</section>'):
+            output = output[9:]
+        else:
+            output = '<section>\n' + output
+        output = """<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept xml:lang="en-us" id="{0}">
+<title>{1}</title>
+<conbody>
+{2}</section>
+</conbody>
+</concept>""".format(page_id, title, output)
+        return output
+
+    def output_table(self):
+        # Derived from the mistune library source code
+        aligns = self.token['align']
+        aligns_length = len(aligns)
+        cell = self.renderer.placeholder()
+        # header part
+        header = self.renderer.placeholder()
+        cols = len(self.token['header'])
+        for i, value in enumerate(self.token['header']):
+            align = aligns[i] if i < aligns_length else None
+            flags = {'header': True, 'align': align}
+            cell += self.renderer.table_cell(self.inline(value), **flags)
+        header += self.renderer.table_row(cell)
+        # body part
+        body = self.renderer.placeholder()
+        for i, row in enumerate(self.token['cells']):
+            cell = self.renderer.placeholder()
+            for j, value in enumerate(row):
+                align = aligns[j] if j < aligns_length else None
+                flags = {'header': False, 'align': align}
+                cell += self.renderer.table_cell(self.inline(value), **flags)
+            body += self.renderer.table_row(cell)
+        return self.renderer.table(header, body, cols)
+
+# Terminal Styling
 class termcolor:
    PURPLE = '\033[95m'
    CYAN = '\033[96m'
@@ -58,83 +112,38 @@ class termcolor:
 
 # MarkUP Code
 def intro():
-    print(termcolor.GREEN + "Converting the following Markdown files from " + termcolor.UNDERLINE + _markup_directory + termcolor.END + termcolor.GREEN + " to DITA" + termcolor.END)
+    print(termcolor.CYAN + "Converting the following Markdown files from " + termcolor.UNDERLINE + _markup_directory + termcolor.END + termcolor.CYAN + " to DITA" + termcolor.END)
 
 def convert():
     for _markdown_file in _markdown_files_all:
-        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")
-        global _topic_id
-        _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
+        global _file_title
+        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")        
         _input_str = open(_markdown_file, 'r').read()
-        
-        class Markdown(mistune.Markdown):
-            def __init__(self, renderer=None, inline=None, block=None, **kwargs):
-                if not renderer:
-                    renderer = Renderer(**kwargs)
-                else:
-                    kwargs.update(renderer.options)
-                super(Markdown, self).__init__(
-                    renderer=renderer, inline=inline, block=block)
-
-            def parse(self, text, page_id = _topic_id,
-                    title= _file_title.replace(_markup_directory, "")):
-                output = super(Markdown, self).parse(text)
-                if output.startswith('</section>'):
-                    output = output[9:]
-                else:
-                    output = '<section>\n' + output
-                output = """<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept xml:lang="en-us" id="{0}">
-<title>{1}</title>
-<conbody>
-{2}</section>
-</conbody>
-</concept>""".format(page_id, title, output)
-                return output
-
-            def output_table(self):
-                # Derived from the mistune library source code
-                aligns = self.token['align']
-                aligns_length = len(aligns)
-                cell = self.renderer.placeholder()
-                # header part
-                header = self.renderer.placeholder()
-                cols = len(self.token['header'])
-                for i, value in enumerate(self.token['header']):
-                    align = aligns[i] if i < aligns_length else None
-                    flags = {'header': True, 'align': align}
-                    cell += self.renderer.table_cell(self.inline(value), **flags)
-                header += self.renderer.table_row(cell)
-                # body part
-                body = self.renderer.placeholder()
-                for i, row in enumerate(self.token['cells']):
-                    cell = self.renderer.placeholder()
-                    for j, value in enumerate(row):
-                        align = aligns[j] if j < aligns_length else None
-                        flags = {'header': False, 'align': align}
-                        cell += self.renderer.table_cell(self.inline(value), **flags)
-                    body += self.renderer.table_row(cell)
-                return self.renderer.table(header, body, cols)
-        
+        Markdown()
         # Output
         _markdown = Markdown()
         _dita_output = _markdown(_input_str)
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
+            global _pretty_printing
             try:
                 _dita_output_parse = xml.dom.minidom.parseString(_dita_output)
                 _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
                 _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
                 output_file.write(_dita_output_prettier)
+                _pretty_printing = True
             except xml.parsers.expat.ExpatError:
                 output_file.write(_dita_output)
+                _pretty_printing = False
 
         # Logs
         global _log_converted
         _log_converted = (_markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)).replace("\\", "/")
         global _log_topic_id
         _log_topic_id =  _topic_id
-        print(" - " + _log_converted.replace(_markup_directory, "") + " [@ID=" + _log_topic_id +"]")
+        if _pretty_printing == True:
+            print(" \u2713 " + _log_converted.replace(_markup_directory, "") + " [@ID=" + _log_topic_id + "]")
+        if _pretty_printing == False:
+            print(" ! " + _log_converted.replace(_markup_directory, "") + " [@ID=" + _log_topic_id + "]" + termcolor.YELLOW + " [No prettyprinting applied due to the parser error!]" + termcolor.END)
         if _log_called == True:
             log_items()        
 
@@ -146,15 +155,18 @@ def log():
 _log_called = False
 
 def log_items():
-    with open(_markup_directory + "/" + "log_markup.txt", "a+") as log_file:
-        log_file.write(" - " + _log_converted + " [@ID=" + _log_topic_id +"]" + "\n")
+    with open(_markup_directory + "/" + "log_markup.txt", "a+", encoding ="utf-8") as log_file:
+        if _pretty_printing == True:
+            log_file.write(" \u2713 " + _log_converted + " [@ID=" + _log_topic_id +"]" + "\n")
+        if _pretty_printing == False:
+            log_file.write(" ! " + _log_converted + " [@ID=" + _log_topic_id +"]" + " [No prettyprinting applied due to the parser error!]" + "\n")
 
 def summary():
     if _log_called == False:
         print(termcolor.GREEN + "Conversion successful!" + termcolor.END) 
     if _log_called == True:
         print(termcolor.GREEN + "Conversion successful! For detailed information, see log_markup.txt" + termcolor.END)
-    _exit_prompt = input(termcolor.BOLD + termcolor.YELLOW + "To exit, press [Enter]" + termcolor.END)
+    _exit_prompt = input(termcolor.BOLD + termcolor.CYAN + "To exit, press [Enter]" + termcolor.END)
     if _exit_prompt:
         exit(0)
 
@@ -251,6 +263,7 @@ class Renderer(mistune.Renderer):
     
     def footnote_item(self, key, text):
         return ''
+    
     def footnotes(self, text):
         return ''
     
