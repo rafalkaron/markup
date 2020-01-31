@@ -3,9 +3,9 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\LocalFiles\\GitHub\\MarkUP\\MarkUP\\MarkUP.py'],
-             pathex=['C:\\LocalFiles\\GitHub\\MarkUP'],
-             binaries=[],
+a = Analysis(['/Users/rafalkaron/GitHub/MarkUP/MarkUP/MarkUP.py'],
+             pathex=['/Users/rafalkaron/GitHub/MarkUP'],
+             binaries=[('/System/Library/Frameworks/Tk.framework/Tk', 'tk'), ('/System/Library/Frameworks/Tcl.framework/Tcl', 'tcl')],
              datas=[],
              hiddenimports=[],
              hookspath=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , icon='C:\\LocalFiles\\GitHub\\MarkUP\\MarkUP\\MarkUP.ico')
+          console=True )
