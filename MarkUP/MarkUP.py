@@ -35,19 +35,28 @@ _markup_filepath = os.path.abspath(__file__)
 _markup_filename = os.path.basename(__file__)
 _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
 ## Markdown files in the Markup location with different extensions
-_md_files = glob.glob(_markup_directory + "/*.md")
-_md_files_upper = glob.glob(_markup_directory + "/*.MD")
-_markdown_files = glob.glob(_markup_directory + "/*.markdown")
-_markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
+if os.name=="posix":
+    _md_files = glob.glob(_markup_directory + "/*.md")
+    _md_files_upper = glob.glob(_markup_directory + "/*.MD")
+    _markdown_files = glob.glob(_markup_directory + "/*.markdown")
+    _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
+
+if os.name=="nt":
+    _markdown_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/")
+    _md_files = glob.glob(_markdown_directory + "/*.md")
+    _md_files_upper = glob.glob(_markdown_directory + "/*.MD")
+    _markdown_files = glob.glob(_markdown_directory + "/*.markdown")
+    _markdown_files_upper = glob.glob(_markdown_directory + "/*.MARKDOWN")
+    
 ### Aggregation of every Markup file in the Markup location
 _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 # Timestamps for logs
 _timestamp = datetime.datetime.now()
 _log_markup = _markup_directory + "log_markup.txt"
-_topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
 for _markdown_file in _markdown_files_all:
-    _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")        
-
+    _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")    
+_topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
+    
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
 class XML(mistune.Markdown):
@@ -277,13 +286,6 @@ def md_to_dita_curdir():
         terminal.report()
 
 def md_to_dita_chdir():
-    _markdown_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/")
-    _md_files = glob.glob(_markup_directory + "/*.md")
-    _md_files_upper = glob.glob(_markup_directory + "/*.MD")
-    _markdown_files = glob.glob(_markup_directory + "/*.markdown")
-    _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-    _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
-
     for _markdown_file in _markdown_files_all:
         global _file_title
         _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")

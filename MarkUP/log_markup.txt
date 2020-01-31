@@ -149,3 +149,52 @@ Converted on 01/31/20 at 14:32:56
  [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_g3pxzqaq"
  [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_g3pxzqaq"
  [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_g3pxzqaq"
+Converted on 01/31/20 at 14:55:44
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_vdyyxiyg"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_vdyyxiyg"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_vdyyxiyg"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_vdyyxiyg"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_vdyyxiyg"
+Converted on 01/31/20 at 14:57:02
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_f9fs3olx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_f9fs3olx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_f9fs3olx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_f9fs3olx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_f9fs3olx"
+Converted on 01/31/20 at 14:58:04
+Converted on 01/31/20 at 14:59:22
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_uavm2wn7"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_uavm2wn7"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_uavm2wn7"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_uavm2wn7"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_uavm2wn7"
+Converted on 01/31/20 at 14:59:53
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_2wiy556r"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_2wiy556r"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_2wiy556r"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_2wiy556r"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_2wiy556r"
+Converted on 01/31/20 at 15:00:12
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_eu2ho0jx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_eu2ho0jx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_eu2ho0jx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_eu2ho0jx"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_eu2ho0jx"
+Converted on 01/31/20 at 15:00:23
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_4l94kshj"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_4l94kshj"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_4l94kshj"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_4l94kshj"
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_4l94kshj"
+Converted on 01/31/20 at 15:03:27
+ [+] C:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> C:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID="topic_qgrrbgq8"
+ [+] C:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> C:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID="topic_qgrrbgq8"
+ [+] C:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> C:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID="topic_qgrrbgq8"
+ [+] C:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.md -> C:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup_lite.dita @ID="topic_qgrrbgq8"
+ [+] C:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> C:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID="topic_qgrrbgq8"
+Converted on 01/31/20 at 15:03:44
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID="topic_v4wv38c5"
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID="topic_v4wv38c5"
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup_lite.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup_lite.dita @ID="topic_v4wv38c5"
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID="topic_v4wv38c5" [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID="topic_v4wv38c5"
