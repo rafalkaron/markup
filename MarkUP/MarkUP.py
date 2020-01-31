@@ -12,14 +12,12 @@
 
     Coming soon:
     - Settable topictypes
-    - MacOS version (NT vs POSIX)
     - CLI
     - File explorer?
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
     - Program crashes if there's a file with markdown extension that actually contains the XML code (cannot be processed by the parser) - test out if that happens with codeblocks
     - Additional ">" characher after conbody is sometimes inserted
     - Set read-only to input files?
-    - Justify report
     - Summary that informs you about errors
 """
 from __future__ import print_function
@@ -52,23 +50,18 @@ _timestamp = datetime.datetime.now()
 _log_markup = _markup_directory + "log_markup.txt"
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
-
-
-
-
 class terminal():            
+    
     def intro():
         if os.name == "nt":
             print("Converting the Markdown files to DITA from: " + _markup_directory)
-        #if os.name == "posix":
-            #print("Converting the Markdown files to DITA from: " + _markdown_directory)
-
+    
     def report():
         if _pretty_printing == True:
             print(" [+] " + _log_converted.replace(_markup_directory, "") + " @ID=" + _log_topic_id)
         if _pretty_printing == False:
             print(" [!] " + _log_converted.replace(_markup_directory, "") + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]")
-
+    
     def summary():
         if _pretty_printing == True:
             print("Conversion completed successfully!") 
@@ -133,7 +126,6 @@ def md_to_dita():
         </conbody>
         </concept>""".format(page_id, title, output)
                 return output
-
             def output_table(self):
                 # Derived from the mistune library source code
                 aligns = self.token['align']
@@ -157,6 +149,7 @@ def md_to_dita():
                         cell += self.renderer.table_cell(self.inline(value), **flags)
                     body += self.renderer.table_row(cell)
                 return self.renderer.table(header, body, cols)
+    #Output
         _render = XML()
         _dita_output = _render(_input_str)
         with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
@@ -179,8 +172,6 @@ def md_to_dita():
             log.log_items()
     #Feedback
         terminal.report()
-
-
 
 def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
@@ -279,8 +270,6 @@ class Renderer(mistune.Renderer):
     
     def strikethrough(self, text):
         return text
-
-
 
 terminal.intro()
 log.log_init()
