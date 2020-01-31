@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!DOCTYPE concept
+  PUBLIC '-//OASIS//DTD DITA Concept//EN'
+  'concept.dtd'>
+<concept xml:lang="en-us" id="topic_2e5bqyxx">
+	<title>MD</title>
+	<conbody>
+		<section>
+			<p>&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;!DOCTYPE concept
+  PUBLIC '-//OASIS//DTD DITA Concept//EN'
+  'concept.dtd'&gt;</p>
+			<p>
+				&lt;concept xml:lang=&quot;en-us&quot; id=&quot;topic_kb6kq7e8&quot;&gt;
+				<title>Source4</title>
+				<conbody>
+&gt;
+					<section>
+						<title>heading</title>
+						<p>
+							<i>test</i>
+						</p>
+					</section>
+				</conbody>
+&lt;/concept&gt;
+			</p>
+		</section>
+	</conbody>
+</concept>
