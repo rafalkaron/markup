@@ -25,7 +25,7 @@ from xml.dom.minidom import parseString, xml
 __version__ = "1.1.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-if os.name=="nt":
+if os.name=="posix":
     _markup_filepath = os.path.abspath(__file__)
     _markup_filename = os.path.basename(__file__)
     _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
@@ -35,8 +35,11 @@ if os.name=="nt":
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
 
-if os.name=="posix":
-    _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
+if os.name=="nt":
+    try:
+        _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
+    except OSError:
+        _markup_directory = input("Try entering the full path to the directory that contains the Markdown files that you want to convert again: ").replace("\\", "/").replace("//", "/")
 
     _md_files = glob.glob(_markup_directory + "/*.md")
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
@@ -46,7 +49,6 @@ if os.name=="posix":
 _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 
 _timestamp = datetime.datetime.now()
-
 _log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
