@@ -27,34 +27,37 @@ from xml.dom.minidom import parseString, xml
 __version__ = "1.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-_markup_filepath = os.path.abspath(__file__)
-_markup_filename = os.path.basename(__file__)
-_markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
+if os.name=="posix":
+    _markup_filepath = os.path.abspath(__file__)
+    _markup_filename = os.path.basename(__file__)
+    _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
 
-if os.name=="nt":
     _md_files = glob.glob(_markup_directory + "/*.md")
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
 
-if os.name=="posix":
-    _markdown_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/")
-    _md_files = glob.glob(_markdown_directory + "/*.md")
-    _md_files_upper = glob.glob(_markdown_directory + "/*.MD")
-    _markdown_files = glob.glob(_markdown_directory + "/*.markdown")
-    _markdown_files_upper = glob.glob(_markdown_directory + "/*.MARKDOWN")
+if os.name=="nt":
+    _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
+
+    _md_files = glob.glob(_markup_directory + "/*.md")
+    _md_files_upper = glob.glob(_markup_directory + "/*.MD")
+    _markdown_files = glob.glob(_markup_directory + "/*.markdown")
+    _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
     
 _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 
 _timestamp = datetime.datetime.now()
-_log_markup = _markup_directory + "log_markup.txt"
+
+_log_markup = (_markup_directory + "/" + "log_markup.txt")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
+
+print(_markup_directory)
 
 class terminal():            
     
     def intro():
-        if os.name == "nt":
-            print("Converting the Markdown files to DITA from: " + _markup_directory)
+        print("Converting the Markdown files to DITA from: " + _markup_directory)
     
     def report():
         if _pretty_printing == True:
@@ -94,11 +97,8 @@ class log():
 def md_to_dita():
     for _markdown_file in _markdown_files_all:
     #Input
-        global _file_title
-        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE).replace("\\", "/")
-        global _topic_id
+        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE)
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
-        global _input_str
         _input_str = open(_markdown_file, 'r').read()
     #Output
         class XML(mistune.Markdown):
