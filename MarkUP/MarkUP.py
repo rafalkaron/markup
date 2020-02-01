@@ -15,19 +15,17 @@
     - CLI
     - File explorer?
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
-    - Program crashes if there's a file with markdown extension that actually contains the XML code (cannot be processed by the parser) - test out if that happens with codeblocks
     - Additional ">" characher after conbody is sometimes inserted
-    - Set read-only to input files?
     - Summary that informs you about errors
 """
 from __future__ import print_function
 import argparse, sys, mistune, os, glob, re, random, string, datetime
 from xml.dom.minidom import parseString, xml
 
-__version__ = "1.1"
+__version__ = "1.1.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-if os.name=="posix":
+if os.name=="nt":
     _markup_filepath = os.path.abspath(__file__)
     _markup_filename = os.path.basename(__file__)
     _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
@@ -37,7 +35,7 @@ if os.name=="posix":
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
 
-if os.name=="nt":
+if os.name=="posix":
     _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
 
     _md_files = glob.glob(_markup_directory + "/*.md")
@@ -49,7 +47,7 @@ _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _
 
 _timestamp = datetime.datetime.now()
 
-_log_markup = (_markup_directory + "/" + "log_markup.txt")
+_log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
 print(_markup_directory)
@@ -72,7 +70,7 @@ class terminal():
             print("Conversion completed with warnings!")
         if _log_called == True:
             print("For detailed information, see: " + _log_markup)
-        _exit_prompt = input("To exit, press [Enter]")
+        _exit_prompt = input("To finish, press [Enter]")
         if _exit_prompt:
             exit(0)
 
@@ -84,9 +82,6 @@ class log():
             log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
     _log_called = False
 
-   # def log_variables():
-
-
     def log_items():
         with open(_log_markup, "a+", encoding ="utf-8") as log_file:
             if _pretty_printing == True:
@@ -97,7 +92,10 @@ class log():
 def md_to_dita():
     for _markdown_file in _markdown_files_all:
     #Input
-        _file_title = re.sub(r"(\.md|\.markdown)", "", _markdown_file, flags=re.IGNORECASE)
+        _in_file_directory = _markdown_file.replace("\\", "/")
+        _in_file_name = _in_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
+        _in_file_title = re.sub(r"(\.md|\.markdown)", "", _in_file_name, flags=re.IGNORECASE)
+
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
         _input_str = open(_markdown_file, 'r').read()
     #Output
@@ -111,7 +109,7 @@ def md_to_dita():
                     renderer=renderer, inline=inline, block=block)
 
             def parse(self, text, page_id = _topic_id,
-                    title= _file_title.replace(_markup_directory, "")):
+                    title= _in_file_title):
                 output = super(XML, self).parse(text)
                 if output.startswith('</section>'):
                     output = output[9:]
