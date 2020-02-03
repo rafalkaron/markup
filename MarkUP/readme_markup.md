@@ -5,4 +5,4 @@ MarkUP Lite enables you to convert your Markdown files to DITA by performing the
 
 #### Dependencies
 MarkUP Lite uses "markdown2dita" to convert Markdown to DITA. 
-"markdown2dita" uses "mustune" to parse Markdown.
+"markdown2dita" uses "misuse" to parse Markdown.

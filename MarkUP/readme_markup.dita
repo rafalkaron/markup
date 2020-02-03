@@ -2,8 +2,8 @@
 <!DOCTYPE concept
   PUBLIC '-//OASIS//DTD DITA Concept//EN'
   'concept.dtd'>
-<concept xml:lang="en-us" id="topic_3xeg03xu">
-	<title>readme_markup_lite</title>
+<concept xml:lang="en-us" id="topic_0ciwwzt8">
+	<title>readme_markup</title>
 	<conbody>
         &gt;
 		<section>
@@ -27,7 +27,7 @@
 				<b>Dependencies</b>
 			</p>
 			<p>MarkUP Lite uses &quot;markdown2dita&quot; to convert Markdown to DITA. 
-&quot;markdown2dita&quot; uses &quot;mustune&quot; to parse Markdown.</p>
+&quot;markdown2dita&quot; uses &quot;misuse&quot; to parse Markdown.</p>
 		</section>
 	</conbody>
 </concept>

@@ -15,7 +15,7 @@
     - CLI
     - File explorer?
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
-    - Additional ">" characher after conbody is sometimes inserted
+    - Additional > characher after conbody is sometimes inserted
     - Summary that informs you about errors
 """
 from __future__ import print_function
@@ -33,7 +33,7 @@ if os.name=="posix":
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-
+    
 if os.name=="nt":
     _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
     _md_files = glob.glob(_markup_directory + "/*.md")
@@ -48,15 +48,14 @@ _log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
 class terminal():            
-    
     def intro():
         print("Converting the Markdown files to DITA from: " + _markup_directory)
     
     def report():
         if _pretty_printing == True:
-            print(" [+] " + _in_file_directory.replace(_markup_directory, "") + " -> " + _out_file_directory.replace(_markup_directory, "") + " @ID=" + _log_topic_id)
+            print(" [+] " + _in_file_name + " -> " + _out_file_name + " @ID=" + _topic_id)
         if _pretty_printing == False:
-            print(" [!] " + _in_file_directory.replace(_markup_directory, "") + " -> " + _out_file_directory.replace(_markup_directory, "") + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]")
+            print(" [!] " + _in_file_name + " -> " + _out_file_name + " @ID=" + _topic_id + " [" + _parser_error_msg + "]")
     
     def summary():
         if _pretty_printing == True:
@@ -83,22 +82,26 @@ class log():
     def log_items():
         with open(_log_markup, "a+", encoding ="utf-8") as log_file:
             if _pretty_printing == True:
-                log_file.write(" [+] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _log_topic_id + "\n")
+                log_file.write(" [+] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + "\n")
             if _pretty_printing == False:
-                log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]" + "\n")
+                log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + " [" + _parser_error_msg + "]" + "\n")
 
 def md_to_dita():
     for _markdown_file in _markdown_files_all:
-    #Input
         global _in_file_directory
         _in_file_directory = _markdown_file.replace("\\", "/")
+        global _in_file_name
         _in_file_name = _in_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
         _in_file_title = re.sub(r"(\.md|\.markdown)", "", _in_file_name, flags=re.IGNORECASE)
         global _out_file_directory
         _out_file_directory = re.sub(r"(\.md|\.markdown)", ".dita", _in_file_directory, flags=re.IGNORECASE)
+        global _out_file_name
+        _out_file_name = _out_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
+        global _topic_id
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
+    #Input
         _input_str = open(_markdown_file, 'r').read()
-    #Output
+    #Conversion
         class XML(mistune.Markdown):
             def __init__(self, renderer=None, inline=None, block=None, **kwargs):
                 if not renderer:
@@ -162,10 +165,6 @@ def md_to_dita():
                 output_file.write(_dita_output)
                 _pretty_printing = False
     #Logs
-        global _log_converted
-        _log_converted = (_markdown_file + " -> " + re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE)).replace("\\", "/")
-        global _log_topic_id
-        _log_topic_id =  _topic_id
         if _log_called == True:
             log.log_items()
     #Feedback
