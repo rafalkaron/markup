@@ -29,18 +29,13 @@ if os.name=="posix":
     _markup_filepath = os.path.abspath(__file__)
     _markup_filename = os.path.basename(__file__)
     _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
-
     _md_files = glob.glob(_markup_directory + "/*.md")
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
 
 if os.name=="nt":
-    try:
-        _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
-    except OSError:
-        _markup_directory = input("Try entering the full path to the directory that contains the Markdown files that you want to convert again: ").replace("\\", "/").replace("//", "/")
-
+    _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
     _md_files = glob.glob(_markup_directory + "/*.md")
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
@@ -52,8 +47,6 @@ _timestamp = datetime.datetime.now()
 _log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
-print(_markup_directory)
-
 class terminal():            
     
     def intro():
@@ -61,9 +54,9 @@ class terminal():
     
     def report():
         if _pretty_printing == True:
-            print(" [+] " + _log_converted.replace(_markup_directory, "") + " @ID=" + _log_topic_id)
+            print(" [+] " + _in_file_directory.replace(_markup_directory, "") + " -> " + _out_file_directory.replace(_markup_directory, "") + " @ID=" + _log_topic_id)
         if _pretty_printing == False:
-            print(" [!] " + _log_converted.replace(_markup_directory, "") + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]")
+            print(" [!] " + _in_file_directory.replace(_markup_directory, "") + " -> " + _out_file_directory.replace(_markup_directory, "") + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]")
     
     def summary():
         if _pretty_printing == True:
@@ -72,8 +65,11 @@ class terminal():
             print("Conversion completed with warnings!")
         if _log_called == True:
             print("For detailed information, see: " + _log_markup)
-        _exit_prompt = input("To finish, press [Enter]")
-        if _exit_prompt:
+        if os.name=="nt":
+            _exit_prompt = input("To finish, press [Enter]")
+            if _exit_prompt:
+                exit(0)
+        if os.name=="posix":
             exit(0)
 
 class log():
@@ -87,17 +83,19 @@ class log():
     def log_items():
         with open(_log_markup, "a+", encoding ="utf-8") as log_file:
             if _pretty_printing == True:
-                log_file.write(" [+] " + _log_converted + " @ID=" + _log_topic_id + "\n")
+                log_file.write(" [+] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _log_topic_id + "\n")
             if _pretty_printing == False:
-                log_file.write(" [!] " + _log_converted + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]" + "\n")
+                log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _log_topic_id + " [" + _parser_error_msg + "]" + "\n")
 
 def md_to_dita():
     for _markdown_file in _markdown_files_all:
     #Input
+        global _in_file_directory
         _in_file_directory = _markdown_file.replace("\\", "/")
         _in_file_name = _in_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
         _in_file_title = re.sub(r"(\.md|\.markdown)", "", _in_file_name, flags=re.IGNORECASE)
-
+        global _out_file_directory
+        _out_file_directory = re.sub(r"(\.md|\.markdown)", ".dita", _in_file_directory, flags=re.IGNORECASE)
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
         _input_str = open(_markdown_file, 'r').read()
     #Output
@@ -152,7 +150,7 @@ def md_to_dita():
     #Output
         _render = XML()
         _dita_output = _render(_input_str)
-        with open(re.sub(r"(\.md|\.markdown)", ".dita", _markdown_file, flags=re.IGNORECASE), "w") as output_file:
+        with open(_out_file_directory, "w") as output_file:
             global _pretty_printing
             try:
                 _dita_output_parse = xml.dom.minidom.parseString(_dita_output)

@@ -1,2 +1,4 @@
 .vscode/.gitignore
 .DS_Store
+MarkUP.spec
+build_commands.txt
