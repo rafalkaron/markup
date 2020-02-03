@@ -1,0 +1,29 @@
+#Z takich rzeczy na już to tak, klasy z wielkiej litery i nie pisz po ich definicji ()
+żeby kod był testowalny, nie używaj input tylko zamiast tego daj ten path jako parametr metody. Unikaj globalnych zmiennych. Coś takiego bym zrobił, że albo user podaje path w rodzaju MarkUP.py /path/do/pliku albo jeszcze lepiej MarkUP.py -r /opcjonalna/sciezka/do/wyników /sciezka/do/plikow
+15:28
+https://www.tutorialspoint.com/python/python_command_line_arguments.htm
+15:28
+następnie jak już będziesz to miał, to potem w pliku /test/simple.py napisałem taki banalny test
+15:29
+i teraz jak będziesz miał przerobioną tę metodę to wrzucasz jako tst_path plik który wypluła Twoja metoda
+15:29
+i ref_path niech pokazuje na resources/expected.dita
+15:29
+i teraz jeszcze jedna rzecz
+15:30
+ID jest generowane losowo, więec nie wystarczy filecmp.cmp albo assertListEqual <- trzeba dorobić logikę w taki sposób, że jak natknie się na parametr id w root elemencie XMLa, to żeby go pominął w porównaniu
+15:30
+ostatnia rzecz - ja tam zrobiłem io.open ale tylko dla przykładu - to trzeba zamykać
+15:31
+więcej grzechów na razie nie pamiętam, serdecznie za nie dziękuję i obiecuję że będze więcej, ale żeby było sexy to przerobiłbym tak jak pisałem :wink:
+
+jeszcze przy okazji tam dodałem trochę @static <- poczytaj sobie co to są metody statyczne, ten koncept jest trudny, ale bardzo przydatny
+15:33
+w skrócie, jeśli metoda nie zmienia / nie wykorzystuje stanu obiektu danej klasy to powinna być statyczna
+15:34
+np. czy_dwa_stringi_sa_rowne(s1, s2): return s1 == s2 może i powiinna być statyczna, wtedy nie trzeba tego parametru self
+15:35
+ale np. jak masz klasę Rower i on trzyma sobie w środku np. zmienną ‘marka’ i masz metodę
+czyJestemMarkiGiant(self): return self.marka == 'Giant' to już nie może być statyczne bo odwołuje się do stanu obiektu klasy Rower, czyli do konkretnego roweru :wink:
+15:36
+shit odruchowo napisalem te drugą nazwę metody w konwencji Javowej ale wiesz o co chodzi :smile:

@@ -4,10 +4,10 @@
     ****************************************************************
 
     Convert all Markdown files in the MarkUP Lite directory to DITA.
-    
+
     ****************************************************************
     Dependencies:
-    Uses "markdown2dita" to convert Markdown to DITA. 
+    Uses "markdown2dita" to convert Markdown to DITA.
     "markdown2dita" uses "misuse" to parse Markdown.
 
     Coming soon:
@@ -15,17 +15,25 @@
     - CLI
     - File explorer?
     - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
-    - Additional > characher after conbody is sometimes inserted
+    - Additional ">" characher after conbody is sometimes inserted
     - Summary that informs you about errors
 """
 from __future__ import print_function
-import argparse, sys, mistune, os, glob, re, random, string, datetime
+
 from xml.dom.minidom import parseString, xml
 
-__version__ = "1.1.2"
+import datetime
+import glob
+import mistune
+import os
+import random
+import re
+import string
+
+__version__ = "1.1.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-if os.name=="nt":
+if os.name == "nt":
     _markup_filepath = os.path.abspath(__file__)
     _markup_filename = os.path.basename(__file__)
     _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
@@ -33,80 +41,87 @@ if os.name=="nt":
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-    
-if os.name=="posix":
-    _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
+
+if os.name == "posix":
+    _markup_directory = input(
+        "Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\",
+                                                                                                                  "/").replace(
+        "//", "/")
     _md_files = glob.glob(_markup_directory + "/*.md")
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-    
+
 _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 
+_timestamp = datetime.datetime.now()
 _log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
-class Terminal:            
-    @staticmethod
-    def intro():
+
+class Terminal:
+    def intro(self):
         print("Converting the Markdown files to DITA from: " + _markup_directory)
-    
-    @staticmethod
-    def report():
+
+    def report(self):
         if _pretty_printing == True:
-            print(" [+] " + _in_file_name + " -> " + _out_file_name + " @ID=" + _topic_id)
+            print(" [+] " + _in_file_directory.replace(_markup_directory, "") + " -> " + _out_file_directory.replace(
+                _markup_directory, "") + " @ID=" + _topic_id)
         if _pretty_printing == False:
-            print(" [!] " + _in_file_name + " -> " + _out_file_name + " @ID=" + _topic_id + " [" + _parser_error_msg + "]")
-    
-    @staticmethod
-    def summary():
+            print(" [!] " + _in_file_directory.replace(_markup_directory, "") + " -> " + _out_file_directory.replace(
+                _markup_directory, "") + " @ID=" + _topic_id + " [" + _parser_error_msg + "]")
+
+    def summary(self):
         if _pretty_printing == True:
-            print("Conversion completed successfully!") 
+            print("Conversion completed successfully!")
         if _pretty_printing == False:
             print("Conversion completed with warnings!")
         if _log_called == True:
             print("For detailed information, see: " + _log_markup)
-        if os.name=="nt":
+        if os.name == "nt":
             _exit_prompt = input("To finish, press [Enter]")
             if _exit_prompt:
                 exit(0)
-        if os.name=="posix":
+        if os.name == "posix":
             exit(0)
+
 
 class Log:
     @staticmethod
     def log_init():
-        _timestamp = datetime.datetime.now()
         global _log_called
         _log_called = True
         with open(_log_markup, "a") as log_file:
-            log_file.write("Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
+            log_file.write(
+                "Converted on " + str(_timestamp.strftime("%x")) + " at " + str(_timestamp.strftime("%X")) + "\n")
+
     _log_called = False
 
     @staticmethod
     def log_items():
-        with open(_log_markup, "a+", encoding ="utf-8") as log_file:
+        with open(_log_markup, "a+", encoding="utf-8") as log_file:
             if _pretty_printing == True:
                 log_file.write(" [+] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + "\n")
             if _pretty_printing == False:
-                log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + " [" + _parser_error_msg + "]" + "\n")
+                log_file.write(
+                    " [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + " [" + _parser_error_msg + "]" + "\n")
+
 
 def md_to_dita():
     for _markdown_file in _markdown_files_all:
+
         global _in_file_directory
         _in_file_directory = _markdown_file.replace("\\", "/")
-        global _in_file_name
         _in_file_name = _in_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
         _in_file_title = re.sub(r"(\.md|\.markdown)", "", _in_file_name, flags=re.IGNORECASE)
         global _out_file_directory
         _out_file_directory = re.sub(r"(\.md|\.markdown)", ".dita", _in_file_directory, flags=re.IGNORECASE)
-        global _out_file_name
-        _out_file_name = _out_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
         global _topic_id
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
-    #Input
+        # Input
         _input_str = open(_markdown_file, 'r').read()
-    #Conversion
+
+        # Conversion
         class XML(mistune.Markdown):
             def __init__(self, renderer=None, inline=None, block=None, **kwargs):
                 if not renderer:
@@ -116,8 +131,8 @@ def md_to_dita():
                 super(XML, self).__init__(
                     renderer=renderer, inline=inline, block=block)
 
-            def parse(self, text, page_id = _topic_id,
-                    title= _in_file_title):
+            def parse(self, text, page_id=_topic_id,
+                      title=_in_file_title):
                 output = super(XML, self).parse(text)
                 if output.startswith('</section>'):
                     output = output[9:]
@@ -132,6 +147,7 @@ def md_to_dita():
         </conbody>
         </concept>""".format(page_id, title, output)
                 return output
+
             def output_table(self):
                 # Derived from the mistune library source code
                 aligns = self.token['align']
@@ -155,7 +171,8 @@ def md_to_dita():
                         cell += self.renderer.table_cell(self.inline(value), **flags)
                     body += self.renderer.table_row(cell)
                 return self.renderer.table(header, body, cols)
-    #Output
+
+        # Output
         _render = XML()
         _dita_output = _render(_input_str)
         with open(_out_file_directory, "w") as output_file:
@@ -163,20 +180,23 @@ def md_to_dita():
             try:
                 _dita_output_parse = xml.dom.minidom.parseString(_dita_output)
                 _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
-                _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
+                _dita_output_prettier = '\n'.join(
+                    list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
                 output_file.write(_dita_output_prettier)
                 _pretty_printing = True
             except xml.parsers.expat.ExpatError:
                 output_file.write(_dita_output)
                 _pretty_printing = False
-    #Logs
+        # Logs
         if _log_called == True:
             Log.log_items()
-    #Feedback
-        Terminal.report()
+        # Feedback
+        Terminal().report()
+
 
 def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
+
 
 class Renderer(mistune.Renderer):
     def codespan(self, text):
@@ -238,7 +258,7 @@ class Renderer(mistune.Renderer):
         return output
 
     def table(self, header, body, cols):
-        col_string = ['<colspec colname="col{0}"/>'.format(x+1)
+        col_string = ['<colspec colname="col{0}"/>'.format(x + 1)
                       for x in range(cols)]
         output_str = ('<table>\n<tgroup cols="{0}">\n{1}\n'
                       .format(cols, '\n'.join(col_string)))
@@ -254,26 +274,28 @@ class Renderer(mistune.Renderer):
             return '<entry align="{0}">{1}</entry>\n'.format(align, content)
         else:
             return '<entry>{0}</entry>\n'.format(content)
-    
+
     def autolink(self, link, is_email=False):
         text = link = escape(link)
         if is_email:
             link = 'mailto:{0}'.format(link)
         return '<xref href="{0}">{1}</xref>'.format(link, text)
-    
+
     def footnote_ref(self, key, index):
         return ''
-    
+
     def footnote_item(self, key, text):
         return ''
-    
+
     def footnotes(self, text):
         return ''
-    
+
     def strikethrough(self, text):
         return text
 
-Terminal.intro()
+
+t = Terminal()
+t.intro()
 Log.log_init()
 md_to_dita()
-Terminal.summary()
+t.summary()
