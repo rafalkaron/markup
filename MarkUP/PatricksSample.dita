@@ -2,14 +2,14 @@
 <!DOCTYPE concept
   PUBLIC '-//OASIS//DTD DITA Concept//EN'
   'concept.dtd'>
-<concept xml:lang="en-us" id="topic_pwbmcbam">
+<concept xml:lang="en-us" id="topic_46vvd8gi">
 	<title>PatricksSample</title>
 	<conbody>
 		<section>
 			<p>
-				The Help Center is made up of two parts: a knowledge base and a separate community platform. The community consists of questions and answers organized by topic. Questions can include ideas, tips, or any other community item. To get started, see &lt;a href=
-				<xref href="https://support.zendesk.com/hc/en-us/articles/203664406&gt;Managing">https://support.zendesk.com/hc/en-us/articles/203664406&gt;Managing</xref>
-				 community content&lt;/a&gt;.
+				The Help Center is made up of two parts: a knowledge base and a separate community platform. The community consists of questions and answers organized by topic. Questions can include ideas, tips, or any other community item. To get started, see 
+				<xref href="https://support.zendesk.com/hc/en-us/articles/203664406">Managing community content</xref>
+				.
 			</p>
 			<p>
 				<b>Note</b>

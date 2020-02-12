@@ -2,12 +2,15 @@
 <!DOCTYPE concept
   PUBLIC '-//OASIS//DTD DITA Concept//EN'
   'concept.dtd'>
-<concept xml:lang="en-us" id="topic_k5406ac0">
+<concept xml:lang="en-us" id="topic_j7kzrgb4">
 	<title>branch_manager copy</title>
 	<conbody>
         &gt;
 		<section>
 			<title>Well</title>
+			<p>
+				<xref href="https://www.google.com">google</xref>
+			</p>
 		</section>
 	</conbody>
 </concept>
