@@ -1,6 +1,24 @@
-Converted on 02/03/20 at 16:20:47
- [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID=topic_y2t0rbdf
- [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.dita @ID=topic_us1gk2jh
- [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID=topic_6ts2futs
- [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID=topic_4mhgrmmz
- [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID=topic_vjjnt63g
+Converted on 02/12/20 at 15:50:40
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID=topic_nb7nr4b6
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/branch_manager.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/branch_manager.dita @ID=topic_37t3nrlh
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.dita @ID=topic_ya2mr8h6
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID=topic_hcoabh19
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID=topic_b6ccfy18
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/sample.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/sample.dita @ID=topic_9ecg0y5l
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID=topic_l0o4wy0s
+Converted on 02/12/20 at 15:55:11
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/branch_manager.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/branch_manager.dita @ID=topic_99cfylvz
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID=topic_eu6wja7m
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID=topic_kjexlxoc
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID=topic_3o9b0h6s
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID=topic_6olrhblk
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.dita @ID=topic_4p1lqkzx
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/PatricksSample.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/PatricksSample.dita @ID=topic_veegv5ac
+Converted on 02/12/20 at 15:58:03
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/branch_manager.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/branch_manager.dita @ID=topic_r3j72h13
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/readme_markup.dita @ID=topic_8z4h2rhy
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/PatricksSample.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/PatricksSample.dita @ID=topic_3ry7r859
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.MARKDOWN -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source2.dita @ID=topic_k7zerh4a
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.MD -> c:/LocalFiles/GitHub/MarkUP/MarkUP/MD.dita @ID=topic_yb3mh7a6
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.markdown -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source3Invalid.dita @ID=topic_sbvcr4xe
+ [+] c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.md -> c:/LocalFiles/GitHub/MarkUP/MarkUP/Source1.dita @ID=topic_y7018lou

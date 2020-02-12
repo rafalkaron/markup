@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!DOCTYPE concept
+  PUBLIC '-//OASIS//DTD DITA Concept//EN'
+  'concept.dtd'>
+<concept xml:lang="en-us" id="topic_r3j72h13">
+	<title>branch_manager</title>
+	<conbody>
+		<section>
+			<p>&lt;!DOCTYPE html
+  SYSTEM &quot;about:legacy-compat&quot;&gt;</p>
+		</section>
+		<section>
+			<title>Branching Manager</title>
+			<p>The Branching
+                           Manager enables users with administrator
+      privileges to see all branches on easyDITA and to delete
+      branches that are no longer needed.</p>
+			<codeblock>        &lt;img class=&quot;image&quot; width=&quot;420&quot; src=&quot;../_Media/branching_admin.png&quot;&gt;</codeblock>
+		</section>
+	</conbody>
+</concept>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+        <concept xml:lang="en-us" id="topic_6jlyffiq">
+        <title>create_a_topic</title>
+        <conbody>
+        ><section><title>Create a Topic</title><p>Each topic type enables you to insert specific elements.</p>
+<li class="li step stepexpand">
+                In the content library, navigate to a folder and click 
+                                    Create New.
+            </li><li class="li step stepexpand">
+            Select the topic type you want to create.
+
+               <figure class="fig fignone" id="task-2603__fig_xyn_zzh_lkb"><figcaption>Figure 1. Create New Topic Window</figcaption>
+
+                  <img class="image" id="task-2603__image_onk_zzh_lkb" width="420" src="../_Media/create_new_concept_topic.png">
+               </figure>
+
+         </li><li class="li step stepexpand">
+                Enter a title and file name.
+            </li><li class="li step stepexpand">**Optional: **
+                Create the file in a folder different than the current folder by clicking
+                        Change and selecting a new location.
+                The save location is modified. 
+            </li><li class="li step stepexpand">**Optional: **
+                Assign the file to collections by clicking Collections
+                    and selecting collections from the list.
+                Collections are selected.
+            </li><li class="li step stepexpand">**Optional: **
+                Assign metadata to the file by filling in the Metadata
+                    fields.
+                Metadata is selected.
+            </li><li class="li step stepexpand">
+                Do one of the following:
+                <ul class="ul choices" id="task-2603__d60e535">
+                    <li class="li choice">To create and open the file, click 
+                                    Create &amp; Edit
+                                .</li>
+                    <li class="li choice">To create the file and return to the content library, click 
+                                    Create
+                                .</li>
+                </ul>
+            </li></section>
+        </conbody>
+        </concept>

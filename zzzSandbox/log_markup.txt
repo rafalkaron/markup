@@ -1,0 +1,139 @@
+Converted on 01/31/20 at 15:40:43
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID="topic_zzx3bdvf"
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID="topic_zzx3bdvf"
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID="topic_zzx3bdvf"
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID="topic_zzx3bdvf" [Not pretty-printed as the file is not parseable!]
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID="topic_zzx3bdvf"
+Converted on 01/31/20 at 15:53:56
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID="topic_8gynnkvk"
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID="topic_8gynnkvk"
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID="topic_8gynnkvk" [Not pretty-printed as the file is not parseable!]
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID="topic_8gynnkvk"
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID="topic_8gynnkvk"
+Converted on 01/31/20 at 16:06:09
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID="topic_ys6ps3e0"
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID="topic_ys6ps3e0" [Not pretty-printed as the file is not parseable!]
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID="topic_ys6ps3e0"
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID="topic_ys6ps3e0"
+ [✓] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID="topic_ys6ps3e0"
+Converted on 01/31/20 at 20:51:27
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_0yp95p4q
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_7hz5puix
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_0spel8m7
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_ke5u6blt
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_0ukalff2 [Not pretty-printed as the file is not parseable!]
+Converted on 01/31/20 at 20:51:38
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_ceimkn62
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_mtbi5sn8 [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_v9hewab8
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_d3ekjco2
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_ljzxcwz5
+Converted on 02/01/20 at 14:01:09
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_djfea2t9
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_psnqmesr
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_1k4307zq
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_htjc8l63 [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_qpvq5k7y
+Converted on 02/01/20 at 14:03:21
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_iedxebyt
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_qxjec7l9
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_63ovwcvc
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_i6rdpxlx [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_7o7514k5
+Converted on 02/01/20 at 14:05:02
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_6i3uqmoi
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_9a43sxkh
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_lu9vkble
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_kyg6mrlr [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_5d4tn8hu
+Converted on 02/01/20 at 14:05:55
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_8n4v57xf
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_ccyv0yvi
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_ue5jx8eq
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_598s3iri [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_147jnw12
+Converted on 02/01/20 at 14:06:33
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_8090ve3g
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_ybub2jfk
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_vuy32wun
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_r5bwg2b8 [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_sndaogpk
+Converted on 02/01/20 at 14:07:27
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_8v7wupzp [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_au1spalx
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_9bj2zek1
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_rcp0kr1m
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_byi52giw
+Converted on 02/01/20 at 14:10:32
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_4tjailzd [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_hjbsijwn
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_btox37k2
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_pti9lteo
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_zfu7e0jm
+Converted on 02/01/20 at 14:11:42
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_13fcap2o
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_rrg9fh14
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_csl0y2nj
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_uavdbdpr [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_kt77koqd
+Converted on 02/01/20 at 14:13:29
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_4d5u89cq
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_ba6jpdsl
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_epc5enr4
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_21ss09gr
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_i5zr65h7 [Not pretty-printed as the file is not parseable!]
+Converted on 02/01/20 at 14:16:30
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_0w56y6fo [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_1hgah8wy
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_ejmnwuvs
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_bgctujmg
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_0992bk19
+Converted on 02/01/20 at 14:17:13
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_m2j8qnby
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_fisj5erj
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_wxg9m7ya
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_erkg9g6j [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_79fhcb3b
+Converted on 02/01/20 at 14:20:23
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_cap5u66p
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_rjjat74i
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_61p0cyhd
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_h19diov9 [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_6lb89apk
+Converted on 02/01/20 at 14:22:39
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_k7h5q7no
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_4s4hgncj [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_y0vo5ivt
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_uucej4n7
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_xw72opui
+Converted on 02/01/20 at 14:23:35
+Converted on 02/01/20 at 14:23:57
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_iqclt7y6
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_yyhru1uq
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_vkxx4r47 [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_2ixv31da
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_scopuhss
+Converted on 02/01/20 at 14:25:01
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_yfvoqy5g [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_ntowd773
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_rrp4gilt
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_wbpqahzi
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_5z5ifohr
+Converted on 02/01/20 at 14:25:54
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_qo41vtt8
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_l332etun [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_2q1hfpn2
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_1l2eucpi
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_fsbl8stj
+Converted on 02/01/20 at 14:26:40
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_wbwuf8h2
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_gfeovj03 [Not pretty-printed as the file is not parseable!]
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_uwoq04n3
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_s6grwpta
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_3k74jlux
+Converted on 02/07/20 at 20:39:01
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.MD -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/MD.dita @ID=topic_bizffuf9
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.MARKDOWN -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source2.dita @ID=topic_1qnwjr7z
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/readme_markup.dita @ID=topic_f6kuynbn
+ [+] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.md -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source1.dita @ID=topic_y3bhdhzw
+ [!] C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.markdown -> C:/Users/rafal/Desktop/MarkUP Lite Sandbox/Source3Invalid.dita @ID=topic_ezveluzc [Not pretty-printed as the file is not parseable!]
