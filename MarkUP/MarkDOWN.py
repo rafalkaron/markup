@@ -9,6 +9,7 @@
 """
 import argparse, sys, mistune, os, glob, re, string
 import tomd
+import htmlmin
 
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
@@ -36,8 +37,9 @@ def html_to_dita():
         _out_file_name = _out_file_path.replace(_script_directory + "/", "").replace(_script_directory, "")
     #Input
         _input_str = open(_html_file, 'r').read()
+        _input_mini = htmlmin.minify(_input_str, remove_empty_space=True)
     #Conversion
-        _tomd = tomd.convert(_input_str)
+        _tomd = tomd.convert(_input_mini)
     #Output
         with open(_out_file_path, "w") as output_file:
             output_file.write(_tomd)
