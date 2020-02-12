@@ -22,8 +22,47 @@ from __future__ import print_function
 import argparse, sys, mistune, os, glob, re, random, string, datetime
 from xml.dom.minidom import parseString, xml
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
+
+### HTML to DITA ---------------------------------------------------------------------------------------------
+def html_to_dita():
+    import tomd
+    import htmlmin
+    if os.name=="nt":
+        _script_filepath = os.path.abspath(__file__)
+        _script_filename = os.path.basename(__file__)
+        _script_directory = _script_filepath.replace(_script_filename, "").replace("\\", "/")
+        _html_files = glob.glob(_script_directory + "/*.html")
+        _html_files_upper = glob.glob(_script_directory + "/*.HTML")
+        
+    if os.name=="posix":
+        _script_directory = input("Enter a full path to the directory that contains the HTML files that you want to convert: ").replace("\\", "/").replace("//", "/")
+        _md_files = glob.glob(_script_directory + "/*.html")
+        _md_files_upper = glob.glob(_script_directory + "/*.HTML")
+
+    _html_files_all = list(set(_html_files + _html_files_upper))
+
+    for _html_file in _html_files_all:
+    #Variables
+        _in_file_path = _html_file.replace("\\", "/")
+        _in_file_name = _in_file_path.replace(_script_directory + "/", "").replace(_script_directory, "")
+        _out_file_path = re.sub(r".html", ".md", _in_file_path, flags=re.IGNORECASE)
+        _out_file_name = _out_file_path.replace(_script_directory + "/", "").replace(_script_directory, "")
+    #Input
+        _input_str = open(_html_file, 'r').read()
+        _input_mini = htmlmin.minify(_input_str, remove_empty_space=True)
+        #_input_pretty = html.fromstring(_input_str)
+    #Conversion
+        _tomd = tomd.convert(_input_mini)
+        #_tomd = tomd.convert(_input_str)
+        #_tomd = tomd.convert(etree.tostring(_input_pretty, pretty_print=True))
+    #Output
+        with open(_out_file_path, "w") as output_file:
+            output_file.write(_tomd)
+
+html_to_dita()
+### HTML to DITA ---------------------------------------------------------------------------------------------
 
 if os.name=="nt":
     _markup_filepath = os.path.abspath(__file__)
