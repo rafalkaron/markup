@@ -28,7 +28,7 @@ __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 ### HTML to DITA ---------------------------------------------------------------------------------------------
 def html_to_dita():
     import tomd
-    import htmlmin
+    #import htmlmin
     import markdown
     #import pypandoc
 
@@ -54,7 +54,7 @@ def html_to_dita():
         _out_file_name = _out_file_path.replace(_script_directory + "/", "").replace(_script_directory, "")
     #Input
         _input_str = open(_html_file, 'r').read()
-        _input_mini = htmlmin.minify(_input_str)
+        #_input_mini = htmlmin.minify(_input_str)
         _input_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), _input_str.split('\n'))))
     #Conversion
         #_tomd = tomd.convert(_input_mini)
@@ -62,11 +62,13 @@ def html_to_dita():
         _tomd = tomd.convert(_input_pretty)
         #_tomd_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), _tomd.split('\n'))))
         _tomd_pretty = _tomd.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("    ", "")
+        _tomd_prettier = re.sub(r"[ \t]+", " ", _tomd)
+        _tomd_prettiest = re.sub(r"\n\s*\n\s*", "\n\n", _tomd_prettier)
         #_pandoc = pypandoc.convert_text(_input_mini, "md", format="html", encoding="utf-8")
         #print(_pandoc)
     #Output
         with open(_out_file_path, "w") as output_file:
-            output_file.write(_tomd_pretty)
+            output_file.write(_tomd_prettiest)
 
 html_to_dita()
 ### HTML to DITA ---------------------------------------------------------------------------------------------
