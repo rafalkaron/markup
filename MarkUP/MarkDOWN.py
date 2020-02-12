@@ -10,6 +10,7 @@
 import argparse, sys, mistune, os, glob, re, string
 import tomd
 import htmlmin
+#from lxml import etree, html
 
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
@@ -38,8 +39,11 @@ def html_to_dita():
     #Input
         _input_str = open(_html_file, 'r').read()
         _input_mini = htmlmin.minify(_input_str, remove_empty_space=True)
+        #_input_pretty = html.fromstring(_input_str)
     #Conversion
         _tomd = tomd.convert(_input_mini)
+        #_tomd = tomd.convert(_input_str)
+        #_tomd = tomd.convert(etree.tostring(_input_pretty, pretty_print=True))
     #Output
         with open(_out_file_path, "w") as output_file:
             output_file.write(_tomd)
