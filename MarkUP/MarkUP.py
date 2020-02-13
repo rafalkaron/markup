@@ -31,7 +31,13 @@ def html_to_dita():
     #import htmlmin
     import markdown
     #import pypandoc
-
+    _script_filepath = os.path.abspath(__file__)
+    _script_filename = os.path.basename(__file__)
+    _script_directory = _script_filepath.replace(_script_filename, "").replace("\\", "/")
+    _html_files = glob.glob(_script_directory + "/*.html")
+    _html_files_upper = glob.glob(_script_directory + "/*.HTML")
+    _html_files_all = list(set(_html_files + _html_files_upper))
+    """
     if os.name=="nt":
         _script_filepath = os.path.abspath(__file__)
         _script_filename = os.path.basename(__file__)
@@ -45,7 +51,7 @@ def html_to_dita():
         _md_files_upper = glob.glob(_script_directory + "/*.HTML")
 
     _html_files_all = list(set(_html_files + _html_files_upper))
-
+    """
     for _html_file in _html_files_all:
     #Variables
         _in_file_path = _html_file.replace("\\", "/")
