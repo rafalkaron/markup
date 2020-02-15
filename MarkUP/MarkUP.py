@@ -78,7 +78,14 @@ def html_to_dita():
 
 html_to_dita()
 ### HTML to DITA ---------------------------------------------------------------------------------------------
-
+_markup_filepath = os.path.abspath(__file__)
+_markup_filename = os.path.basename(__file__)
+_markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
+_md_files = glob.glob(_markup_directory + "/*.md")
+_md_files_upper = glob.glob(_markup_directory + "/*.MD")
+_markdown_files = glob.glob(_markup_directory + "/*.markdown")
+_markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
+"""    
 if os.name=="nt":
     _markup_filepath = os.path.abspath(__file__)
     _markup_filename = os.path.basename(__file__)
@@ -94,7 +101,7 @@ if os.name=="posix":
     _md_files_upper = glob.glob(_markup_directory + "/*.MD")
     _markdown_files = glob.glob(_markup_directory + "/*.markdown")
     _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-    
+"""    
 _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 
 _log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
