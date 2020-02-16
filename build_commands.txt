@@ -1,0 +1,2 @@
+pyinstaller "C:\LocalFiles\GitHub\MarkUP\MarkUP\MarkUP.py" -i "C:\LocalFiles\GitHub\MarkUP\MarkUP\MarkUP.ico" --onefile
+sudo pyinstaller --onefile --add-binary='/System/Library/Frameworks/Tk.framework/Tk':'tk' --add-binary='/System/Library/Frameworks/Tcl.framework/Tcl':'tcl' "/Users/rafalkaron/GitHub/MarkUP/MarkUP/MarkUP.py"
