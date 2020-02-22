@@ -123,3 +123,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.vscode/settings.json
+.vscode/settings.json
+.vscode/settings.json
+.vscode/settings.json
+MarkUP/*.dita
+MarkUP/*.html
+MarkUP/*.md
+MarkUP/*.MD
+MarkUP/*.MARKDOWN
+MarkUP/*.markdown
+MarkUP/*.txt
