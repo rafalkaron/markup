@@ -13,92 +13,20 @@ from xml.dom.minidom import parseString, xml
 __version__ = "1.1.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-### HTML to DITA ---------------------------------------------------------------------------------------------
-def html_to_dita():
-    import tomd
-    #import htmlmin
-    import markdown
-    #import pypandoc
-    _script_filepath = os.path.abspath(__file__)
-    _script_filename = os.path.basename(__file__)
-    _script_directory = _script_filepath.replace(_script_filename, "").replace("\\", "/")
-    _html_files = glob.glob(_script_directory + "/*.html")
-    _html_files_upper = glob.glob(_script_directory + "/*.HTML")
-    _html_files_all = list(set(_html_files + _html_files_upper))
-    """
-    if os.name=="nt":
-        _script_filepath = os.path.abspath(__file__)
-        _script_filename = os.path.basename(__file__)
-        _script_directory = _script_filepath.replace(_script_filename, "").replace("\\", "/")
-        _html_files = glob.glob(_script_directory + "/*.html")
-        _html_files_upper = glob.glob(_script_directory + "/*.HTML")
-        
-    if os.name=="posix":
-        _script_directory = input("Enter a full path to the directory that contains the HTML files that you want to convert: ").replace("\\", "/").replace("//", "/")
-        _md_files = glob.glob(_script_directory + "/*.html")
-        _md_files_upper = glob.glob(_script_directory + "/*.HTML")
+if getattr(sys, 'frozen', False):
+    app_path = os.path.dirname(sys.executable)
+elif __file__:
+    app_path = os.path.dirname(__file__)
 
-    _html_files_all = list(set(_html_files + _html_files_upper))
-    """
-    for _html_file in _html_files_all:
-    #Variables
-        _in_file_path = _html_file.replace("\\", "/")
-        _in_file_name = _in_file_path.replace(_script_directory + "/", "").replace(_script_directory, "")
-        _out_file_path = re.sub(r".html", ".md", _in_file_path, flags=re.IGNORECASE)
-        _out_file_name = _out_file_path.replace(_script_directory + "/", "").replace(_script_directory, "")
-    #Input
-        _input_str = open(_html_file, 'r').read()
-        #_input_mini = htmlmin.minify(_input_str)
-        _input_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), _input_str.split('\n'))))
-    #Conversion
-        #_tomd = tomd.convert(_input_mini)
-        #_tomd = tomd.convert(_input_str)
-        _tomd = tomd.convert(_input_pretty)
-        #_tomd_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), _tomd.split('\n'))))
-        _tomd_pretty = _tomd.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("    ", "")
-        _tomd_prettier = re.sub(r"[ \t]+", " ", _tomd)
-        _tomd_prettiest = re.sub(r"\n\s*\n\s*", "\n\n", _tomd_prettier)
-        #_pandoc = pypandoc.convert_text(_input_mini, "md", format="html", encoding="utf-8")
-        #print(_pandoc)
-    #Output
-        with open(_out_file_path, "w") as output_file:
-            output_file.write(_tomd_prettiest)
 
-html_to_dita()
-### HTML to DITA ---------------------------------------------------------------------------------------------
-_markup_filepath = os.path.abspath(__file__)
-_markup_filename = os.path.basename(__file__)
-_markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
-_md_files = glob.glob(_markup_directory + "/*.md")
-_md_files_upper = glob.glob(_markup_directory + "/*.MD")
-_markdown_files = glob.glob(_markup_directory + "/*.markdown")
-_markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-"""    
-if os.name=="nt":
-    _markup_filepath = os.path.abspath(__file__)
-    _markup_filename = os.path.basename(__file__)
-    _markup_directory = _markup_filepath.replace(_markup_filename, "").replace("\\", "/")
-    _md_files = glob.glob(_markup_directory + "/*.md")
-    _md_files_upper = glob.glob(_markup_directory + "/*.MD")
-    _markdown_files = glob.glob(_markup_directory + "/*.markdown")
-    _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-    
-if os.name=="posix":
-    _markup_directory = input("Enter a full path to the directory that contains the Markdown files that you want to convert: ").replace("\\", "/").replace("//", "/")
-    _md_files = glob.glob(_markup_directory + "/*.md")
-    _md_files_upper = glob.glob(_markup_directory + "/*.MD")
-    _markdown_files = glob.glob(_markup_directory + "/*.markdown")
-    _markdown_files_upper = glob.glob(_markup_directory + "/*.MARKDOWN")
-"""    
-_markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
 
-_log_markup = (_markup_directory + "/" + "log_markup.txt").replace("//", "/")
+_log_markup = (app_path + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
 class Terminal:            
     @staticmethod
     def intro():
-        print("Converting the Markdown files to DITA from: " + _markup_directory)
+        print("Converting the Markdown files to DITA from: " + app_path)
     
     @staticmethod
     def report():
@@ -140,17 +68,49 @@ class Log:
             if _pretty_printing == False:
                 log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + " [" + _parser_error_msg + "]" + "\n")
 
+def html_to_md():
+    import tomd
+    #import htmlmin
+    import markdown
+    #import pypandoc
+    _html_files = glob.glob(app_path + "/*.html")
+    _html_files_upper = glob.glob(app_path + "/*.HTML")
+    _html_files_all = list(set(_html_files + _html_files_upper))
+
+    for _html_file in _html_files_all:
+    #Variables
+        _in_file_path = _html_file.replace("\\", "/")
+        _in_file_name = _in_file_path.replace(app_path + "/", "").replace(app_path, "")
+        _out_file_path = re.sub(r".html", ".md", _in_file_path, flags=re.IGNORECASE)
+        _out_file_name = _out_file_path.replace(app_path + "/", "").replace(app_path, "")
+    #Input
+        _input_str = open(_html_file, 'r').read()
+        _input_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), _input_str.split('\n'))))
+    #Conversion
+        _tomd = tomd.convert(_input_pretty)
+        _tomd_pretty = _tomd.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("    ", "")
+        _tomd_prettier = re.sub(r"[ \t]+", " ", _tomd)
+        _tomd_prettiest = re.sub(r"\n\s*\n\s*", "\n\n", _tomd_prettier)
+    #Output
+        with open(_out_file_path, "w") as output_file:
+            output_file.write(_tomd_prettiest)
+
 def md_to_dita():
+    _md_files = glob.glob(app_path + "/*.md")
+    _md_files_upper = glob.glob(app_path + "/*.MD")
+    _markdown_files = glob.glob(app_path + "/*.markdown")
+    _markdown_files_upper = glob.glob(app_path + "/*.MARKDOWN")
+    _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
     for _markdown_file in _markdown_files_all:
         global _in_file_directory
         _in_file_directory = _markdown_file.replace("\\", "/")
         global _in_file_name
-        _in_file_name = _in_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
+        _in_file_name = _in_file_directory.replace(app_path + "/", "").replace(app_path, "")
         _in_file_title = re.sub(r"(\.md|\.markdown)", "", _in_file_name, flags=re.IGNORECASE)
         global _out_file_directory
         _out_file_directory = re.sub(r"(\.md|\.markdown)", ".dita", _in_file_directory, flags=re.IGNORECASE)
         global _out_file_name
-        _out_file_name = _out_file_directory.replace(_markup_directory + "/", "").replace(_markup_directory, "")
+        _out_file_name = _out_file_directory.replace(app_path + "/", "").replace(app_path, "")
         global _topic_id
         _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
     #Input
@@ -214,10 +174,10 @@ def md_to_dita():
                 _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
                 _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
                 output_file.write(_dita_output_prettier)
-                _pretty_printing == True
+                _pretty_printing = True
             except xml.parsers.expat.ExpatError:
                 output_file.write(_dita_output)
-                _pretty_printing == False
+                _pretty_printing = False
     #Logs
         if _log_called == True:
             Log.log_items()
@@ -324,5 +284,6 @@ class Renderer(mistune.Renderer):
 
 Terminal.intro()
 Log.log_init()
+html_to_md()
 md_to_dita()
 Terminal.summary()

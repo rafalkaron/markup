@@ -136,3 +136,4 @@ MarkUP/*.markdown
 MarkUP/*.txt
 MarkUP/.DS_Store
 .vscode
+MarkUP/RemoveConvertedFiles.py
