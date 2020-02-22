@@ -1,22 +1,10 @@
 # coding: utf-8
 """
-    MarkUP Lite (Codename: Even Flamingo)
+    MarkUP Lite
     ****************************************************************
-
     Convert all Markdown files in the MarkUP Lite directory to DITA.
     
     ****************************************************************
-    Dependencies:
-    Uses "markdown2dita" to convert Markdown to DITA. 
-    "markdown2dita" uses "misuse" to parse Markdown.
-
-    Coming soon:
-    - Settable topictypes
-    - CLI
-    - File explorer?
-    - The <title> tag should encapsulate the first #, the <abstract> tag should encapsulate what's under the first #
-    - Additional > characher after conbody is sometimes inserted
-    - Summary that informs you about errors
 """
 from __future__ import print_function
 import argparse, sys, mistune, os, glob, re, random, string, datetime
@@ -226,10 +214,10 @@ def md_to_dita():
                 _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
                 _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
                 output_file.write(_dita_output_prettier)
-                _pretty_printing = True
+                _pretty_printing == True
             except xml.parsers.expat.ExpatError:
                 output_file.write(_dita_output)
-                _pretty_printing = False
+                _pretty_printing == False
     #Logs
         if _log_called == True:
             Log.log_items()
