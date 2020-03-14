@@ -6,9 +6,18 @@
     
     ****************************************************************
 """
-from __future__ import print_function
-import argparse, sys, mistune, os, glob, re, random, string, datetime
+
 from xml.dom.minidom import parseString, xml
+import sys
+import os
+import mistune
+import glob
+import re
+import random
+import string
+import datetime
+import tomd
+import markdown
 
 __version__ = "1.1.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
@@ -18,15 +27,18 @@ if getattr(sys, 'frozen', False):
 elif __file__:
     app_path = os.path.dirname(__file__)
 
-
-
 _log_markup = (app_path + "/" + "log_markup.txt").replace("//", "/")
 _parser_error_msg = "Not pretty-printed as the file is not parseable!"
 
-class Terminal:            
+class Terminal:
     @staticmethod
     def intro():
-        print("Converting the Markdown files to DITA from: " + app_path)
+      #  for file_type in os.listdir(app_path):
+            #if file_type.endswith('.MD'):
+              #  print("markdown test")
+           # else:
+            #    print ("else")
+        print("Converting the HTML and Markdown files to DITA from: " + app_path)
     
     @staticmethod
     def report():
@@ -69,10 +81,6 @@ class Log:
                 log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + " [" + _parser_error_msg + "]" + "\n")
 
 def html_to_md():
-    import tomd
-    #import htmlmin
-    import markdown
-    #import pypandoc
     _html_files = glob.glob(app_path + "/*.html")
     _html_files_upper = glob.glob(app_path + "/*.HTML")
     _html_files_all = list(set(_html_files + _html_files_upper))
@@ -101,6 +109,7 @@ def md_to_dita():
     _markdown_files = glob.glob(app_path + "/*.markdown")
     _markdown_files_upper = glob.glob(app_path + "/*.MARKDOWN")
     _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
+    
     for _markdown_file in _markdown_files_all:
         global _in_file_directory
         _in_file_directory = _markdown_file.replace("\\", "/")
