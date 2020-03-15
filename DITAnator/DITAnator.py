@@ -35,13 +35,14 @@ out_dir = app_path
 class Dirs:
     global try_again_msg
     try_again_msg = "Try answering the following question again by entering the \"Y\" or \"N\" characters without the quotation marks."
+
     def in_dir():
         print("The default input directory is: " + app_path)
         in_dir_set = input("Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory (" + app_path + ")" + ", enter: N\nAnswer: ")
         
         global in_dir
         if in_dir_set == "y" or in_dir_set =="Y":
-            in_dir = input("Provide a full path to the directory that contains HTML5 and Markdown files that you want to convert: ")
+            in_dir = input("Provide a full path to the directory that contains HTML5 and Markdown files that you want to convert: ").replace("\\", "/")
         elif in_dir_set == "n" or in_dir_set =="N":
             in_dir = app_path
         else:
@@ -54,7 +55,7 @@ class Dirs:
         
         global out_dir
         if out_dir_set == "y" or out_dir_set =="Y":
-            out_dir = input("Provide a full path to the directory that contains HTML5 and Markdown files that you want to convert: ")
+            out_dir = input("Provide a full path to the directory that contains HTML5 and Markdown files that you want to convert: ").replace("\\", "/")
         elif out_dir_set == "n" or out_dir_set =="N":
             out_dir = app_path
         else:
@@ -135,10 +136,18 @@ class Converter:
             in_html_file_path = html_file.replace("\\", "/")
             global in_html_file_name
             in_html_file_name = in_html_file_path.replace(in_dir + "/", "").replace(in_dir, "")
+            
+            global out_md_file_name
+            out_md_file_name = re.sub(r".html", ".md", in_html_file_name, flags=re.IGNORECASE)
+            global out_md_file_path
+            out_md_file_path = out_dir + "/" + out_md_file_name
+
+            """
             global out_md_file_path
             out_md_file_path = re.sub(r".html", ".md", in_html_file_path, flags=re.IGNORECASE)
             global out_md_file_name
             out_md_file_name = out_md_file_path.replace(in_dir + "/", "").replace(in_dir, "")
+            """
         # Input
             html_str = open(html_file, 'r').read()
             # Pretty-prints HTML prior to conversion
