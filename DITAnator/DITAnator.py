@@ -68,18 +68,20 @@ class SystemOutput:
     parser_error_msg = " [File not pretty-printed due to parser error] "
     
     @staticmethod
-    def intro():
+    def dirs_info():
         # Terminal communicate indicating the source files directory
         print("Converting files to DITA from " + in_dir + " to " + out_dir)
 
     @staticmethod
     def report_html_to_md():
         # Terminal communicates listing the HTML source files and MD output files
+        print("Converting HTML to Markdown:")
         print(" [+] " + in_html_file_name + " -> " + out_md_file_name)
 
     @staticmethod
     def report_md_to_dita():
         # Terminal communicates listing the MD source files, output files with IDs, and errors
+        print("Converting Markdown to DITA:")
         if pretty_print == True:
             print(" [+] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id)
         if pretty_print == False:
@@ -107,7 +109,7 @@ class SystemOutput:
         log_called = True
         # Creates a new log file or adds to the existing log file. Adds a timestamp.
         with open(log_file_path, "a+", encoding="utf-8") as log_file:
-            log_file.write("Conversion started on " + str(timestamp.strftime("%x")) + " at " + str(timestamp.strftime("%X")) + "\n")
+            log_file.write("Conversion started on " + str(timestamp.strftime("%x")) + " at " + str(timestamp.strftime("%X")) + "\n" + " [i] Input directory: " + in_dir + "\n" + " [o] Output directory: " + out_dir +"\n")
     log_called = False
 
     @staticmethod
@@ -115,16 +117,16 @@ class SystemOutput:
         # Writes to the initialized log file
         with open(log_file_path, "a+", encoding ="utf-8") as log_file:
             # Log items listing the source files, output files with IDs, and errors
-            log_file.write(" [+] " + in_html_file_path + " -> " + out_md_file_path + "\n")
+            log_file.write(" [+] " + in_html_file_name + " -> " + out_md_file_name + "\n")
 
     @staticmethod
     def log_md_to_dita():
         # Writes to the initialized log file
         with open(log_file_path, "a+", encoding ="utf-8") as log_file:
             if pretty_print == True:
-                log_file.write(" [+] " + in_md_file_path + " -> " + out_dita_file_path + " @ID=" + dita_concept_id + "\n")
+                log_file.write(" [+] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id + "\n")
             if pretty_print == False:
-                log_file.write(" [!] " + in_md_file_path + " -> " + out_dita_file_path + " @ID=" + dita_concept_id + parser_error_msg + "\n")
+                log_file.write(" [!] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id + parser_error_msg + "\n")
 
 class Converter:
     def html_to_md():                                                       # Will need to replace app_file with another variable when the directory picker is added to the code
@@ -355,7 +357,7 @@ class Renderer(mistune.Renderer):
 def main():
     Dirs.in_dir()
     Dirs.out_dir()
-    SystemOutput.intro()
+    SystemOutput.dirs_info()
     SystemOutput.log_init() # Initializes the log file prior to running the converters
     Converter.html_to_md()
     Converter.md_to_dita()
