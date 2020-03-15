@@ -27,27 +27,39 @@ if getattr(sys, 'frozen', False):
     app_path = os.path.dirname(sys.executable)
 elif __file__:
     app_path = os.path.dirname(__file__)
+# The input directory defaults to the script or executable directory
 in_dir = app_path
+# The output directory defaults to the script or executable directory
+out_dir = app_path
 
 class Dirs:
+    global try_again_msg
+    try_again_msg = "Try answering the following question again by entering the \"Y\" or \"N\" characters without the quotation marks."
     def in_dir():
         print("The default input directory is: " + app_path)
-        
         in_dir_set = input("Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory (" + app_path + ")" + ", enter: N\nAnswer: ")
+        
+        global in_dir
         if in_dir_set == "y" or in_dir_set =="Y":
             in_dir = input("Provide a full path to the directory that contains HTML5 and Markdown files that you want to convert: ")
         elif in_dir_set == "n" or in_dir_set =="N":
             in_dir = app_path
         else:
-            print("Try answering the following question again by entering the \"Y\" or \"N\" characters without the quotation marks.")
+            print(try_again_msg)
             Dirs.in_dir()
     
     def out_dir():
         print("the default output directory is: " + app_path)
-        out_dir = input("Provide a full path to the directory where you want to save the converted files: ")
-
-
-#add a variable "source directory that'll enable you to choose the input dir manually or automatically"
+        out_dir_set = input("Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory (" + app_path + ")" + ", enter: N\nAnswer: ")
+        
+        global out_dir
+        if out_dir_set == "y" or out_dir_set =="Y":
+            out_dir = input("Provide a full path to the directory that contains HTML5 and Markdown files that you want to convert: ")
+        elif out_dir_set == "n" or out_dir_set =="N":
+            out_dir = app_path
+        else:
+            print(try_again_msg)
+            Dirs.out_dir()
 
 class SystemOutput:
     global log_filepath
@@ -335,6 +347,7 @@ class Renderer(mistune.Renderer):
 
 def main():
     Dirs.in_dir()
+    Dirs.out_dir()
     SystemOutput.intro()
     #SystemOutput.log_init()
     Converter.html_to_md()
