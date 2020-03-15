@@ -136,18 +136,10 @@ class Converter:
             in_html_file_path = html_file.replace("\\", "/")
             global in_html_file_name
             in_html_file_name = in_html_file_path.replace(in_dir + "/", "").replace(in_dir, "")
-            
             global out_md_file_name
             out_md_file_name = re.sub(r".html", ".md", in_html_file_name, flags=re.IGNORECASE)
             global out_md_file_path
             out_md_file_path = out_dir + "/" + out_md_file_name
-
-            """
-            global out_md_file_path
-            out_md_file_path = re.sub(r".html", ".md", in_html_file_path, flags=re.IGNORECASE)
-            global out_md_file_name
-            out_md_file_name = out_md_file_path.replace(in_dir + "/", "").replace(in_dir, "")
-            """
         # Input
             html_str = open(html_file, 'r').read()
             # Pretty-prints HTML prior to conversion
@@ -181,10 +173,10 @@ class Converter:
             in_md_file_title = re.sub(r"(\.md|\.markdown)", "", in_md_file_name, flags=re.IGNORECASE)
             global dita_concept_id
             dita_concept_id = "concept_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
-            global out_dita_file_path
-            out_dita_file_path = re.sub(r"(\.md|\.markdown)", ".dita", in_md_file_path, flags=re.IGNORECASE)
             global out_dita_file_name
-            out_dita_file_name = out_dita_file_path.replace(in_dir + "/", "").replace(in_dir, "")
+            out_dita_file_name = re.sub(r"(\.md|\.markdown)", ".dita", in_md_file_name, flags=re.IGNORECASE)
+            global out_dita_file_path
+            out_dita_file_path = out_dir + "/" + out_dita_file_name
         # Input
             md_str = open(md_file, 'r').read()
         # Conversion
