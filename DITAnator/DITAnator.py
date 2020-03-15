@@ -47,9 +47,9 @@ class SystemOutput:
     def report():
         # Terminal communicates listing the source files, output files with IDs, and errors
         if pretty_print == True:
-            print(" [+] " + in_file_name + " -> " + out_file_name + " @ID=" + _topic_id)
+            print(" [+] " + in_md_file_name + " -> " + out_md_file_name + " @ID=" + dita_concept_id)
         if pretty_print == False:
-            print(" [!] " + in_file_name + " -> " + out_file_name + " @ID=" + _topic_id + " [" + parser_error_msg + "]")
+            print(" [!] " + in_md_file_name + " -> " + out_md_file_name + " @ID=" + dita_concept_id + " [" + parser_error_msg + "]")
     
     @staticmethod
     def summary():
@@ -85,9 +85,9 @@ class SystemOutput:
         with open(log_filepath, "a+", encoding ="utf-8") as log_file:
             # Log items listing the source files, output files with IDs, and errors
             if pretty_print == True:
-                log_file.write(" [+] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + "\n")
+                log_file.write(" [+] " + in_md_file_path + " -> " + out_md_file_path + " @ID=" + dita_concept_id + "\n")
             if pretty_print == False:
-                log_file.write(" [!] " + _in_file_directory + " -> " + _out_file_directory + " @ID=" + _topic_id + " [" + parser_error_msg + "]" + "\n")
+                log_file.write(" [!] " + in_md_file_path + " -> " + out_md_file_path + " @ID=" + dita_concept_id + " [" + parser_error_msg + "]" + "\n")
 
 class Converter:
     def html_to_md():                                                       # Will need to replace app_file with another variable when the directory picker is added to the code
@@ -97,45 +97,50 @@ class Converter:
         html_files = list(set(html_files_lower + html_files_upper))
 
         for html_file in html_files:
-        #Variables
-            in_file_path = html_file.replace("\\", "/")
-            in_file_name = in_file_path.replace(app_path + "/", "").replace(app_path, "")
-            out_file_path = re.sub(r".html", ".md", in_file_path, flags=re.IGNORECASE)
-            out_file_name = out_file_path.replace(app_path + "/", "").replace(app_path, "")
-        #Input
-            _input_str = open(html_file, 'r').read()
-            _input_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), _input_str.split('\n'))))
-        #Conversion
-            _tomd = tomd.convert(_input_pretty)
+        # Variables
+            in_html_file_path = html_file.replace("\\", "/")
+            in_html_file_name = in_html_file_path.replace(app_path + "/", "").replace(app_path, "")
+            out_html_file_path = re.sub(r".html", ".md", in_html_file_path, flags=re.IGNORECASE)
+            out_md_file_name = out_html_file_path.replace(app_path + "/", "").replace(app_path, "")
+        # Input
+            html_str = open(html_file, 'r').read()
+            # Pretty-prints HTML prior to conversion
+            html_str_pretty = '\n'.join(list(filter(lambda x: len(x.strip()), html_str.split('\n'))))
+        # Conversion
+            _tomd = tomd.convert(html_str_pretty)
             _tomd_pretty = _tomd.replace("\n\n\n", "\n\n").replace("\n\n\n", "\n\n").replace("    ", "")
             _tomd_prettier = re.sub(r"[ \t]+", " ", _tomd)
             _tomd_prettiest = re.sub(r"\n\s*\n\s*", "\n\n", _tomd_prettier)
-        #Output
-            with open(out_file_path, "w") as output_file:
+        # Output
+            with open(out_html_file_path, "w") as output_file:
                 output_file.write(_tomd_prettiest)
 
     def md_to_dita():
-        _md_files = glob.glob(app_path + "/*.md")
-        _md_files_upper = glob.glob(app_path + "/*.MD")
-        _markdown_files = glob.glob(app_path + "/*.markdown")
-        _markdown_files_upper = glob.glob(app_path + "/*.MARKDOWN")
-        _markdown_files_all = list(set(_md_files + _md_files_upper + _markdown_files + _markdown_files_upper))
+        # Lists the MD files in the source directory
+        md_files_lower = glob.glob(app_path + "/*.md")
+        md_files_upper = glob.glob(app_path + "/*.MD")
+        markdown_files_lower = glob.glob(app_path + "/*.markdown")
+        markdown_files_upper = glob.glob(app_path + "/*.MARKDOWN")
+        md_files = list(set(md_files_lower + md_files_upper + markdown_files_lower + markdown_files_upper))
         
-        for _markdown_file in _markdown_files_all:
-            global _in_file_directory
-            _in_file_directory = _markdown_file.replace("\\", "/")
-            global in_file_name
-            in_file_name = _in_file_directory.replace(app_path + "/", "").replace(app_path, "")
-            _in_file_title = re.sub(r"(\.md|\.markdown)", "", in_file_name, flags=re.IGNORECASE)
-            global _out_file_directory
-            _out_file_directory = re.sub(r"(\.md|\.markdown)", ".dita", _in_file_directory, flags=re.IGNORECASE)
-            global out_file_name
-            out_file_name = _out_file_directory.replace(app_path + "/", "").replace(app_path, "")
-            global _topic_id
-            _topic_id = "topic_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
-        #Input
-            _input_str = open(_markdown_file, 'r').read()
-        #Conversion
+        for md_file in md_files:
+        # Variables
+            global in_md_file_path
+            in_md_file_path = md_file.replace("\\", "/")
+            global in_md_file_name
+            in_md_file_name = in_md_file_path.replace(app_path + "/", "").replace(app_path, "")
+            global in_md_file_title
+            in_md_file_title = re.sub(r"(\.md|\.markdown)", "", in_md_file_name, flags=re.IGNORECASE)
+            global dita_concept_id
+            dita_concept_id = "concept_" + "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
+            global out_md_file_path
+            out_md_file_path = re.sub(r"(\.md|\.markdown)", ".dita", in_md_file_path, flags=re.IGNORECASE)
+            global out_md_file_name
+            out_md_file_name = out_md_file_path.replace(app_path + "/", "").replace(app_path, "")
+
+        # Input
+            _input_str = open(md_file, 'r').read()
+        # Conversion
             class XML(mistune.Markdown):
                 def __init__(self, renderer=None, inline=None, block=None, **kwargs):
                     if not renderer:
@@ -144,9 +149,8 @@ class Converter:
                         kwargs.update(renderer.options)
                     super(XML, self).__init__(
                         renderer=renderer, inline=inline, block=block)
-
-                def parse(self, text, page_id = _topic_id,
-                        title= _in_file_title):
+                def parse(self, text, page_id = dita_concept_id,
+                        title= in_md_file_title):
                     output = super(XML, self).parse(text)
                     if output.startswith('</section>'):
                         output = output[9:]
@@ -184,10 +188,10 @@ class Converter:
                             cell += self.renderer.table_cell(self.inline(value), **flags)
                         body += self.renderer.table_row(cell)
                     return self.renderer.table(header, body, cols)
-        #Output
             _render = XML()
+            # Output
             _dita_output = _render(_input_str)
-            with open(_out_file_directory, "w") as output_file:
+            with open(out_md_file_path, "w") as output_file:
                 global pretty_print
                 try:
                     _dita_output_parse = xml.dom.minidom.parseString(_dita_output)
@@ -198,13 +202,13 @@ class Converter:
                 except xml.parsers.expat.ExpatError:
                     output_file.write(_dita_output)
                     pretty_print = False
-        #Logs
-            if log_called == True:
-                SystemOutput.log()
-        #Feedback
+            # Logs
+            #if log_called == True:
+            #    SystemOutput.log()
+            # Feedback
             SystemOutput.report()
 
-#try moving it to the renderer
+# This is needed to convert MD
 def escape(text, quote=False, smart_amp=True):
     return mistune.escape(text, quote=quote, smart_amp=smart_amp)
 
@@ -303,8 +307,12 @@ class Renderer(mistune.Renderer):
     def strikethrough(self, text):
         return text
 
-SystemOutput.intro()
-SystemOutput.log_init()
-Converter.html_to_md()
-Converter.md_to_dita()
-SystemOutput.summary()
+def main():
+    #SystemOutput.intro()
+    #SystemOutput.log_init()
+    Converter.html_to_md()
+    Converter.md_to_dita()
+    #SystemOutput.summary()
+
+if __name__ == '__main__':
+    main()
