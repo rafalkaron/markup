@@ -63,14 +63,14 @@ class Dirs:
             Dirs.out_dir()
 
 class SystemOutput:
-    global log_filepath
-    log_filepath = (in_dir + "/" + "log_markup.txt").replace("//", "/")
-    parser_error_msg = "File not pretty-printed due to parser error."
+    global log_file_path
+    log_file_path = (in_dir + "/" + "log_markup.txt").replace("//", "/")
+    parser_error_msg = " [File not pretty-printed due to parser error] "
     
     @staticmethod
     def intro():
         # Terminal communicate indicating the source files directory
-        print("Converting files to DITA from: " + in_dir)
+        print("Converting files to DITA from " + in_dir + " to " + out_dir)
 
     @staticmethod
     def report_html_to_md():
@@ -83,17 +83,14 @@ class SystemOutput:
         if pretty_print == True:
             print(" [+] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id)
         if pretty_print == False:
-            print(" [!] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id + " [" + parser_error_msg + "]")
+            print(" [!] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id + parser_error_msg)
     
     @staticmethod
     def summary():
         # Terminal communicates summarising the conversion
-        if pretty_print == True:
-            print("Conversion completed successfully!") 
-        if pretty_print == False:
-            print("Conversion completed with warnings!")
+        print("Conversion completed!") 
         if log_called == True:
-            print("For detailed information, see: " + log_filepath)
+            print("For detailed information, see: " + log_file_path)
         # Controls the OS-specific terminal behavior
         if os.name=="nt":
             exit_prompt = input("To finish, press [Enter]")
@@ -109,19 +106,25 @@ class SystemOutput:
         global log_called
         log_called = True
         # Creates a new log file or adds to the existing log file. Adds a timestamp.
-        with open(log_filepath, "a") as log_file:
-            log_file.write("Converted on " + str(timestamp.strftime("%x")) + " at " + str(timestamp.strftime("%X")) + "\n")
+        with open(log_file_path, "a+", encoding="utf-8") as log_file:
+            log_file.write("Conversion started on " + str(timestamp.strftime("%x")) + " at " + str(timestamp.strftime("%X")) + "\n")
     log_called = False
 
     @staticmethod
-    def log():
+    def log_html_to_md():
         # Writes to the initialized log file
-        with open(log_filepath, "a+", encoding ="utf-8") as log_file:
+        with open(log_file_path, "a+", encoding ="utf-8") as log_file:
             # Log items listing the source files, output files with IDs, and errors
+            log_file.write(" [+] " + in_html_file_path + " -> " + out_md_file_path + "\n")
+
+    @staticmethod
+    def log_md_to_dita():
+        # Writes to the initialized log file
+        with open(log_file_path, "a+", encoding ="utf-8") as log_file:
             if pretty_print == True:
                 log_file.write(" [+] " + in_md_file_path + " -> " + out_dita_file_path + " @ID=" + dita_concept_id + "\n")
             if pretty_print == False:
-                log_file.write(" [!] " + in_md_file_path + " -> " + out_dita_file_path + " @ID=" + dita_concept_id + " [" + parser_error_msg + "]" + "\n")
+                log_file.write(" [!] " + in_md_file_path + " -> " + out_dita_file_path + " @ID=" + dita_concept_id + parser_error_msg + "\n")
 
 class Converter:
     def html_to_md():                                                       # Will need to replace app_file with another variable when the directory picker is added to the code
@@ -152,7 +155,10 @@ class Converter:
                 md_prettish = re.sub(r"[ \t]+", " ", convert_tomd)
                 md_pretty = re.sub(r"\n\s*\n\s*", "\n\n", md_prettish)
                 md_output.write(md_pretty)
-        # Feedback
+        # Logging
+            if log_called == True:
+                SystemOutput.log_html_to_md()
+        # Terminal feedback
             SystemOutput.report_html_to_md()
 
     def md_to_dita():
@@ -231,20 +237,20 @@ class Converter:
             _dita_output = _render(md_str)
             # Output
             with open(out_dita_file_path, "w") as output_file:
-                global pretty_print
                 try:
                     _dita_output_parse = xml.dom.minidom.parseString(_dita_output)
                     _dita_output_pretty = _dita_output_parse.toprettyxml(indent="\t", newl="\n")
                     _dita_output_prettier = '\n'.join(list(filter(lambda x: len(x.strip()), _dita_output_pretty.split('\n'))))
                     output_file.write(_dita_output_prettier)
+                    global pretty_print
                     pretty_print = True
                 except xml.parsers.expat.ExpatError:
                     output_file.write(_dita_output)
                     pretty_print = False
-            # Logs
-            #if log_called == True:
-            #    SystemOutput.log()
-            # Feedback
+            # Logging
+            if log_called == True:
+                SystemOutput.log_md_to_dita()
+            # Terminal Feedback
             SystemOutput.report_md_to_dita()
 
 # This is needed to convert MD
@@ -350,10 +356,10 @@ def main():
     Dirs.in_dir()
     Dirs.out_dir()
     SystemOutput.intro()
-    #SystemOutput.log_init()
+    SystemOutput.log_init() # Initializes the log file prior to running the converters
     Converter.html_to_md()
     Converter.md_to_dita()
-    #SystemOutput.summary()
+    SystemOutput.summary()
 
 if __name__ == '__main__':
     main()
