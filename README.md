@@ -1,2 +1,2 @@
-# MarkUP
-Quickly convert HTML and Markdown files to DITA in the MarkUP directory.
+# DITAnator
+Batch-convert Markdown and HTML files to DITA.
