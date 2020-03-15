@@ -1,5 +1,0 @@
-Converted on 02/22/20 at 21:38:21
- [+] C:/LocalFiles/GitHub/MarkUP/Sample_Files/PatricksSample.md -> C:/LocalFiles/GitHub/MarkUP/Sample_Files/PatricksSample.dita @ID=topic_llwuyry2
- [+] C:/LocalFiles/GitHub/MarkUP/Sample_Files/branch_manager copy.md -> C:/LocalFiles/GitHub/MarkUP/Sample_Files/branch_manager copy.dita @ID=topic_zmixbkbb
- [!] C:/LocalFiles/GitHub/MarkUP/Sample_Files/branch_manager.md -> C:/LocalFiles/GitHub/MarkUP/Sample_Files/branch_manager.dita @ID=topic_19icayw0 [Not pretty-printed as the file is not parseable!]
- [+] C:/LocalFiles/GitHub/MarkUP/Sample_Files/PatricksSample2.md -> C:/LocalFiles/GitHub/MarkUP/Sample_Files/PatricksSample2.dita @ID=topic_r4wj6odi

@@ -27,6 +27,7 @@ if getattr(sys, 'frozen', False):
     app_path = os.path.dirname(sys.executable)
 elif __file__:
     app_path = os.path.dirname(__file__)
+in_dir = app_path
 
 class Dirs:
     def in_dir():
@@ -50,13 +51,13 @@ class Dirs:
 
 class SystemOutput:
     global log_filepath
-    log_filepath = (app_path + "/" + "log_markup.txt").replace("//", "/")
+    log_filepath = (in_dir + "/" + "log_markup.txt").replace("//", "/")
     parser_error_msg = "File not pretty-printed due to parser error."
     
     @staticmethod
     def intro():
         # Terminal communicate indicating the source files directory
-        print("Converting files to DITA from: " + app_path)
+        print("Converting files to DITA from: " + in_dir)
 
     @staticmethod
     def report_html_to_md():
@@ -112,8 +113,8 @@ class SystemOutput:
 class Converter:
     def html_to_md():                                                       # Will need to replace app_file with another variable when the directory picker is added to the code
         # Lists the HTML files in the source directory
-        html_files_lower = glob.glob(app_path + "/*.html")
-        html_files_upper = glob.glob(app_path + "/*.HTML")
+        html_files_lower = glob.glob(in_dir + "/*.html")
+        html_files_upper = glob.glob(in_dir + "/*.HTML")
         html_files = list(set(html_files_lower + html_files_upper))
 
         for html_file in html_files:
@@ -121,11 +122,11 @@ class Converter:
             global in_html_file_path
             in_html_file_path = html_file.replace("\\", "/")
             global in_html_file_name
-            in_html_file_name = in_html_file_path.replace(app_path + "/", "").replace(app_path, "")
+            in_html_file_name = in_html_file_path.replace(in_dir + "/", "").replace(in_dir, "")
             global out_md_file_path
             out_md_file_path = re.sub(r".html", ".md", in_html_file_path, flags=re.IGNORECASE)
             global out_md_file_name
-            out_md_file_name = out_md_file_path.replace(app_path + "/", "").replace(app_path, "")
+            out_md_file_name = out_md_file_path.replace(in_dir + "/", "").replace(in_dir, "")
         # Input
             html_str = open(html_file, 'r').read()
             # Pretty-prints HTML prior to conversion
@@ -143,10 +144,10 @@ class Converter:
 
     def md_to_dita():
         # Lists the MD files in the source directory
-        md_files_lower = glob.glob(app_path + "/*.md")
-        md_files_upper = glob.glob(app_path + "/*.MD")
-        markdown_files_lower = glob.glob(app_path + "/*.markdown")
-        markdown_files_upper = glob.glob(app_path + "/*.MARKDOWN")
+        md_files_lower = glob.glob(in_dir + "/*.md")
+        md_files_upper = glob.glob(in_dir + "/*.MD")
+        markdown_files_lower = glob.glob(in_dir + "/*.markdown")
+        markdown_files_upper = glob.glob(in_dir + "/*.MARKDOWN")
         md_files = list(set(md_files_lower + md_files_upper + markdown_files_lower + markdown_files_upper))
         
         for md_file in md_files:
@@ -154,7 +155,7 @@ class Converter:
             global in_md_file_path
             in_md_file_path = md_file.replace("\\", "/")
             global in_md_file_name
-            in_md_file_name = in_md_file_path.replace(app_path + "/", "").replace(app_path, "")
+            in_md_file_name = in_md_file_path.replace(in_dir + "/", "").replace(in_dir, "")
             global in_md_file_title
             in_md_file_title = re.sub(r"(\.md|\.markdown)", "", in_md_file_name, flags=re.IGNORECASE)
             global dita_concept_id
@@ -162,7 +163,7 @@ class Converter:
             global out_dita_file_path
             out_dita_file_path = re.sub(r"(\.md|\.markdown)", ".dita", in_md_file_path, flags=re.IGNORECASE)
             global out_dita_file_name
-            out_dita_file_name = out_dita_file_path.replace(app_path + "/", "").replace(app_path, "")
+            out_dita_file_name = out_dita_file_path.replace(in_dir + "/", "").replace(in_dir, "")
         # Input
             md_str = open(md_file, 'r').read()
         # Conversion
