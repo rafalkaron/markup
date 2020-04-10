@@ -33,7 +33,7 @@ in_dir = app_path
 out_dir = app_path
 
 class Dirs:
-    global try_again_msg
+    global try_again_msg # CAN SUCH VARIABLES BE ADDED TO CLASSES?
     try_again_msg = "Try answering the following question again by entering the \"Y\" or \"N\" characters without the quotation marks."
 
     @staticmethod
@@ -103,7 +103,7 @@ class SystemOutput:
             exit(0)
     
     @staticmethod
-    def log_init():
+    def log_init():                                         #split into log_init_md and log_init_dita
         timestamp = datetime.datetime.now()
         # Initializes a log file
         global log_called
@@ -130,6 +130,7 @@ class SystemOutput:
                 log_file.write(" [!] " + in_md_file_name + " -> " + out_dita_file_name + " @ID=" + dita_concept_id + parser_error_msg + "\n")
 
 class Converter:
+    @staticmethod # ADD STATICMETHODS
     def html_to_md():                                                       # Will need to replace app_file with another variable when the directory picker is added to the code
         # Lists the HTML files in the source directory
         html_files_lower = glob.glob(in_dir + "/*.html")
@@ -257,18 +258,20 @@ class Converter:
             SystemOutput.report_md_to_dita()
 
 # This is needed to convert MD
-def escape(text, quote=False, smart_amp=True):
-    return mistune.escape(text, quote=quote, smart_amp=smart_amp)
 
 class Renderer(mistune.Renderer):
+    
+    def escape(text, quote=False, smart_amp=True):
+        return mistune.escape(text, quote=quote, smart_amp=smart_amp) #move it down and change every escape() to Renderer.eascape()
+
     def codespan(self, text):
-        return '<codeph>{0}</codeph>'.format(escape(text.rstrip()))
+        return '<codeph>{0}</codeph>'.format(Renderer.escape(text.rstrip()))
 
     def link(self, link, title, content):
-        return '<xref href="{0}">{1}</xref>'.format(link, escape(content or title))
+        return '<xref href="{0}">{1}</xref>'.format(link, Renderer.escape(content or title))
 
     def block_code(self, code, language=None):
-        code = escape(code.rstrip('\n'))
+        code = Renderer.escape(code.rstrip('\n'))
         if language:
             return ('<codeblock outputclass="language-{0}">{1}</codeblock>'
                     .format(language, code))
@@ -309,9 +312,9 @@ class Renderer(mistune.Renderer):
     def image(self, src, title, text):
         # Derived from the mistune library source code
         src = mistune.escape_link(src)
-        text = escape(text, quote=True)
+        text = Renderer.escape(text, quote=True)
         if title:
-            title = escape(title, quote=True)
+            title = Renderer.escape(title, quote=True)
             output = ('<fig><title>{0}</title>\n'
                       '<image href="{1}" alt="{2}"/></fig>'
                       .format(title, src, text))
@@ -338,7 +341,7 @@ class Renderer(mistune.Renderer):
             return '<entry>{0}</entry>\n'.format(content)
     
     def autolink(self, link, is_email=False):
-        text = link = escape(link)
+        text = link = Renderer.escape(link)
         if is_email:
             link = 'mailto:{0}'.format(link)
         return '<xref href="{0}">{1}</xref>'.format(link, text)
