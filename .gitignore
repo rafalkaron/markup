@@ -138,3 +138,4 @@ DITAnator/.DS_Store
 .vscode
 DITAnator/RemoveConvertedFiles.py
 sample_files
+.DS_Store
