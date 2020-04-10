@@ -36,6 +36,7 @@ class Dirs:
     global try_again_msg
     try_again_msg = "Try answering the following question again by entering the \"Y\" or \"N\" characters without the quotation marks."
 
+    @staticmethod
     def in_dir():
         print("The default input directory is: " + app_path)
         in_dir_set = input("Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory (" + app_path + ")" + ", enter: N\nAnswer: ")
