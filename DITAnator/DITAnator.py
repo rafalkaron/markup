@@ -38,8 +38,9 @@ class Dirs:
 
     @staticmethod
     def in_dir():
-        print("The default input directory is: " + app_path)
-        in_dir_set = input("Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory (" + app_path + ")" + ", enter: N\nAnswer: ")
+        """Specifies the input directory"""
+        print(f"The default input directory is: {app_path}")
+        in_dir_set = input(f"Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory {app_path}, enter: N\nAnswer: ")
         
         global in_dir
         if in_dir_set == "y" or in_dir_set =="Y":
@@ -51,6 +52,7 @@ class Dirs:
             Dirs.in_dir()
     
     def out_dir():
+        """Specifies the output directory"""
         print("the default output directory is: " + in_dir)
         out_dir_set = input("Do you want to change the input directory?\n - To change the input directory, enter: Y\n - To keep the default input directory (" + app_path + ")" + ", enter: N\nAnswer: ")
         
@@ -70,8 +72,8 @@ class SystemOutput:
     
     @staticmethod
     def dirs_info():
-        # Terminal communicate indicating the source files directory
-        print("Converting files to DITA from " + in_dir + " to " + out_dir)
+        """Terminal communicate indicating the source files directory""" 
+        print("Converting files to DITA from {0} to {1}".format(in_dir, out_dir))
 
     @staticmethod
     def report_html_to_md():
