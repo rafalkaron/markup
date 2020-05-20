@@ -10,7 +10,8 @@ from MarkUP import (progressbar,
                     exe_dir,
                     read_file,
                     enter_filepath,
-                    save_str_as_file)
+                    save_str_as_file,
+                    dir_files)
 
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
