@@ -20,21 +20,26 @@ def main():
     par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files to DITA.", formatter_class=argparse.RawTextHelpFormatter)
     par.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
     par.add_argument("-in", "--input", metavar="input_folder", help="manually specify the input folder (defualts to MarkUP executable folder)")
-    par.add_argument("-out", "--output", metavar="output_folder", help="manually specify the output folder")
+    par.add_argument("-out", "--output", metavar="output_folder", help="manually specify the output folder (defaults to the input folder)")
     par.add_argument("-ex", "--exit", action ="store_true", help="exits without a prompt (defaults to prompt on exit)")
     args = par.parse_args()
 
     if not args.input:
-        in_path = exe_dir
+        input_folder = exe_dir
     if args.input:
-        in_path = args.input
+        input_folder = args.input
+
     if not args.output:
-        out_path = f"{os.path.normpath(os.path.expanduser('~/Desktop'))}/{os.path.basename(in_path)}".replace(".txt", ".html").replace("\\", "/").replace("//", "/")
+        output_folder = input_folder
     if args.output:
-        out_path = f"{args.output}/{os.path.basename(in_path)}".replace(".txt", ".html").replace("\\", "/").replace("//", "/")
+        output_folder = args.output
     
+    for input_file in dir_files(exe_dir, "md"):
+        input_file_str = read_file(input_file)
+        markdown_str_to_html_str(input_file_str)
+
     if not args.exit:
-        exit_prompt("\nTo exit Klipps, press [Enter]")
+        exit_prompt("\nTo exit MarkUP, press [Enter]")
 
 if __name__ == "__main__":
     main()
