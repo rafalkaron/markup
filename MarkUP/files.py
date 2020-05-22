@@ -17,8 +17,6 @@ def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
     files_extension_lowercase = files_extension.lower()
     files_extension_uppercase = files_extension.upper()
-    print(files_extension_lowercase)
-    print(files_extension_uppercase)
     print(directory)
     files_list_lowercase = glob.glob(f"{directory}/*.{files_extension_lowercase}")
     files_list_uppercase = glob.glob(f"{directory}/*.{files_extension_uppercase}")
