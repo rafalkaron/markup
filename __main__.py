@@ -11,7 +11,7 @@ from MarkUP import (progressbar,
                     read_file,
                     enter_filepath,
                     save_str_as_file,
-                    dir_files)
+                    files_list)
 
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
@@ -25,18 +25,21 @@ def main():
     args = par.parse_args()
 
     if not args.input:
-        input_folder = exe_dir
+        input_folder = exe_dir()
     if args.input:
         input_folder = args.input
+    print(f"Converting the files from {input_folder}:")
 
     if not args.output:
         output_folder = input_folder
     if args.output:
         output_folder = args.output
+    print(output_folder)
     
-    for input_file in dir_files(exe_dir, "md"):
+    for input_file in files_list(input_folder, "md"):
         input_file_str = read_file(input_file)
-        markdown_str_to_html_str(input_file_str)
+        markdown_str = markdown_str_to_html_str(input_file_str)
+        save_str_as_file(markdown_str, f"{output_folder}/out.html")
 
     if not args.exit:
         exit_prompt("\nTo exit MarkUP, press [Enter]")

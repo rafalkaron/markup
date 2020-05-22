@@ -13,13 +13,17 @@ def exe_dir():
         exe_path = os.path.dirname(__file__)
     return exe_path
 
-def dir_files(directory, files_extension):
+def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
-    files_extension_lowercase = str(files_extension).lower
-    files_extension_uppercase = str(files_extension).upper
-    files_list_lowercase = glob.glob(directory + f"/*.{files_extension_lowercase}")
-    files_list_uppercase = glob.glob(directory + f"/*.{files_extension_uppercase}")
+    files_extension_lowercase = files_extension.lower()
+    files_extension_uppercase = files_extension.upper()
+    print(files_extension_lowercase)
+    print(files_extension_uppercase)
+    print(directory)
+    files_list_lowercase = glob.glob(f"{directory}/*.{files_extension_lowercase}")
+    files_list_uppercase = glob.glob(f"{directory}/*.{files_extension_uppercase}")
     files_list = list(set(files_list_lowercase + files_list_uppercase))
+    print(files_list)
     return files_list
 
 def enter_filepath():
