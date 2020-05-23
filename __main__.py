@@ -77,6 +77,9 @@ def main():
             output_file = os.path.basename(re.sub(r".html", ".dita", input_filepath, flags=re.IGNORECASE))
             save_str_as_file(dita_str, output_folder + "/" + output_file)
 
+    if not args.markdown_to_html and not args.html_to_markdown and not args.markdown_to_dita and not args.html_to_dita and not args.exit:
+        par.print_help()
+
     if not args.exit:
         exit_prompt("\nTo exit MarkUP, press [Enter]")
 

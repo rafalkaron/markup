@@ -7,6 +7,8 @@ import markdown
 import markdown2dita
 import tomd
 import re
+import random
+import string
 
 def markdown_str_to_html_str(markdown_str):
     "Return an HTML string from a Markdown string."
@@ -19,7 +21,10 @@ def markdown_str_to_html_str(markdown_str):
 def markdown_str_to_dita_str(markdown_str):
     "Return a DITA string from a Markdown string."
     converter = markdown2dita.Markdown(title_level=4)
+    random_id = "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
     dita_str = converter(markdown_str)
+    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)
+    dita_str = re.sub(">\n><", ">\n<", dita_str)
     return dita_str
 
 def html_str_to_dita_str(html_str):
