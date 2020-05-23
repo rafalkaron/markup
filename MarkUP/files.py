@@ -1,26 +1,14 @@
 # coding: utf-8
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-import os
-import sys
 import glob
-
-def exe_dir():
-    """Return the executable directory."""
-    if getattr(sys, 'frozen', False):
-        exe_path = os.path.dirname(sys.executable)
-    elif __file__:
-        exe_path = os.path.dirname(__file__)
-    return exe_path
 
 def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
-    files_extension_lowercase = files_extension.lower()
-    files_extension_uppercase = files_extension.upper()
     print(directory)
-    files_list_lowercase = glob.glob(f"{directory}/*.{files_extension_lowercase}")
-    files_list_uppercase = glob.glob(f"{directory}/*.{files_extension_uppercase}")
-    files_list = list(set(files_list_lowercase + files_list_uppercase))
+    files_list_lowercase = glob.glob(f"{directory}/*.{files_extension.lower()}")
+    files_list_uppercase = glob.glob(f"{directory}/*.{files_extension.upper()}")
+    files_list = files_list_lowercase + files_list_uppercase
     print(files_list)
     return files_list
 
