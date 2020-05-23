@@ -13,6 +13,7 @@ from MarkUP import (progressbar as pb,
                     markdown_str_to_html_str,
                     html_str_to_markdown_str,
                     markdown_str_to_dita_str,
+                    html_str_to_dita_str,
                     read_file,
                     enter_filepath,
                     save_str_as_file,
@@ -67,6 +68,13 @@ def main():
             input_file_str = read_file(input_filepath)
             dita_str = markdown_str_to_dita_str(input_file_str)
             output_file = os.path.basename(re.sub(r".md", ".dita", input_filepath, flags=re.IGNORECASE))
+            save_str_as_file(dita_str, output_folder + "/" + output_file)
+
+    if args.html_to_dita:
+        for input_filepath in files_list(input_folder, "html"):
+            input_file_str = read_file(input_filepath)
+            dita_str = html_str_to_dita_str(input_file_str)
+            output_file = os.path.basename(re.sub(r".html", ".dita", input_filepath, flags=re.IGNORECASE))
             save_str_as_file(dita_str, output_folder + "/" + output_file)
 
     if not args.exit:
