@@ -5,11 +5,9 @@ import glob
 
 def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
-    print(directory)
     files_list_lowercase = glob.glob(f"{directory}/*.{files_extension.lower()}")
     files_list_uppercase = glob.glob(f"{directory}/*.{files_extension.upper()}")
     files_list = files_list_lowercase + files_list_uppercase
-    print(files_list)
     return files_list
 
 def enter_filepath():
