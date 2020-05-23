@@ -7,7 +7,6 @@ import os
 import sys
 import re
 import argparse
-import xmldirector
 from MarkUP import (progressbar as pb,
                     exit_prompt,
                     markdown_str_to_html_str,
@@ -22,7 +21,7 @@ from MarkUP import (progressbar as pb,
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-def convert(input_folder, input_extension, converter, output_folder, output_extension):
+def convert(input_folder, input_extension, converter, output_folder, output_extension): # think how to rework this into a class
     for input_filepath in files_list(input_folder, input_extension):
         output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
         try:
