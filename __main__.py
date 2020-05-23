@@ -17,10 +17,17 @@ from MarkUP import (progressbar as pb,
                     read_file,
                     enter_filepath,
                     save_str_as_file,
-                    files_list
+                    files_list,
                     )
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
+
+def convert(input_folder, converter, output_folder):
+    for input_filepath in files_list(input_folder, "md"):
+        input_file_str = read_file(input_filepath)
+        output_str = converter(input_file_str)
+        output_file = os.path.basename(re.sub(r".md", ".html", input_filepath, flags=re.IGNORECASE))
+        save_str_as_file(output_str, output_folder + "/" + output_file)
 
 def main():
     par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files to DITA.", formatter_class=argparse.RawTextHelpFormatter)

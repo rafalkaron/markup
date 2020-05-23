@@ -34,7 +34,7 @@ def html_str_to_dita_str(html_str):
     return dita_str
 
 def html_str_to_markdown_str(html_str):
-    "Return a Markdown String from an HTML string"
+    "Return a Markdown String from an HTML string."
     converter = tomd.convert  #or markdownify
     markdown_str = converter(html_str)
     markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
