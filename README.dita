@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept xml:lang="en-us" id="enter-id-here">
+<title>Enter the page title here</title>
+<shortdesc>Enter the short description for this page here</shortdesc>
+<conbody>
+><section><title>MarkUP</title><p>Batch-convert Markdown and HTML files to DITA.</p>
+</section>
+</conbody>
+</concept>
