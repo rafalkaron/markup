@@ -23,10 +23,10 @@ def markdown_str_to_dita_str(markdown_str, output_file):
     converter = markdown2dita.Markdown(title_level=4)
     random_id = "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
     dita_str = converter(markdown_str)
-    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)  # This adds a random ID to each topic
-    dita_str = re.sub(">\n><", ">\n<", dita_str)    # This fixes a markdown2dita bug
-    dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>", "", dita_str)    # This removes the hardcoded shortdesc
-    dita_str = re.sub("<title>Enter the page title here</title>", f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # This replaces the title to match filename
+    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)  # Adds a random ID to each topic
+    dita_str = re.sub(">\n><", ">\n<", dita_str)    # Fixes a markdown2dita bug
+    dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>", "", dita_str)    # Removes the hardcoded shortdesc
+    dita_str = re.sub("<title>Enter the page title here</title>", f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # Replaces the title to match filename
     dita_str = re.sub("\n\n", "\n", dita_str)
     return dita_str
 
