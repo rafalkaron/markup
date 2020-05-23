@@ -73,15 +73,15 @@ def main():
     if args.markdown_to_dita:
         for input_filepath in files_list(input_folder, "md"):
             input_file_str = read_file(input_filepath)
-            dita_str = markdown_str_to_dita_str(input_file_str)
             output_file = os.path.basename(re.sub(r".md", ".dita", input_filepath, flags=re.IGNORECASE))
+            dita_str = markdown_str_to_dita_str(input_file_str, output_file)
             save_str_as_file(dita_str, output_folder + "/" + output_file)
 
     if args.html_to_dita:
         for input_filepath in files_list(input_folder, "html"):
             input_file_str = read_file(input_filepath)
-            dita_str = html_str_to_dita_str(input_file_str)
             output_file = os.path.basename(re.sub(r".html", ".dita", input_filepath, flags=re.IGNORECASE))
+            dita_str = html_str_to_dita_str(input_file_str, output_file)
             save_str_as_file(dita_str, output_folder + "/" + output_file)
 
     if not args.markdown_to_html and not args.html_to_markdown and not args.markdown_to_dita and not args.html_to_dita and not args.exit:

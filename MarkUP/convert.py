@@ -18,19 +18,22 @@ def markdown_str_to_html_str(markdown_str):
     html_str = re.sub(r"&gt;", r">", html_str)
     return html_str
 
-def markdown_str_to_dita_str(markdown_str):
+def markdown_str_to_dita_str(markdown_str, output_file):
     "Return a DITA string from a Markdown string."
     converter = markdown2dita.Markdown(title_level=4)
     random_id = "".join([random.choice(string.ascii_lowercase + string.digits) for n in range(8)])
     dita_str = converter(markdown_str)
-    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)
-    dita_str = re.sub(">\n><", ">\n<", dita_str)
+    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)  # This adds a random ID to each topic
+    dita_str = re.sub(">\n><", ">\n<", dita_str)    # This fixes a markdown2dita bug
+    dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>", "", dita_str)    # This removes the hardcoded shortdesc
+    dita_str = re.sub("<title>Enter the page title here</title>", f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # This replaces the title to match filename
+    dita_str = re.sub("\n\n", "\n", dita_str)
     return dita_str
 
-def html_str_to_dita_str(html_str):
+def html_str_to_dita_str(html_str, output_file):
     "Return a DITA string from an HTML string (with the use of Markdown as an intermediary format)."
     markdown_str = html_str_to_markdown_str(html_str)
-    dita_str = markdown_str_to_dita_str(markdown_str)
+    dita_str = markdown_str_to_dita_str(markdown_str, output_file)
     return dita_str
 
 def html_str_to_markdown_str(html_str):
