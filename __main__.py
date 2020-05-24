@@ -61,11 +61,9 @@ def main():
     if args.output:
         output_folder = args.output
 
-    input_filepath = input("input files")
-
     if args.markdown_to_html:
-        convert_file(input_filepath, markdown_str_to_html_str, "html")
-        #convert_folder(input_folder, "md", markdown_str_to_html_str, output_folder, "html")
+        #convert_file(input_filepath, markdown_str_to_html_str, "html")
+        convert_folder(input_folder, "md", markdown_str_to_html_str, output_folder, "html")
     if args.html_to_markdown:
         convert_folder(input_folder, "html", html_str_to_markdown_str, output_folder, "md")
     if args.markdown_to_dita:
