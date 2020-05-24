@@ -10,7 +10,7 @@ import re
 import random
 import string
 
-def markdown_str_to_html_str(markdown_str):
+def markdown_str_to_html_str(markdown_str, output_file):
     "Return an HTML string from a Markdown string."
     converter = mistune.markdown # or markdown.markdown
     html_str = converter(markdown_str)

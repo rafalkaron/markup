@@ -135,9 +135,9 @@ DITAnator/*.MARKDOWN
 DITAnator/*.markdown
 DITAnator/*.txt
 DITAnator/.DS_Store
-.vscode
 DITAnator/RemoveConvertedFiles.py
 sample_files
 .DS_Store
 
-src
+sr
+.vscode

@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-Batch-convert Markdown and HTML files to DITA.
+Batch-convert Markdown and HTML files to DITA. # Ditsy? Ditto?
 """
 
 import os
@@ -17,18 +17,23 @@ from MarkUP import (progressbar as pb,
                     enter_filepath,
                     save_str_as_file,
                     files_list,
+                    file_extension
                     )
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-def convert(input_folder, input_extension, converter, output_folder, output_extension): # think how to rework this into a class
+def convert_folder(input_folder, input_extension, converter, output_folder, output_extension): # think how to rework this into a class
     for input_filepath in files_list(input_folder, input_extension):
         output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-        try:
-            output_str = converter(read_file(input_filepath))
-        except:
-            output_str = converter(read_file(input_filepath), output_file) # This is needed to supply <title> in the converted DITA files
+        output_str = converter(read_file(input_filepath), output_file)
         save_str_as_file(output_str, output_folder + "/" + output_file)
+
+def convert_file(input_filepath, converter, output_extension): # think how to rework this into a class
+    input_extension = file_extension(input_filepath)
+    output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
+    output_folder = os.path.dirname(os.path.abspath(input_filepath))
+    output_str = converter(read_file(input_filepath), output_file)
+    save_str_as_file(output_str, output_folder + "/" + output_file)
 
 def main():
     par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files to DITA.", formatter_class=argparse.RawTextHelpFormatter)
@@ -55,15 +60,18 @@ def main():
         output_folder = input_folder
     if args.output:
         output_folder = args.output
-    
+
+    input_filepath = input("input files")
+
     if args.markdown_to_html:
-        convert(input_folder, "md", markdown_str_to_html_str, output_folder, "html")
+        convert_file(input_filepath, markdown_str_to_html_str, "html")
+        #convert_folder(input_folder, "md", markdown_str_to_html_str, output_folder, "html")
     if args.html_to_markdown:
-        convert(input_folder, "html", html_str_to_markdown_str, output_folder, "md")
+        convert_folder(input_folder, "html", html_str_to_markdown_str, output_folder, "md")
     if args.markdown_to_dita:
-        convert(input_folder, "md", markdown_str_to_dita_str, output_folder, "dita")
+        convert_folder(input_folder, "md", markdown_str_to_dita_str, output_folder, "dita")
     if args.html_to_dita:
-        convert(input_folder, "html", html_str_to_dita_str, output_folder, "dita")
+        convert_folder(input_folder, "html", html_str_to_dita_str, output_folder, "dita")
 
     if not args.markdown_to_html and not args.html_to_markdown and not args.markdown_to_dita and not args.html_to_dita and not args.exit:
         par.print_help()

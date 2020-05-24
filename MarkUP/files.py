@@ -2,6 +2,7 @@
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
 import glob
+import os
 
 def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
@@ -30,3 +31,8 @@ def save_str_as_file(str, filepath):
     with open(filepath, "w", encoding="utf-8") as file:
         file.write(str)
     return filepath
+
+def file_extension(filepath):
+    """Return file extension from a file path."""
+    file_extension = os.path.splitext(filepath)[1][1:]
+    return file_extension
