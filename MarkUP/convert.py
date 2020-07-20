@@ -1,9 +1,7 @@
 # coding: utf-8
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-from markdownify import markdownify
 import mistune
-import markdown
 import markdown2dita
 import tomd
 import re
@@ -25,7 +23,7 @@ def markdown_str_to_dita_str(markdown_str, output_file):
     dita_str = converter(markdown_str)
     dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)  # Adds a random ID to each topic
     dita_str = re.sub(">\n><", ">\n<", dita_str)    # Fixes a markdown2dita bug
-    dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>", "", dita_str)    # Removes the hardcoded shortdesc
+    dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>", "<shortdesc></shortdesc>", dita_str)    # Removes the hardcoded shortdesc
     dita_str = re.sub("<title>Enter the page title here</title>", f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # Replaces the title to match filename
     dita_str = re.sub("\n\n", "\n", dita_str)
     return dita_str
@@ -38,7 +36,7 @@ def html_str_to_dita_str(html_str, output_file):
 
 def html_str_to_markdown_str(html_str):
     "Return a Markdown String from an HTML string."
-    converter = tomd.convert  #or markdownify
+    converter = tomd.convert
     markdown_str = converter(html_str)
     markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
     return markdown_str
