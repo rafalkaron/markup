@@ -22,6 +22,15 @@ from MarkUP import (progressbar as pb,
 __version__ = "0.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
+def exe_dir():
+    """Return the executable directory."""
+    if getattr(sys, 'frozen', False):
+        exe_path = os.path.dirname(sys.executable)
+        exe_path = os.path.dirname(os.path.dirname(os.path.dirname(exe_path))) # Uncomment for macOS app builds
+    elif __file__:
+        exe_path = os.path.dirname(__file__)
+    return exe_path
+
 def convert_folder(source, input_extension, converter, output_folder, output_extension):
     for input_filepath in files_list(source, input_extension):
         output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
@@ -46,30 +55,32 @@ def main():
     par.add_argument("-html_dita", "--html_to_dita", action="store_true", help="convert HTML files to DITA files")
     par.add_argument("-ex", "--exit", action ="store_true", help="exits without a prompt (defaults to prompt on exit)")
     args = par.parse_args()
-
-    if getattr(sys, 'frozen', False):
-        exe_path = os.path.dirname(sys.executable)
-    elif __file__:
-        exe_path = os.path.dirname(__file__)
-
+    # Default behavior
     if not args.input:
-        source = exe_path
+        source = exe_dir()
     if args.input:
         source = args.input
     if not args.output:
         output_folder = source
     if args.output:
         output_folder = args.output
-
+    # Convert MD to...
     if args.markdown_to_html:
-        convert_file(source, markdown_str_to_html_str, "html")
-        #convert_folder(source, "md", markdown_str_to_html_str, output_folder, "html")
-    if args.html_to_markdown:
-        convert_folder(source, "html", html_str_to_markdown_str, output_folder, "md")
+        if os.path.isfile(source):
+            convert_file(source, markdown_str_to_html_str, "html")
+        elif os.path.isdir(source):
+            convert_folder(source, "md", markdown_str_to_html_str, output_folder, "html")
+        else:
+            print("Invalid input!")
     if args.markdown_to_dita:
         convert_folder(source, "md", markdown_str_to_dita_str, output_folder, "dita")
+    # Convert HTML to...
     if args.html_to_dita:
         convert_folder(source, "html", html_str_to_dita_str, output_folder, "dita")
+    if args.html_to_markdown:
+        convert_folder(source, "html", html_str_to_markdown_str, output_folder, "md")
+    # Convert DITA to...
+
 
     if not args.markdown_to_html and not args.html_to_markdown and not args.markdown_to_dita and not args.html_to_dita and not args.exit:
         par.print_help()
