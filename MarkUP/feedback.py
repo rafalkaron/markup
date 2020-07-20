@@ -1,7 +1,7 @@
 # coding: utf-8
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
-def progressbar(percent, length=50, prefix="Exporting", fill="#", empty="-"):
+def progressbar(percent, length=50, prefix="Converting", fill="#", empty="-"):
     """Print a progress bar.
 
     Keyword arguments:
