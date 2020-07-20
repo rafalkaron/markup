@@ -32,12 +32,21 @@ def exe_dir():
     return exe_path
 
 def convert_folder(source, input_extension, converter, output_folder, output_extension):
-    for input_filepath in files_list(source, input_extension):
+    """Convert files in a folder."""
+    input_files_list = files_list(source, input_extension)
+    files_number = len(input_files_list)
+    part = 100 / files_number
+    progress = 0
+    for input_filepath in input_files_list:
+        progress += part
+        pb(int(progress))
         output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
         output_str = converter(read_file(input_filepath), output_file)
         save_str_as_file(output_str, output_folder + "/" + output_file)
+    print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} files.")
 
 def convert_file(input_filepath, converter, output_extension):
+    """Convert a specific file."""
     input_extension = file_extension(input_filepath)
     output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
     output_folder = os.path.dirname(os.path.abspath(input_filepath))
@@ -104,7 +113,7 @@ def main():
     
     # Display Exit prompt if not overriden by an attribute
     if not args.exit:
-        exit_prompt("\nTo exit MarkUP, press [Enter]")
+        exit_prompt("To exit MarkUP, press [Enter]")
 
 if __name__ == "__main__":
     main()
