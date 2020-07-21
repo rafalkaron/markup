@@ -23,6 +23,8 @@ from MarkUP import (progressbar as pb,
 __version__ = "0.2"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
+sys.tracebacklimit = 0 # Disables traceback
+
 def exe_dir():
     """Return the executable directory."""
     if getattr(sys, 'frozen', False):
@@ -37,29 +39,30 @@ def convert_folder(source, input_extension, converter, output_folder, output_ext
     start_time = time.time()
     input_files_list = files_list(source, input_extension)
     files_number = len(input_files_list)
-    if files_number != 0:
-        part = 100 / files_number
-        progress = 0
-        pb(progress)
-        for input_filepath in input_files_list:
-            progress += part
-            pb(int(progress))
-            output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-            output_str = converter(read_file(input_filepath), output_file)
-            save_str_as_file(output_str, output_folder + "/" + output_file)
-        elapsed_time = time.time() - start_time
-        print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
-    elif files_number == 0:
-        print(f"No {input_extension.upper()} files found in {source}")
+    if files_number == 0:
+        raise Exception(f"No {input_extension.upper()} files found in {source}")
+    part = 100 / files_number
+    progress = 0
+    pb(progress)
+    for input_filepath in input_files_list:
+        progress += part
+        pb(int(progress))
+        output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
+        output_str = converter(read_file(input_filepath), output_file)
+        save_str_as_file(output_str, output_folder + "/" + output_file)
+    elapsed_time = time.time() - start_time
+    print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
 
-def convert_file(input_filepath, converter, output_extension):
+def convert_file(source, input_extension, converter, output_extension):
     """Convert a specific file."""
     start_time = time.time()
     pb(0)
-    input_extension = file_extension(input_filepath)
-    output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-    output_folder = os.path.dirname(os.path.abspath(input_filepath))
-    output_str = converter(read_file(input_filepath), output_file)
+    source_extension = file_extension(source)
+    if input_extension.lower() != source_extension.lower():
+        raise Exception(f"You selected a wrong file type. Please select a {input_extension.upper()} file.")
+    output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
+    output_folder = os.path.dirname(os.path.abspath(source))
+    output_str = converter(read_file(source), output_file)
     save_str_as_file(output_str, output_folder + "/" + output_file)
     elapsed_time = time.time() - start_time
     pb(100)
@@ -90,34 +93,34 @@ def main():
     # Convert MD to...
     if args.markdown_to_html:
         if os.path.isfile(source):
-            convert_file(source, markdown_str_to_html_str, "html")
+            convert_file(source, "md", markdown_str_to_html_str, "html")
         elif os.path.isdir(source):
             convert_folder(source, "md", markdown_str_to_html_str, output_folder, "html")
         else:
-            print("Invalid input!")
+            raise Exception("The resource that you selected does not exist.")
     elif args.markdown_to_dita:
         if os.path.isfile(source):
-            convert_file(source, markdown_str_to_dita_str, "dita")
+            convert_file(source, "md", markdown_str_to_dita_str, "dita")
         elif os.path.isdir(source):
             convert_folder(source, "md", markdown_str_to_dita_str, output_folder, "dita")
         else:
-            print("Invalid input!")
+            raise Exception("The resource that you selected does not exist.")
 
     # Convert HTML to...
     elif args.html_to_dita:
         if os.path.isfile(source):
-            convert_file(source, html_str_to_dita_str, "dita")
+            convert_file(source, "html", html_str_to_dita_str, "dita")
         elif os.path.isdir(source):
             convert_folder(source, "html", html_str_to_dita_str, output_folder, "dita")
         else:
-            print("Invalid input!")
+            raise Exception("The resource that you selected does not exist.")
     if args.html_to_markdown:
         if os.path.isfile(source):
-            convert_file(source, html_str_to_markdown_str, "md")
+            convert_file(source, "html", html_str_to_markdown_str, "md")
         elif os.path.isdir(source):
             convert_folder(source, "html", html_str_to_markdown_str, output_folder, "md")
         else:
-            print("Invalid input!")    
+            raise Exception("The resource that you selected does not exist.")
     
     # If no argumets are passed, display help.
     elif not args.markdown_to_html and not args.html_to_markdown and not args.markdown_to_dita and not args.html_to_dita and not args.exit:
