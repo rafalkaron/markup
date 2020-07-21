@@ -20,10 +20,8 @@ from MarkUP import (progressbar as pb,
                     files_list,
                     file_extension
                     )
-__version__ = "0.2"
+__version__ = "0.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
-
-sys.tracebacklimit = 0 # Disables traceback
 
 def exe_dir():
     """Return the executable directory."""
@@ -59,7 +57,7 @@ def convert_file(source, input_extension, converter, output_extension):
     pb(0)
     source_extension = file_extension(source)
     if input_extension.lower() != source_extension.lower():
-        raise Exception(f"You selected a wrong file type. Please select a {input_extension.upper()} file.")
+        raise Exception(f"You selected a wrong file type. Please select a(n) {input_extension.upper()} file.")
     output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
     output_folder = os.path.dirname(os.path.abspath(source))
     output_str = converter(read_file(source), output_file)
@@ -69,6 +67,7 @@ def convert_file(source, input_extension, converter, output_extension):
     print(f"Converted one {input_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
 
 def main():
+    sys.tracebacklimit = 0 # Disables traceback messages
     par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files to DITA.", formatter_class=argparse.RawTextHelpFormatter)
     par.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
     par.add_argument("-in", "--input", metavar="source", help="manually specify the input folder (defualts to MarkUP executable folder)")
@@ -79,7 +78,6 @@ def main():
     par.add_argument("-html_dita", "--html_to_dita", action="store_true", help="convert HTML files to DITA files")
     par.add_argument("-ex", "--exit", action ="store_true", help="exits without a prompt (defaults to prompt on exit)")
     args = par.parse_args()
-    
     # Default behavior. Sets source and output folders to the executable directory.
     if not args.input:
         source = exe_dir()
