@@ -37,17 +37,20 @@ def convert_folder(source, input_extension, converter, output_folder, output_ext
     start_time = time.time()
     input_files_list = files_list(source, input_extension)
     files_number = len(input_files_list)
-    part = 100 / files_number
-    progress = 0
-    pb(progress)
-    for input_filepath in input_files_list:
-        progress += part
-        pb(int(progress))
-        output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-        output_str = converter(read_file(input_filepath), output_file)
-        save_str_as_file(output_str, output_folder + "/" + output_file)
-    elapsed_time = time.time() - start_time
-    print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    if files_number != 0:
+        part = 100 / files_number
+        progress = 0
+        pb(progress)
+        for input_filepath in input_files_list:
+            progress += part
+            pb(int(progress))
+            output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
+            output_str = converter(read_file(input_filepath), output_file)
+            save_str_as_file(output_str, output_folder + "/" + output_file)
+        elapsed_time = time.time() - start_time
+        print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    elif files_number == 0:
+        print(f"No {input_extension.upper()} files found in {source}")
 
 def convert_file(input_filepath, converter, output_extension):
     """Convert a specific file."""
