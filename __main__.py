@@ -46,6 +46,7 @@ def main():
     par.add_argument("-html_dita", "--html_to_dita", action="store_true", help="convert HTML files to DITA files")
     par.add_argument("-ex", "--exit", action ="store_true", help="exits without a prompt (defaults to prompt on exit)")
     args = par.parse_args()
+
     # Default behavior. Sets source and output folders to the executable directory.
     if not args.input:
         source = exe_dir()

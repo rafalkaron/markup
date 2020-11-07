@@ -12,12 +12,9 @@ import os
 from .files import read_file, save_str_as_file, files_list, file_extension
 from .feedback import progressbar as pb
 
-
-
 def markdown_str_to_html_str(markdown_str, output_file):
     "Return an HTML string from a Markdown string."
-    converter = mistune.markdown # or markdown.markdown
-    html_str = converter(markdown_str)
+    html_str = mistune.markdown(markdown_str)
     html_str = re.sub(r"&lt;", r"<", html_str)
     html_str = re.sub(r"&gt;", r">", html_str)
     return html_str
@@ -42,8 +39,7 @@ def html_str_to_dita_str(html_str, output_file):
 
 def html_str_to_markdown_str(html_str):
     "Return a Markdown String from an HTML string."
-    converter = tomd.convert
-    markdown_str = converter(html_str)
+    markdown_str = tomd.convert(html_str)
     markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
     return markdown_str
 
@@ -65,7 +61,7 @@ def convert_folder(source, input_extension, converter, output_folder, output_ext
         save_str_as_file(output_str, output_folder + "/" + output_file)
     elapsed_time = time.time() - start_time
     print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
-    
+
 def convert_file(source, input_extension, converter, output_extension):
     """Convert a specific file."""
     start_time = time.time()
@@ -75,8 +71,9 @@ def convert_file(source, input_extension, converter, output_extension):
         raise Exception(f"You selected a wrong file type. Please select a(n) {input_extension.upper()} file.")
     output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
     output_folder = os.path.dirname(os.path.abspath(source))
+    output_filepath = output_folder + "/" + output_file
     output_str = converter(read_file(source), output_file)
-    save_str_as_file(output_str, output_folder + "/" + output_file)
+    save_str_as_file(output_str, output_filepath)
     elapsed_time = time.time() - start_time
     pb(100)
     print(f"Converted one {input_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
