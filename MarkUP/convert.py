@@ -58,9 +58,16 @@ def convert_folder(source, input_extension, converter, output_folder, output_ext
         pb(int(progress))
         output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
         output_str = converter(read_file(input_filepath), output_file)
-        save_str_as_file(output_str, output_folder + "/" + output_file)
-    elapsed_time = time.time() - start_time
-    print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+        output_filepath = output_folder + "/" + output_file
+        if os.path.isfile(output_filepath):
+            prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
+            if prompt == "y" or prompt == "Y":
+                save_str_as_file(output_str,output_filepath)
+                elapsed_time = time.time() - start_time
+                print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+            elif prompt != "y" or prompt != "Y":
+                print("Aborted process.")
+                return False
 
 def convert_file(source, input_extension, converter, output_extension):
     """Convert a specific file."""
@@ -72,8 +79,14 @@ def convert_file(source, input_extension, converter, output_extension):
     output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
     output_folder = os.path.dirname(os.path.abspath(source))
     output_filepath = output_folder + "/" + output_file
-    output_str = converter(read_file(source), output_file)
-    save_str_as_file(output_str, output_filepath)
-    elapsed_time = time.time() - start_time
-    pb(100)
-    print(f"Converted one {input_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    if os.path.isfile(output_filepath):
+        prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
+        if prompt == "y" or prompt == "Y":
+            output_str = converter(read_file(source), output_file)
+            save_str_as_file(output_str, output_filepath)
+            elapsed_time = time.time() - start_time
+            pb(100)
+            print(f"Converted one {input_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+        elif prompt != "y" or prompt != "Y":
+            print("Aborted process.")
+            return False
