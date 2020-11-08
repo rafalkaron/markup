@@ -55,7 +55,7 @@ def convert_folder(source, input_extension, converter, output_folder, output_ext
     pb(progress)
     for input_filepath in input_files_list:
         progress += part
-        pb(int(progress))
+        pb(progress)
         output_file = os.path.basename(re.sub(f".{input_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
         output_str = converter(read_file(input_filepath), output_file)
         output_filepath = output_folder + "/" + output_file
@@ -67,7 +67,6 @@ def convert_folder(source, input_extension, converter, output_folder, output_ext
                 print(f"Converted {files_number} {input_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
             elif prompt != "y" or prompt != "Y":
                 print("Aborted process.")
-                return False
 
 def convert_file(source, input_extension, converter, output_extension):
     """Convert a specific file."""

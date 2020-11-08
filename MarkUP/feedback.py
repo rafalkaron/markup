@@ -18,9 +18,3 @@ def progressbar(percent, length=50, prefix="Converting", fill="#", empty="-"):
         print(bar, end="\r", flush="true")
     if percent == 100:
         print(bar)
-
-def exit_prompt(prompt):
-    """Prompt to exit the program by pressing the Enter key."""
-    response = input(prompt)
-    if response:
-        exit(0)
