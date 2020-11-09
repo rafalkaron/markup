@@ -20,9 +20,8 @@ def markdown_str_to_html_str(markdown_str, output_file):
 def markdown_str_to_dita_str(markdown_str, output_file):
     """Return a DITA string from a Markdown string."""
     converter = markdown2dita.Markdown(title_level=4)
-    random_id = uuid.uuid4()
     dita_str = converter(markdown_str)
-    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"{random_id}\"", dita_str)  # Adds a random ID to each topic
+    dita_str = re.sub("id=\"enter-id-here\"", f"id=\"concept-{uuid.uuid4()}\"", dita_str)
     dita_str = re.sub(">\n><", ">\n<", dita_str)    # Fixes a markdown2dita bug
     dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>", "<shortdesc></shortdesc>", dita_str)    # Removes the hardcoded shortdesc
     dita_str = re.sub("<title>Enter the page title here</title>", f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # Replaces the title to match filename
@@ -30,7 +29,7 @@ def markdown_str_to_dita_str(markdown_str, output_file):
     return dita_str
 
 def html_str_to_dita_str(html_str, output_file):
-    """Return a DITA string from an HTML string (with the use of Markdown as an intermediary format)."""
+    """Return a DITA string from an HTML string (with the use of Markdown as the intermediary format)."""
     markdown_str = html_str_to_markdown_str(html_str)
     dita_str = markdown_str_to_dita_str(markdown_str, output_file)
     return dita_str
@@ -46,8 +45,20 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     elapsed_time = 0
     input_files = files_list(source, source_extension)
     files_number = len(input_files)
+    existing_files = []
     if files_number == 0:
         raise Exception(f" [!] No {source_extension.upper()} files found in {source}")
+    
+    for input_filepath in input_files:
+        if os.path.isfile(input_filepath):
+            existing_files.append(input_filepath)
+    prompt = input(f" [?] Do you want to overwrite the following files? {existing_files} \n [y/n]")
+    if prompt == "y" or prompt == "Y":
+        pass
+    elif prompt != "y" or prompt != "Y":
+        print("Cancelled conversion.")
+        return False
+    
     for input_filepath in input_files:
         start_time = time.time()
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
@@ -55,19 +66,10 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         output_str = converter(read_file(input_filepath), output_file)
         iter_time = time.time() - start_time
         elapsed_time = elapsed_time + iter_time
-        if os.path.isfile(output_filepath):
-            prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
-            if prompt == "y" or prompt == "Y":
-                save_str_as_file(output_str, output_filepath)
-                print(f" [+] Converted {source} to {output_filepath}")
-            elif prompt != "y" or prompt != "Y":
-                print(" [i] Cancelled conversion.")
-                return False
-        elif not os.path.isfile(output_filepath):
-            save_str_as_file(output_str,output_filepath)
-            print(f" [+] Converted {source} to {output_filepath}")
+        save_str_as_file(output_str, output_filepath)
+        print(f" [+] Converted {source} to {output_filepath}")
     print(f" [i] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
-    return [source_extension.upper(), output_extension.upper()]
+    return True
 
 def convert_file(source, source_extension, converter, output_extension):
     """Convert a specific file."""
@@ -90,7 +92,7 @@ def convert_file(source, source_extension, converter, output_extension):
     elif not os.path.isfile(output_filepath):
         save_str_as_file(output_str, output_filepath)
     print(f" [+] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
-    return [source_extension.upper(), output_extension.upper()]
+    return True
 
 def md_html(source, output_dir):
     """Convert Markdown to HTML."""
@@ -106,7 +108,7 @@ def md_dita(source, output_dir):
     if os.path.isfile(source):
         convert_file(source, "md", markdown_str_to_dita_str, "dita")
     elif os.path.isdir(source):
-        convert_folder(source, "md", markdown_str_to_dita_str, output_dir, "dita")
+        details = convert_folder(source, "md", markdown_str_to_dita_str, output_dir, "dita")
     else:
         raise Exception(f" [!] {source} does not exist.")
 
