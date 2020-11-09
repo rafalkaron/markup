@@ -52,7 +52,9 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     for input_filepath in input_files:
         if os.path.isfile(input_filepath):
             existing_files.append(input_filepath)
-    prompt = input(f" [?] Do you want to overwrite the following files? {existing_files} \n [y/n]")
+    existing_files = "\n".join(existing_files)
+    existing_files = "     * " + existing_files.replace("\n", "\n     * ")
+    prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files}\n")
     if prompt == "y" or prompt == "Y":
         pass
     elif prompt != "y" or prompt != "Y":
@@ -68,7 +70,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         elapsed_time = elapsed_time + iter_time
         save_str_as_file(output_str, output_filepath)
         print(f" [+] Converted {source} to {output_filepath}")
-    print(f" [i] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    print(f" [✔] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
     return True
 
 def convert_file(source, source_extension, converter, output_extension):
@@ -91,7 +93,7 @@ def convert_file(source, source_extension, converter, output_extension):
             return False
     elif not os.path.isfile(output_filepath):
         save_str_as_file(output_str, output_filepath)
-    print(f" [+] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
+    print(f" [✔] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
     return True
 
 def md_html(source, output_dir):
