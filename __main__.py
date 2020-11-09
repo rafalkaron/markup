@@ -35,13 +35,13 @@ def main():
 
     # Conversion types
     if args.convert == "md_html":
-        md_html(args.input, output_dir)
+        md_html(args.input.replace("\\", "/"), output_dir.replace("\\", "/"))
     elif args.convert == "md_dita":
-        md_dita(args.input, output_dir)
+        md_dita(args.input.replace("\\", "/"), output_dir.replace("\\", "/"))
     elif args.convert == "html_dita":
-        html_dita(args.input, output_dir)
+        html_dita(args.input.replace("\\", "/"), output_dir.replace("\\", "/"))
     elif args.convert == "html_md":
-        html_md(args.input, output_dir)
+        html_md(args.input.replace("\\", "/"), output_dir.replace("\\", "/"))
     else:
         print(" [!] Run MarkUP again and set a right conversion type.\n")
         par.print_help()

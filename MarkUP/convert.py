@@ -65,6 +65,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         start_time = time.time()
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
         output_filepath = output_dir + "/" + output_file
+        output_filepath = output_filepath.replace("//", "/")
         output_str = converter(read_file(input_filepath), output_file)
         iter_time = time.time() - start_time
         elapsed_time = elapsed_time + iter_time
@@ -82,6 +83,7 @@ def convert_file(source, source_extension, converter, output_extension):
     output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
     output_dir = os.path.dirname(os.path.abspath(source))
     output_filepath = output_dir + "/" + output_file
+    output_filepath = output_filepath.replace("//", "/")
     output_str = converter(read_file(source), output_file)
     elapsed_time = time.time() - start_time
     if os.path.isfile(output_filepath):
