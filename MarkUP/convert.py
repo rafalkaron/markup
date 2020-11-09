@@ -50,8 +50,10 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         raise Exception(f" [!] No {source_extension.upper()} files found in {source}")
     
     for input_filepath in input_files:
-        if os.path.isfile(input_filepath):
-            existing_files.append(input_filepath)
+        output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
+        output_filepath = output_dir + output_file
+        if os.path.isfile(output_filepath):
+            existing_files.append(output_filepath)
     existing_files = "\n".join(existing_files)
     existing_files = "     * " + existing_files.replace("\n", "\n     * ")
     prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files}\n")
@@ -64,8 +66,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     for input_filepath in input_files:
         start_time = time.time()
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-        output_filepath = output_dir + "/" + output_file
-        output_filepath = output_filepath.replace("//", "/")
+        output_filepath = output_dir + output_file
         output_str = converter(read_file(input_filepath), output_file)
         iter_time = time.time() - start_time
         elapsed_time = elapsed_time + iter_time
