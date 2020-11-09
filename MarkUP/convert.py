@@ -85,13 +85,13 @@ def convert_file(source, source_extension, converter, output_extension):
         prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
         if prompt == "y" or prompt == "Y":
             save_str_as_file(output_str, output_filepath)
-            print(f"Converted one {source_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
         elif prompt != "y" or prompt != "Y":
-            print("Aborted process.")
+            print("Cancelled conversion.")
             return False
     elif not os.path.isfile(output_filepath):
         save_str_as_file(output_str, output_filepath)
-        print(f"Converted one {source_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    print(f"Converted one {source_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    return [source_extension.upper(), output_extension.upper()]
 
 
 def md_html(source, output_dir):

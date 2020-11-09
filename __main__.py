@@ -42,7 +42,7 @@ def main():
     elif args.convert == "html_md":
         html_md(args.input, output_dir)
     else:
-        print("Run MarkUP again and set the right conversion type.")
+        print(" [!] Run MarkUP again and set a right conversion type.\n")
         par.print_help()
 
 if __name__ == "__main__":
