@@ -56,11 +56,11 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
             existing_files.append(output_filepath)
     existing_files = "\n".join(existing_files)
     existing_files = "     * " + existing_files.replace("\n", "\n     * ")
-    prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files}\n")
+    prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files}\n     ")
     if prompt == "y" or prompt == "Y":
         pass
     elif prompt != "y" or prompt != "Y":
-        print("Cancelled conversion.")
+        print(" [i] Cancelled conversion.")
         return False
     
     for input_filepath in input_files:
@@ -68,16 +68,15 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
         output_filepath = output_dir + output_file
         output_str = converter(read_file(input_filepath), output_file)
+        save_str_as_file(output_str, output_filepath)
         iter_time = time.time() - start_time
         elapsed_time = elapsed_time + iter_time
-        save_str_as_file(output_str, output_filepath)
         print(f" [+] Converted {input_filepath} to {output_filepath}")
     print(f" [✔] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
     return True
 
 def convert_file(source, source_extension, converter, output_extension):
     """Convert a specific file."""
-    start_time = time.time()
     source_extension = file_extension(source)
     if source_extension.lower() != source_extension.lower():
         raise Exception(f" [!] You selected a wrong file type. Please select a(n) {source_extension.upper()} file.")
@@ -85,17 +84,17 @@ def convert_file(source, source_extension, converter, output_extension):
     output_dir = os.path.dirname(os.path.abspath(source))
     output_filepath = output_dir + "/" + output_file
     output_filepath = output_filepath.replace("//", "/")
-    output_str = converter(read_file(source), output_file)
-    elapsed_time = time.time() - start_time
     if os.path.isfile(output_filepath):
         prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
         if prompt == "y" or prompt == "Y":
-            save_str_as_file(output_str, output_filepath)
+            pass
         elif prompt != "y" or prompt != "Y":
             print(" [i] Cancelled conversion.")
             return False
-    elif not os.path.isfile(output_filepath):
-        save_str_as_file(output_str, output_filepath)
+    start_time = time.time()
+    output_str = converter(read_file(source), output_file)
+    save_str_as_file(output_str, output_filepath)
+    elapsed_time = time.time() - start_time
     print(f" [✔] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
     return True
 
