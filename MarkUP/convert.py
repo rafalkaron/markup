@@ -48,25 +48,26 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     existing_files = []
     if files_number == 0:
         raise Exception(f" [!] No {source_extension.upper()} files found in {source}")
-    
+
     for input_filepath in input_files:
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-        output_filepath = output_dir + output_file
+        output_filepath = output_dir + "/" + output_file
         if os.path.isfile(output_filepath):
             existing_files.append(output_filepath)
-    existing_files = "\n".join(existing_files)
-    existing_files = "     * " + existing_files.replace("\n", "\n     * ")
-    prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files}\n     ")
-    if prompt == "y" or prompt == "Y":
-        pass
-    elif prompt != "y" or prompt != "Y":
-        print(" [i] Cancelled conversion.")
-        return False
-    
+    existing_files_str = "\n".join(existing_files)
+    existing_files_str = "     * " + existing_files_str.replace("\n", "\n     * ")
+    if len(existing_files) > 0:
+        prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files_str}\n     ")
+        if prompt == "y" or prompt == "Y":
+            pass
+        elif prompt != "y" or prompt != "Y":
+            print(" [i] Cancelled conversion.")
+            return False
+
     for input_filepath in input_files:
         start_time = time.time()
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-        output_filepath = output_dir + output_file
+        output_filepath = output_dir + "/" + output_file
         output_str = converter(read_file(input_filepath), output_file)
         save_str_as_file(output_str, output_filepath)
         iter_time = time.time() - start_time
