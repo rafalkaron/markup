@@ -78,17 +78,21 @@ def convert_file(source, source_extension, converter, output_extension):
     output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
     output_dir = os.path.dirname(os.path.abspath(source))
     output_filepath = output_dir + "/" + output_file
+    output_str = converter(read_file(source), output_file)
+    elapsed_time = time.time() - start_time
+    pb(100)
     if os.path.isfile(output_filepath):
         prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
         if prompt == "y" or prompt == "Y":
-            output_str = converter(read_file(source), output_file)
             save_str_as_file(output_str, output_filepath)
-            elapsed_time = time.time() - start_time
-            pb(100)
             print(f"Converted one {source_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
         elif prompt != "y" or prompt != "Y":
             print("Aborted process.")
             return False
+    elif not os.path.isfile(output_filepath):
+        save_str_as_file(output_str, output_filepath)
+        print(f"Converted one {source_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+
 
 def md_html(source, output_dir):
     if os.path.isfile(source):

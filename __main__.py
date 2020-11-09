@@ -1,6 +1,6 @@
 # coding: utf-8
 """
-Batch-convert your docs.
+Batch-convert Markdown and HTML files.
 """
 
 import os

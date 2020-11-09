@@ -1,4 +1,5 @@
 
 # MarkUP
 
-Batch-convert Markdown and HTML files to DITA.
+Batch-convert Markdown and HTML files.
+
