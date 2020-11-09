@@ -46,27 +46,33 @@ def html_str_to_markdown_str(html_str):
 def convert_folder(source, source_extension, converter, output_dir, output_extension):
     """Convert files in a folder."""
     start_time = time.time()
-    input_files_list = files_list(source, source_extension)
-    files_number = len(input_files_list)
+    input_files = files_list(source, source_extension)
+    files_number = len(input_files)
     if files_number == 0:
-        raise Exception(f"No {source_extension.upper()} files found in {source}")
+        raise Exception(f" [!] No {source_extension.upper()} files found in {source}")
     part = 100 / files_number
     progress = 0
     pb(progress)
-    for input_filepath in input_files_list:
+    for input_filepath in input_files:
         progress += part
         pb(progress)
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
-        output_str = converter(read_file(input_filepath), output_file)
         output_filepath = output_dir + "/" + output_file
+        output_str = converter(read_file(input_filepath), output_file)
+        elapsed_time = time.time() - start_time
         if os.path.isfile(output_filepath):
             prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
             if prompt == "y" or prompt == "Y":
-                save_str_as_file(output_str,output_filepath)
-                elapsed_time = time.time() - start_time
-                print(f"Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+                save_str_as_file(output_str, output_filepath)
+                print(f" [+] Converted {source} to {output_filepath}")
             elif prompt != "y" or prompt != "Y":
-                print("Aborted process.")
+                print(" [i] Cancelled conversion.")
+                return False
+        elif not os.path.isfile(output_filepath):
+            save_str_as_file(output_str,output_filepath)
+            print(f" [+] Converted {source} to {output_filepath}")
+        print(f" [i] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+        return [source_extension.upper(), output_extension.upper()]
 
 def convert_file(source, source_extension, converter, output_extension):
     """Convert a specific file."""
@@ -74,7 +80,7 @@ def convert_file(source, source_extension, converter, output_extension):
     pb(0)
     source_extension = file_extension(source)
     if source_extension.lower() != source_extension.lower():
-        raise Exception(f"You selected a wrong file type. Please select a(n) {source_extension.upper()} file.")
+        raise Exception(f" [!] You selected a wrong file type. Please select a(n) {source_extension.upper()} file.")
     output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
     output_dir = os.path.dirname(os.path.abspath(source))
     output_filepath = output_dir + "/" + output_file
@@ -86,13 +92,12 @@ def convert_file(source, source_extension, converter, output_extension):
         if prompt == "y" or prompt == "Y":
             save_str_as_file(output_str, output_filepath)
         elif prompt != "y" or prompt != "Y":
-            print("Cancelled conversion.")
+            print(" [i] Cancelled conversion.")
             return False
     elif not os.path.isfile(output_filepath):
         save_str_as_file(output_str, output_filepath)
-    print(f"Converted one {source_extension.upper()} file to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    print(f" [+] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
     return [source_extension.upper(), output_extension.upper()]
-
 
 def md_html(source, output_dir):
     if os.path.isfile(source):
