@@ -76,13 +76,12 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     print(f" [✔] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
     return True
 
-def convert_file(source, source_extension, converter, output_extension):
+def convert_file(source, source_extension, converter, output_dir, output_extension):
     """Convert a specific file."""
     source_extension = file_extension(source)
     if source_extension.lower() != source_extension.lower():
         raise Exception(f" [!] You selected a wrong file type. Please select a(n) {source_extension.upper()} file.")
     output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", source, flags=re.IGNORECASE))
-    output_dir = os.path.dirname(os.path.abspath(source))
     output_filepath = output_dir + "/" + output_file
     output_filepath = output_filepath.replace("//", "/")
     if os.path.isfile(output_filepath):
@@ -102,7 +101,7 @@ def convert_file(source, source_extension, converter, output_extension):
 def md_html(source, output_dir):
     """Convert Markdown to HTML."""
     if os.path.isfile(source):
-        convert_file(source, "md", markdown_str_to_html_str, "html")
+        convert_file(source, "md", markdown_str_to_html_str, output_dir, "html")
     elif os.path.isdir(source):
         convert_folder(source, "md", markdown_str_to_html_str, output_dir, "html")
     else:
@@ -111,7 +110,7 @@ def md_html(source, output_dir):
 def md_dita(source, output_dir):
     """Convert Markdown to DITA."""
     if os.path.isfile(source):
-        convert_file(source, "md", markdown_str_to_dita_str, "dita")
+        convert_file(source, "md", markdown_str_to_dita_str, output_dir, "dita")
     elif os.path.isdir(source):
         details = convert_folder(source, "md", markdown_str_to_dita_str, output_dir, "dita")
     else:
@@ -120,7 +119,7 @@ def md_dita(source, output_dir):
 def html_dita(source, output_dir):
     """Convert HTML to DITA."""
     if os.path.isfile(source):
-        convert_file(source, "html", html_str_to_dita_str, "dita")
+        convert_file(source, "html", html_str_to_dita_str, output_dir, "dita")
     elif os.path.isdir(source):
         convert_folder(source, "html", html_str_to_dita_str, output_dir, "dita")
     else:
@@ -129,7 +128,7 @@ def html_dita(source, output_dir):
 def html_md(source, output_dir):
     """Convert Markdown to DITA."""
     if os.path.isfile(source):
-        convert_file(source, "html", html_str_to_markdown_str, "md")
+        convert_file(source, "html", html_str_to_markdown_str, output_dir, "md")
     elif os.path.isdir(source):
         convert_folder(source, "html", html_str_to_markdown_str, output_dir, "md")
     else:
