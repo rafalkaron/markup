@@ -69,7 +69,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         iter_time = time.time() - start_time
         elapsed_time = elapsed_time + iter_time
         save_str_as_file(output_str, output_filepath)
-        print(f" [+] Converted {source} to {output_filepath}")
+        print(f" [+] Converted {input_filepath} to {output_filepath}")
     print(f" [✔] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
     return True
 

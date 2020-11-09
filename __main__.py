@@ -12,7 +12,8 @@ from MarkUP import (md_dita,
                     html_dita)
 __version__ = "0.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
-
+# Multiprocessing
+# 
 def main():
     # sys.tracebacklimit = 0 # Disable traceback messages
     par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files.", formatter_class=argparse.RawTextHelpFormatter)
