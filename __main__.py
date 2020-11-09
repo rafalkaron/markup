@@ -15,8 +15,7 @@ __version__ = "0.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
 def main():
-    # sys.tracebacklimit = 0 # Disables traceback messages
-
+    # sys.tracebacklimit = 0 # Disable traceback messages
     par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files.", formatter_class=argparse.RawTextHelpFormatter)
     par.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
     par.add_argument("input", type=str, help="provide a filepath to a file or a folder with files that you want to convert")
@@ -28,11 +27,13 @@ def main():
     par.add_argument("-out", "--output", metavar="output_dir", help="manually specify the output folder (defaults to the input folder)")
     args = par.parse_args()
 
+    # Input and output folders
     if args.output:
         output_dir = args.output
     elif not args.output:
         output_dir = args.input
 
+    # Conversion types
     if args.convert == "md_html":
         md_html(args.input, output_dir)
     elif args.convert == "md_dita":

@@ -71,8 +71,8 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         elif not os.path.isfile(output_filepath):
             save_str_as_file(output_str,output_filepath)
             print(f" [+] Converted {source} to {output_filepath}")
-        print(f" [i] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
-        return [source_extension.upper(), output_extension.upper()]
+    print(f" [i] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    return [source_extension.upper(), output_extension.upper()]
 
 def convert_file(source, source_extension, converter, output_extension):
     """Convert a specific file."""
