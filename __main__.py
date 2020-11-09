@@ -6,8 +6,7 @@ Batch-convert Markdown and HTML files.
 import os
 import sys
 import argparse
-from MarkUP import (progressbar as pb,
-                    md_dita,
+from MarkUP import (md_dita,
                     md_html,
                     html_md,
                     html_dita)
