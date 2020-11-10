@@ -8,7 +8,7 @@ Batch-convert Markdown and HTML files.
 2. Unzip **MarkUP**.
 
 ## Usage
-1. In terminal, run: `markup <source> <conversion_type> --output <output_dir>` 
+1. In a terminal app, run: `markup <source> <conversion_type> --output <output_dir>`  
     Where:
     * **&lt;source&gt;** (required) is the file or directory that contains files that you want to convert.
     * **&lt;conversion_type&gt;** (required) is one of the following:
