@@ -10,7 +10,7 @@ from MarkUP import (md_dita,
                     md_html,
                     html_md,
                     html_dita)
-__version__ = "0.5"
+__version__ = "0.5.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 def main():
     #sys.tracebacklimit = 0 # Disable traceback messages
@@ -29,9 +29,9 @@ def main():
     if args.output:
         output_dir = args.output
     elif not args.output:
-        if os.path.isfile:
+        if os.path.isfile(args.input):
             output_dir = os.path.dirname(args.input)
-        elif os.path.isdir:
+        elif os.path.isdir(args.input):
             output_dir = args.input
 
     # Make paths uniform for every platform

@@ -8,9 +8,9 @@ Batch-convert Markdown and HTML files.
 2. Unzip **MarkUP**.
 
 ## Usage
-1. In terminal, run: `markup <source> <conversion_type> -output_dir <output_dir>` 
+1. In terminal, run: `markup <input> <conversion_type> -output_dir <output_dir>` 
     Where:
-    * **&lt;source&gt;** (required) is the file or directory that contains files that you want to convert.
+    * **&lt;input&gt;** (required) is the file or directory that contains files that you want to convert.
     * **&lt;conversion_type&gt;** (required) is one of the following:
         * `md_dita` - converts Markdown to DITA
         * `html_dita` - converts HTML to DITA
