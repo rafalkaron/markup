@@ -30,11 +30,11 @@ def markdown_str_to_dita_str(markdown_str, output_file):
 
 def html_str_to_dita_str(html_str, output_file):
     """Return a DITA string from an HTML string (with the use of Markdown as the intermediary format)."""
-    markdown_str = html_str_to_markdown_str(html_str)
+    markdown_str = html_str_to_markdown_str(html_str, output_file)
     dita_str = markdown_str_to_dita_str(markdown_str, output_file)
     return dita_str
 
-def html_str_to_markdown_str(html_str):
+def html_str_to_markdown_str(html_str, output_file):
     """Return a Markdown String from an HTML string."""
     markdown_str = tomd.convert(html_str)
     markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
@@ -57,7 +57,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     existing_files_str = "\n".join(existing_files)
     existing_files_str = "     * " + existing_files_str.replace("\n", "\n     * ")
     if len(existing_files) > 0:
-        prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files_str}\n     ")
+        prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files_str}\n [>] ")
         if prompt == "y" or prompt == "Y":
             pass
         elif prompt != "y" or prompt != "Y":

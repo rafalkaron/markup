@@ -10,7 +10,7 @@ from MarkUP import (md_dita,
                     md_html,
                     html_md,
                     html_dita)
-__version__ = "0.4"
+__version__ = "0.5"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 def main():
     #sys.tracebacklimit = 0 # Disable traceback messages
@@ -48,7 +48,7 @@ def main():
     elif args.convert == "html_md":
         html_md(args.input, output_dir)
     else:
-        print(" [!] Run MarkUP again and set a right conversion type.\n")
+        print(" [!] Run MarkUP again and set an allowed conversion type.\n")
         par.print_help()
 
 if __name__ == "__main__":
