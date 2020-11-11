@@ -18,7 +18,7 @@ Batch-convert Markdown and HTML files.
         * `html_md` - converts HTML to Markdown
     * **--output** or **-out** (optional) precedes the directory where you want to save the converted files.  
     **TIP:** By default the output directory is the same as the input directory.
-2. If needed, accept any security prompt. For more information, see [Accepting macOS Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-macOS-Security-Prompts) or [Accepting Windows Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-Windows-Security-Prompts)
+2. If needed, accept any security prompt. For more information, see [Accepting macOS Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-macOS-Security-Prompts) or [Accepting Windows Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-Windows-Security-Prompts).
 
 ## Examples
 

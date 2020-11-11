@@ -112,7 +112,7 @@ def md_dita(source, output_dir):
     if os.path.isfile(source):
         convert_file(source, "md", markdown_str_to_dita_str, output_dir, "dita")
     elif os.path.isdir(source):
-        details = convert_folder(source, "md", markdown_str_to_dita_str, output_dir, "dita")
+        convert_folder(source, "md", markdown_str_to_dita_str, output_dir, "dita")
     else:
         raise Exception(f" [!] {source} does not exist.")
 
