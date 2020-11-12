@@ -3,6 +3,7 @@ __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
 import glob
 import os
+import sys
 
 def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
@@ -36,3 +37,11 @@ def file_extension(filepath):
     """Return file extension from a file path."""
     file_extension = os.path.splitext(filepath)[1][1:]
     return file_extension
+
+def boolean_prompt(prompt_str):
+    prompt = input(prompt_str)
+    if prompt == "y" or prompt == "Y":
+        pass
+    elif prompt != "y" or prompt != "Y":
+        print(f" [i] Cancelled.")
+        sys.exit(0)

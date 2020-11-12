@@ -8,7 +8,11 @@ import re
 import uuid
 import time
 import os
-from .files import read_file, save_str_as_file, files_list, file_extension
+from .files import (read_file,
+                    save_str_as_file,
+                    files_list,
+                    file_extension,
+                    boolean_prompt)
 
 def markdown_str_to_html_str(markdown_str, output_file):
     """Return an HTML string from a Markdown string."""
@@ -57,13 +61,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
     existing_files_str = "\n".join(existing_files)
     existing_files_str = "     * " + existing_files_str.replace("\n", "\n     * ")
     if len(existing_files) > 0:
-        prompt = input(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files_str}\n [>] ")
-        if prompt == "y" or prompt == "Y":
-            pass
-        elif prompt != "y" or prompt != "Y":
-            print(" [i] Cancelled conversion.")
-            return False
-
+        boolean_prompt(f" [?] Do you want to overwrite the following files? [y/n]\n{existing_files_str}\n [>] ")
     for input_filepath in input_files:
         start_time = time.time()
         output_file = os.path.basename(re.sub(f".{source_extension}", f".{output_extension}", input_filepath, flags=re.IGNORECASE))
@@ -85,12 +83,7 @@ def convert_file(source, source_extension, converter, output_dir, output_extensi
     output_filepath = output_dir + "/" + output_file
     output_filepath = output_filepath.replace("//", "/")
     if os.path.isfile(output_filepath):
-        prompt = input(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
-        if prompt == "y" or prompt == "Y":
-            pass
-        elif prompt != "y" or prompt != "Y":
-            print(" [i] Cancelled conversion.")
-            return False
+        boolean_prompt(f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
     start_time = time.time()
     output_str = converter(read_file(source), output_file)
     save_str_as_file(output_str, output_filepath)
