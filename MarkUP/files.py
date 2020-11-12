@@ -12,11 +12,6 @@ def files_list(directory, files_extension):
     files_list = files_list_lowercase + files_list_uppercase
     return files_list
 
-def enter_filepath():
-    """Manually enter file path."""
-    filepath = input("Manually enter file path").replace("\"", "").replace("\'","")  
-    return filepath
-
 def read_file(filepath):
     """Return a string with file contents."""
     with open(filepath, mode='rt', encoding='utf-8') as f:
