@@ -1,37 +1,36 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/rafalkaron/MarkUP/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# MarkUP
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Batch-convert Markdown and HTML files.
 
-### Markdown
+## Before you begin
+1. Download the newest **MarkUP** version. See [Download MarkUP](https://github.com/rafalkaron/MarkUP/releases/latest).
+2. Unzip **MarkUP**.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Usage
+1. In a terminal app, run: `markup <source> <conversion_type> --output <output_dir>`  
+    Where:
+    * **&lt;source&gt;** (required) is the file or directory that contains files that you want to convert.
+    * **&lt;conversion_type&gt;** (required) is one of the following:
+        * `md_dita` - converts Markdown to DITA
+        * `html_dita` - converts HTML to DITA
+        * `md_html` - converts Markdown to HTML
+        * `html_md` - converts HTML to Markdown
+    * **--output** or **-out** (optional) precedes the directory where you want to save the converted files.  
+    **TIP:** By default the output directory is the same as the input directory.
+2. If needed, accept any security prompt. For more information, see [Accepting macOS Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-macOS-Security-Prompts) or [Accepting Windows Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-Windows-Security-Prompts).
 
-```markdown
-Syntax highlighted code block
+## Examples
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+The following converts every Markdown file to DITA in the `Downloads` directory.
 ```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rafalkaron/MarkUP/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+MarkUP "/Users/user_name/Downloads" md_dita
+```
+The following coverts the `README.html` file to DITA in the `Desktop` directory.
+```
+MarkUP "/Users/user_name/Desktop/README.html" html_dita
+```
+The following converts every Markdown file from the `Downloads` directory to HTML and saves the HTML files to the `Destkop` directory.
+```
+MarkUP "/Users/user_name/Downloads" md_html -out "/Users/user_name/Desktop/"
+```
