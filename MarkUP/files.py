@@ -39,6 +39,7 @@ def file_extension(filepath):
     return file_extension
 
 def boolean_prompt(prompt_str):
+    """Exit program on any other response than 'y' or 'Y'"""
     prompt = input(prompt_str)
     if prompt == "y" or prompt == "Y":
         pass

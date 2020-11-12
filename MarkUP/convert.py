@@ -71,7 +71,7 @@ def convert_folder(source, source_extension, converter, output_dir, output_exten
         iter_time = time.time() - start_time
         elapsed_time = elapsed_time + iter_time
         print(f" [+] Converted {input_filepath} to {output_filepath}")
-    print(f" [✔] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
+    print(f" [i] Converted {files_number} {source_extension.upper()} file(s) to {output_extension.upper()} in {round(elapsed_time, 3)} seconds.")
     return True
 
 def convert_file(source, source_extension, converter, output_dir, output_extension):
@@ -88,7 +88,7 @@ def convert_file(source, source_extension, converter, output_dir, output_extensi
     output_str = converter(read_file(source), output_file)
     save_str_as_file(output_str, output_filepath)
     elapsed_time = time.time() - start_time
-    print(f" [✔] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
+    print(f" [i] Converted {source} to {output_filepath} in {round(elapsed_time, 3)} seconds.")
     return True
 
 def md_html(source, output_dir):
