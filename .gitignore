@@ -141,3 +141,5 @@ sample_files
 
 sr
 .vscode
+.*
+_site
