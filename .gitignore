@@ -141,5 +141,6 @@ sample_files
 
 sr
 .vscode
-.*
+.jekyll-cache
+.sass-cache
 _site
