@@ -12,17 +12,23 @@ from MarkUP import (md_dita,
                     html_dita)
 __version__ = "0.5.1"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
+
+
 def main():
-    #sys.tracebacklimit = 0 # Disable traceback messages
-    par = argparse.ArgumentParser(description="Batch-convert Markdown and HTML files.", formatter_class=argparse.RawTextHelpFormatter)
-    par.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
-    par.add_argument("input", type=str, help="provide a filepath to a file or a folder with files that you want to convert")
+    # sys.tracebacklimit = 0 # Disable traceback messages
+    par = argparse.ArgumentParser(
+        description="Batch-convert Markdown and HTML files.", formatter_class=argparse.RawTextHelpFormatter)
+    par.add_argument("-v", "--version", action="version",
+                     version=f"%(prog)s {__version__}")
+    par.add_argument(
+        "input", type=str, help="provide a filepath to a file or a folder with files that you want to convert")
     par.add_argument("convert", type=str, help="""set the conversion type:
  * md_dita - convert Markdown to DITA
  * html_dita - convert HTML to DITA
  * md_html - convert Markdown to HTML
  * html_md - convert HTML to Markdown""")
-    par.add_argument("-out", "--output", metavar="output_dir", help="manually specify the output folder (defaults to the input folder)")
+    par.add_argument("-out", "--output", metavar="output_dir",
+                     help="manually specify the output folder (defaults to the input folder)")
     args = par.parse_args()
 
     # Input and output folders
@@ -50,6 +56,7 @@ def main():
     else:
         print(" [!] Run MarkUP again and set an allowed conversion type.\n")
         par.print_help()
+
 
 if __name__ == "__main__":
     main()
