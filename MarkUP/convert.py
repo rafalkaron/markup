@@ -53,6 +53,7 @@ class Source:
 
     def convert(self):
         source_files_list = []
+        output_files_list = []
 
         if self.is_source_dir == True:
             source_files_list = files_list(self.source, self.source_extension)
@@ -82,9 +83,10 @@ class Source:
             elif self.conversion == "html_md":
                 output_str = self.html_str_to_markdown_str(source_file_str)
 
-            save_str_as_file(output_str, output_filepath)
+            output_file = save_str_as_file(output_str, output_filepath)
+            output_files_list.append(output_file)
 
-        return True
+        return output_files_list
 
     @staticmethod
     def markdown_str_to_dita_str(markdown_str, output_filename) -> str:
