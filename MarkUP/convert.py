@@ -51,60 +51,62 @@ class Source:
             raise Exception(
                 f"{conversion} is not an allowed conversion type. Try entering: 'md_dita', 'html_dita', 'md_html', or 'html_md'")
 
-        def convert(self):
-            if self.is_source_dir == False:
-                source_file = self.source
-                source_file_str = read_file(self.source)
-                output_file = self.input.replace(
-                    self.source_extension, self.output_extension)
-                output_filepath = f"{self.output_dir}/{output_file}"
+    def convert(self):
+        if self.is_source_dir == False:
+            source_file = self.source
+            source_file_str = read_file(self.source)
+            output_file = self.source.replace(
+                self.source_extension, self.output_extension)
+            output_filepath = f"{self.output_dir}/{output_file}"
 
-                if os.path.isfile(output_filepath):
-                    boolean_prompt(
-                        f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
+            if os.path.isfile(output_filepath):
+                boolean_prompt(
+                    f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
 
-                if conversion == "md_dita":
-                    dita_str = markdown_str_to_dita_str(source_file_str)
-                elif conversion == "html_dita":
-                    dita_str = html_str_to_dita_str(source_file_str)
-                elif conversion == "md_html":
-                    html_str = markdown_str_to_html_str(source_file_str)
-                elif conversion == "html_md":
-                    md_str = html_str_to_markdown_str(source_file_str)
+            if self.conversion == "md_dita":
+                output_str = self.markdown_str_to_dita_str(source_file_str)
+            elif self.conversion == "html_dita":
+                output_str = self.html_str_to_dita_str(source_file_str)
+            elif self.conversion == "md_html":
+                output_str = self.markdown_str_to_html_str(source_file_str)
+            elif self.conversion == "html_md":
+                output_str = self.html_str_to_markdown_str(source_file_str)
 
-        @staticmethod
-        def markdown_str_to_dita_str(markdown_str, output_file) -> str:
-            converter = markdown2dita.Markdown(title_level=4)
-            dita_str = converter(markdown_str)
-            dita_str = re.sub("id=\"enter-id-here\"",
-                              f"id=\"concept-{uuid.uuid4()}\"", dita_str)
-            # Fixes a markdown2dita bug
-            dita_str = re.sub(">\n><", ">\n<", dita_str)
-            dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>",
-                              "<shortdesc></shortdesc>", dita_str)    # Removes the hardcoded shortdesc
-            dita_str = re.sub("<title>Enter the page title here</title>",
-                              f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # Replaces the title to match filename
-            dita_str = re.sub("\n\n", "\n", dita_str)
-            return dita_str
+            return save_str_as_file(output_str, output_filepath)
 
-        @staticmethod
-        def html_str_to_dita_str(html_str) -> str:
-            markdown_str = html_str_to_markdown_str(html_str)
-            dita_str = markdown_str_to_dita_str(markdown_str)
-            return dita_str
+    @staticmethod
+    def markdown_str_to_dita_str(markdown_str) -> str:
+        converter = markdown2dita.Markdown(title_level=4)
+        dita_str = converter(markdown_str)
+        dita_str = re.sub("id=\"enter-id-here\"",
+                          f"id=\"concept-{uuid.uuid4()}\"", dita_str)
+        # Fixes a markdown2dita bug
+        dita_str = re.sub(">\n><", ">\n<", dita_str)
+        dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>",
+                          "<shortdesc></shortdesc>", dita_str)    # Removes the hardcoded shortdesc
+        # dita_str = re.sub("<title>Enter the page title here</title>",
+        #                  f"<title>{output_file.replace('.dita', '')}</title>", dita_str)   # Replaces the title to match filename
+        dita_str = re.sub("\n\n", "\n", dita_str)
+        return dita_str
 
-        @staticmethod
-        def markdown_str_to_html_str(markdown_str) -> str:
-            html_str = mistune.markdown(markdown_str)
-            html_str = re.sub(r"&lt;", r"<", html_str)
-            html_str = re.sub(r"&gt;", r">", html_str)
-            return html_str
+    @staticmethod
+    def html_str_to_dita_str(html_str) -> str:
+        markdown_str = html_str_to_markdown_str(html_str)
+        dita_str = markdown_str_to_dita_str(markdown_str)
+        return dita_str
 
-        @staticmethod
-        def html_str_to_markdown_str(html_str) -> str:
-            markdown_str = tomd.convert(html_str)
-            markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
-            return markdown_str
+    @staticmethod
+    def markdown_str_to_html_str(markdown_str) -> str:
+        html_str = mistune.markdown(markdown_str)
+        html_str = re.sub(r"&lt;", r"<", html_str)
+        html_str = re.sub(r"&gt;", r">", html_str)
+        return html_str
+
+    @staticmethod
+    def html_str_to_markdown_str(html_str) -> str:
+        markdown_str = tomd.convert(html_str)
+        markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
+        return markdown_str
 
     """
     def convert_file(self, source, converter, output_extension):
