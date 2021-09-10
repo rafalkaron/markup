@@ -22,9 +22,9 @@ class Source:
         self.output_dir = output_dir
 
         # Determine if input is a dir or file
-        if os.path.isfile(source):
+        if os.path.isfile(self.source):
             self.is_source_dir = False
-        elif os.path.isdir(source):
+        elif os.path.isdir(self.source):
             self.is_source_dir = True
 
         # Set the output dir (defaults to the input dir)
@@ -56,16 +56,11 @@ class Source:
 
         if self.is_source_dir == True:
             source_files_list = files_list(self.source, self.source_extension)
-            print(source_files_list)
 
         elif self.is_source_dir == False:
-            source_files_list = source_files_list.append(self.source)
-            source_files_list = list(source_files_list)
+            source_files_list = [self.source]
 
         for source_item in source_files_list:
-            print(source_item)
-
-            #source_file = self.source
             source_file_str = read_file(source_item)
             output_file = source_item.replace(
                 self.source_extension, self.output_extension)
