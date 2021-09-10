@@ -52,10 +52,19 @@ class Source:
                 f"{conversion} is not an allowed conversion type. Try entering: 'md_dita', 'html_dita', 'md_html', or 'html_md'")
 
     def convert(self):
-        if self.is_source_dir == False:
-            source_file = self.source
-            source_file_str = read_file(self.source)
-            output_file = self.source.replace(
+        source_files_list = []
+
+        if self.is_source_dir == True:
+            source_files_list = files_list(self.source, self.source_extension)
+            print(source_files_list)
+
+        elif self.is_source_dir == False:
+            source_files_list = source_files_list.append(self.source)
+            print(source_files_list)
+
+        for source_file in source_files_list:
+            source_file_str = read_file(source_file)
+            output_file = source_file.replace(
                 self.source_extension, self.output_extension)
             output_filename = os.path.basename(output_file)
             output_filepath = f"{self.output_dir}/{output_filename}"
@@ -92,8 +101,8 @@ class Source:
 
     @staticmethod
     def html_str_to_dita_str(html_str) -> str:
-        markdown_str = html_str_to_markdown_str(html_str)
-        dita_str = markdown_str_to_dita_str(markdown_str)
+        markdown_str = Source.html_str_to_markdown_str(html_str)
+        dita_str = Source.markdown_str_to_dita_str(markdown_str)
         return dita_str
 
     @staticmethod
@@ -108,6 +117,9 @@ class Source:
         markdown_str = tomd.convert(html_str)
         markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
         return markdown_str
+
+    def pretty_print(self):
+        pass
 
     """
     def convert_file(self, source, converter, output_extension):
