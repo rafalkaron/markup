@@ -6,12 +6,11 @@ import markdown2dita
 import tomd
 import re
 import uuid
-import time
 import os
+from lxml import etree
 from .files import (read_file,
                     save_str_as_file,
                     files_list,
-                    file_extension,
                     boolean_prompt)
 
 
@@ -94,7 +93,6 @@ class Source:
         dita_str = converter(markdown_str)
         dita_str = re.sub("id=\"enter-id-here\"",
                           f"id=\"concept-{uuid.uuid4()}\"", dita_str)
-        # Fixes a markdown2dita bug
         dita_str = re.sub(">\n><", ">\n<", dita_str)
         dita_str = re.sub(r"<shortdesc>Enter the short description for this page here</shortdesc>",
                           "<shortdesc></shortdesc>", dita_str)    # Removes the hardcoded shortdesc
@@ -123,5 +121,10 @@ class Source:
         markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
         return markdown_str
 
-    def pretty_print(self):
-        pass
+    """
+    @staticmethod
+    def pretty_print_html(self):
+        soup_html = BeautifulSoup(
+            open(self.bridge_html_filepath), "html.parser")
+        return self.save_str_as_file(soup_html.prettify(), self.bridge_html_filepath)
+    """
