@@ -52,19 +52,16 @@ class Source:
                 f"{conversion} is not an allowed conversion type. Try entering: 'md_dita', 'html_dita', 'md_html', or 'html_md'")
 
     def convert(self):
-        source_files_list = []
-
         if self.is_source_dir == True:
             source_files_list = files_list(self.source, self.source_extension)
             print(source_files_list)
 
         elif self.is_source_dir == False:
-            source_files_list = source_files_list.append(self.source)
-            print(source_files_list)
+            source_files_list = list(self.source)
 
-        for source_file in source_files_list:
-            source_file_str = read_file(source_file)
-            output_file = source_file.replace(
+            #source_file = self.source
+            source_file_str = read_file(self.source)
+            output_file = self.source.replace(
                 self.source_extension, self.output_extension)
             output_filename = os.path.basename(output_file)
             output_filepath = f"{self.output_dir}/{output_filename}"
