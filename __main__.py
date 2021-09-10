@@ -23,7 +23,7 @@ def main():
     * html_dita - convert HTML to DITA
     * md_html - convert Markdown to HTML
     * html_md - convert HTML to Markdown""")
-    par.add_argument("-out", "--output", metavar="folder_path",
+    par.add_argument("-out", "--output", metavar="folder_path", default="",
                      help="manually specify the output folder (defaults to the input DITA file folder)")
     args = par.parse_args()
 
