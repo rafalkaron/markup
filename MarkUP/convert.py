@@ -57,7 +57,8 @@ class Source:
             source_file_str = read_file(self.source)
             output_file = self.source.replace(
                 self.source_extension, self.output_extension)
-            output_filepath = f"{self.output_dir}/{output_file}"
+            output_dir = os.path.dirname(output_file)
+            output_filepath = f"{output_file}"
 
             if os.path.isfile(output_filepath):
                 boolean_prompt(
