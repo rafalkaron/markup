@@ -10,8 +10,7 @@ import os
 from lxml import etree
 from .files import (read_file,
                     save_str_as_file,
-                    files_list,
-                    boolean_prompt)
+                    files_list)
 
 
 class Source:
@@ -53,6 +52,7 @@ class Source:
     def convert(self):
         source_files_list = []
         output_files_list = []
+        convert_all = False
 
         if self.is_source_dir == True:
             source_files_list = files_list(self.source, self.source_extension)
@@ -67,10 +67,6 @@ class Source:
             output_filename = os.path.basename(output_file)
             output_filepath = f"{self.output_dir}/{output_filename}"
 
-            if os.path.isfile(output_filepath):
-                boolean_prompt(
-                    f" [?] Do you want to overwrite {output_filepath}? [y/n]: ")
-
             if self.conversion == "md_dita":
                 output_str = self.markdown_str_to_dita_str(
                     source_file_str, output_filename)
@@ -82,8 +78,24 @@ class Source:
             elif self.conversion == "html_md":
                 output_str = self.html_str_to_markdown_str(source_file_str)
 
-            output_file = save_str_as_file(output_str, output_filepath)
-            output_files_list.append(output_file)
+            if os.path.isfile(output_filepath) and convert_all == False:
+                prompt_overwrite = input(
+                    f" [?] Do you want to overwrite {output_filepath} [y/a/n]? ")
+
+                if prompt_overwrite == "y" or prompt_overwrite == "Y":
+                    output_file = save_str_as_file(output_str, output_filepath)
+                    output_files_list.append(output_file)
+                elif prompt_overwrite == "a" or prompt_overwrite == "A":
+                    convert_all = True
+                    print(f" [i] Overwriting all target files.")
+                    output_file = save_str_as_file(output_str, output_filepath)
+                    output_files_list.append(output_file)
+                elif prompt_overwrite != "y" or prompt_overwrite != "Y" or boolean_prompt != "a" or prompt_overwrite != "A":
+                    print(f" [i] Skipped: {output_filepath}")
+
+            elif not os.path.isfile(output_filepath) or convert_all == True:
+                output_file = save_str_as_file(output_str, output_filepath)
+                output_files_list.append(output_file)
 
         return output_files_list
 

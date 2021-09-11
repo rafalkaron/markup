@@ -2,8 +2,6 @@
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
 import glob
-import os
-import sys
 
 
 def files_list(directory, files_extension):
@@ -32,19 +30,3 @@ def save_str_as_file(str, filepath) -> str:
     with open(filepath, "w", encoding="utf-8") as file:
         file.write(str)
     return filepath
-
-
-def file_extension(filepath):
-    """Return file extension from a file path."""
-    file_extension = os.path.splitext(filepath)[1][1:]
-    return file_extension
-
-
-def boolean_prompt(prompt_str):
-    """Exit program on any other response than 'y' or 'Y'"""
-    prompt = input(prompt_str)
-    if prompt == "y" or prompt == "Y":
-        pass
-    elif prompt != "y" or prompt != "Y":
-        print(f" [i] Cancelled.")
-        sys.exit(0)
