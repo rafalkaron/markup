@@ -28,8 +28,7 @@ def main():
     args = par.parse_args()
 
     source = Source(args.input, args.convert, args.output)
-    output_files = source.convert()
-    print(output_files)
+    Source.output_files = source.convert()
 
 
 if __name__ == "__main__":

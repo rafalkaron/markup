@@ -121,10 +121,6 @@ class Source:
         markdown_str = re.sub(r"\n\s*\n\s*", "\n\n", markdown_str)
         return markdown_str
 
-    """
     @staticmethod
     def pretty_print_html(self):
-        soup_html = BeautifulSoup(
-            open(self.bridge_html_filepath), "html.parser")
-        return self.save_str_as_file(soup_html.prettify(), self.bridge_html_filepath)
-    """
+        pass
