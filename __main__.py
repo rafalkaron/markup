@@ -6,7 +6,7 @@ Batch-convert Markdown and HTML files.
 import argparse
 from MarkUP import (Source)
 
-__version__ = "0.6.2"
+__version__ = "0.6.3"
 __author__ = "Rafał Karoń <rafalkaron@gmail.com>"
 
 

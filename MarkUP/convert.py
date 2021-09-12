@@ -61,12 +61,11 @@ class Source:
                 f".{self.source_extension}", f".{self.output_extension}")
             output_filename = os.path.basename(output_file)
 
+            # Determine the output dir
             if self.output_dir == "":
                 output_filepath = output_file
-
             elif self.output_dir != "":
                 output_filepath = f"{self.output_dir}/{output_filename}"
-
             if not os.path.exists(os.path.dirname(output_filepath)):
                 os.makedirs(os.path.dirname(output_filepath))
 
