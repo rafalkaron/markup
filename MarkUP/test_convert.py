@@ -165,7 +165,7 @@ class TestConvertFolder(unittest.TestCase):
 
     def test_html_to_md(self):
 
-        output_files = files_list(md_dir, "md")
+        output_files = files_list(html_dir, "md")
         for i in output_files:
             os.remove(i)
 
