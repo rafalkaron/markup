@@ -50,7 +50,7 @@ class TestConvert(unittest.TestCase):
 
     def test_html_to_dita_file(self):
         try:
-            os.remove(self.md_a_filepath.replace(".html", ".dita"))
+            os.remove(self.html_a_filepath.replace(".html", ".dita"))
         except:
             pass
 
@@ -61,7 +61,7 @@ class TestConvert(unittest.TestCase):
 
     def test_html_to_md_file(self):
         try:
-            os.remove(self.md_a_filepath.replace(".html", ".md"))
+            os.remove(self.html_a_filepath.replace(".html", ".md"))
         except:
             pass
 
