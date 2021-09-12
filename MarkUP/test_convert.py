@@ -229,3 +229,25 @@ class TestConvertFolderOutput(unittest.TestCase):
 
         for i in output_filepath:
             self.assertTrue(os.path.isfile(i))
+
+
+class TestPromptOverwrite(unittest.TestCase):
+
+    def test_abort(self):
+        source = Source(html_dir, "html_dita", output_dir)
+
+        with mock.patch('builtins.input', return_value=""):
+            output_filepath = source.convert()
+        self.assertEqual(output_filepath, [])
+
+        with mock.patch('builtins.input', return_value="Aa"):
+            output_filepath = source.convert()
+        self.assertEqual(output_filepath, [])
+
+        with mock.patch('builtins.input', return_value="na"):
+            output_filepath = source.convert()
+        self.assertEqual(output_filepath, [])
+
+        with mock.patch('builtins.input', return_value="na"):
+            output_filepath = source.convert()
+        self.assertEqual(output_filepath, [])
