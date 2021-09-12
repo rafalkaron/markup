@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept xml:lang="en-us" id="concept-da41e405-26c2-4a38-81ad-c879178a804a">
-<title>a</title>
+<concept xml:lang="en-us" id="concept-1a8df00a-f052-4f67-8ae4-24afc8e83e67">
+<title>B</title>
 <shortdesc></shortdesc>
 <conbody>
-<section><title>MarkUP</title><p>Batch-convert Markdown and HTML files. CHANGED</p>
-</section><section><title>Before you begin</title><ol><li>Download the newest MarkUP version. See <xref href="https://github.com/rafalkaron/MarkUP/releases/latest">Download MarkUP</xref>.</li><li>Unzip <b>MarkUP</b>.</li></ol></section><section><title>Usage</title><p><li>In terminal, run: <codeph>markup &lt;input&gt; &lt;conversion_type&gt; -output_dir &lt;output_dir&gt;</codeph>
+<section><title>MarkUP</title><p>Batch-convert Markdown and HTML files.</p>
+</section><section><title>Before you begin</title><ol><li>Download the newest MarkUP version. See <xref href="https://github.com/rafalkaron/MarkUP/releases/latest">Download MarkUP</xref>.</li><li>Unzip <b>MarkUP</b>.</li></ol></section><section><title>Usage</title><p><li>In terminal, run: <codeph>markup &lt;input&gt; &lt;conversion_type&gt; -output_dir &lt;output_dir&gt;</codeph> 
  Where:<ul></p>
 <ol><li><b><input></b> (required) is the file or directory that contains files that you want to convert.
 <li><b><conversion_type></b> (required) is one of the following:<ul></li><li><codeph>md_dita</codeph> - converts Markdown to DITA</li><li><codeph>html_dita</codeph> - converts HTML to DITA</li><li><codeph>md_html</codeph> - Converts Markdown to HTML</li><li><codeph>html_md</codeph> - Converts HTML to Markdown

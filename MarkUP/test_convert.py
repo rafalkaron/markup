@@ -1,3 +1,4 @@
+from MarkUP.files import files_list
 import unittest
 import mock
 import os
@@ -123,4 +124,108 @@ class TestConvertFileOutput(unittest.TestCase):
 
 
 class TestConvertFolder(unittest.TestCase):
-    pass
+    def test_md_to_dita(self):
+
+        output_files = files_list(md_dir, "dita")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(md_dir, "md_dita")
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+    def test_md_to_html(self):
+
+        output_files = files_list(md_dir, "html")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(md_dir, "md_html")
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+    def test_html_to_dita(self):
+
+        output_files = files_list(md_dir, "dita")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(html_dir, "html_dita")
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+    def test_html_to_md(self):
+
+        output_files = files_list(md_dir, "md")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(html_dir, "html_md")
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+
+class TestConvertFolderOutput(unittest.TestCase):
+    def test_md_to_dita(self):
+
+        output_files = files_list(output_dir, "dita")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(md_dir, "md_dita", output_dir)
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+    def test_md_to_html(self):
+
+        output_files = files_list(output_dir, "html")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(md_dir, "md_html", output_dir)
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+    def test_html_to_dita(self):
+
+        output_files = files_list(output_dir, "dita")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(html_dir, "html_dita", output_dir)
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
+
+    def test_html_to_md(self):
+
+        output_files = files_list(output_dir, "md")
+        for i in output_files:
+            os.remove(i)
+
+        source = Source(html_dir, "html_md", output_dir)
+        with mock.patch('builtins.input', return_value="a"):
+            output_filepath = source.convert()
+
+        for i in output_filepath:
+            self.assertTrue(os.path.isfile(i))
