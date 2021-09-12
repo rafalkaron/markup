@@ -1,6 +1,7 @@
 import unittest
 import mock
 import os
+import shutil
 from MarkUP import Source
 
 
@@ -72,3 +73,54 @@ class TestConvertFile(unittest.TestCase):
             output_filepath = source.convert()[0]
         self.assertTrue(os.path.isfile(output_filepath))
         self.assertEqual(output_filepath, html_a_md_filepath)
+
+
+class TestConvertFileOutput(unittest.TestCase):
+
+    def test_md_to_dita(self):
+        try:
+            shutil.rmtree(output_dir)
+        except:
+            pass
+
+        source = Source(md_a_filepath, "md_dita", output_dir)
+        with mock.patch('builtins.input', return_value="y"):
+            output_filepath = source.convert()[0]
+        self.assertTrue(os.path.isfile(output_filepath))
+
+    def test_md_to_html(self):
+        try:
+            shutil.rmtree(output_dir)
+        except:
+            pass
+
+        source = Source(md_a_filepath, "md_html", output_dir)
+        with mock.patch('builtins.input', return_value="y"):
+            output_filepath = source.convert()[0]
+        self.assertTrue(os.path.isfile(output_filepath))
+
+    def test_html_to_dita(self):
+        try:
+            shutil.rmtree(output_dir)
+        except:
+            pass
+
+        source = Source(html_a_filepath, "html_dita", output_dir)
+        with mock.patch('builtins.input', return_value="y"):
+            output_filepath = source.convert()[0]
+        self.assertTrue(os.path.isfile(output_filepath))
+
+    def test_html_to_md(self):
+        try:
+            shutil.rmtree(output_dir)
+        except:
+            pass
+
+        source = Source(html_a_filepath, "html_md", output_dir)
+        with mock.patch('builtins.input', return_value="y"):
+            output_filepath = source.convert()[0]
+        self.assertTrue(os.path.isfile(output_filepath))
+
+
+class TestConvertFolder(unittest.TestCase):
+    pass

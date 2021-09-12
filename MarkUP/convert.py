@@ -32,6 +32,10 @@ class Source:
             elif self.is_source_dir == True:
                 self.output_dir = source
 
+        # Create the output dir if needed
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
+
         # Set the conversion type
         if conversion == "md_dita":
             self.source_extension = "md"
