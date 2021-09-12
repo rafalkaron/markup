@@ -26,17 +26,6 @@ class Source:
         elif os.path.isdir(self.source):
             self.is_source_dir = True
 
-        # Set the output dir (defaults to the input dir)
-        if self.output_dir == "":
-            if self.is_source_dir == False:
-                self.output_dir = os.path.dirname(source)
-            elif self.is_source_dir == True:
-                self.output_dir = source
-
-        # Create the output dir if needed
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
-
         # Set the conversion type
         if conversion == "md_dita":
             self.source_extension = "md"
@@ -66,11 +55,19 @@ class Source:
             source_files_list = [self.source]
 
         for source_item in source_files_list:
+
             source_file_str = read_file(source_item)
             output_file = source_item.replace(
-                self.source_extension, self.output_extension)
+                f".{self.source_extension}", f".{self.output_extension}")
             output_filename = os.path.basename(output_file)
-            output_filepath = f"{self.output_dir}/{output_filename}"
+
+            # Determine the output dir
+            if self.output_dir == "":
+                output_filepath = output_file
+            elif self.output_dir != "":
+                output_filepath = f"{self.output_dir}/{output_filename}"
+            if not os.path.exists(os.path.dirname(output_filepath)):
+                os.makedirs(os.path.dirname(output_filepath))
 
             if self.conversion == "md_dita":
                 output_str = self.markdown_str_to_dita_str(

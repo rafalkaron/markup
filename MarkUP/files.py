@@ -7,9 +7,9 @@ import glob
 def files_list(directory, files_extension):
     """Return a list of files with a given extension in a directory."""
     files_list_lowercase = glob.glob(
-        f"{directory}/*.{files_extension.lower()}")
+        f"{directory}/**/*.{files_extension.lower()}", recursive=True)
     files_list_uppercase = glob.glob(
-        f"{directory}/*.{files_extension.upper()}")
+        f"{directory}/**/*.{files_extension.upper()}", recursive=True)
     files_list = files_list_lowercase + files_list_uppercase
     return files_list
 
