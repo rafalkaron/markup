@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept xml:lang="en-us" id="concept-054a9b85-f57b-4cba-9191-42d047529f3d">
+<title>B</title>
+<shortdesc></shortdesc>
+<conbody>
+<section><title>MarkUP</title><p>Batch-convert Markdown and HTML files.</p>
+</section><section><title>Before you begin</title><ol><li>Download the newest <b>MarkUP</b> version. See <xref href="https://github.com/rafalkaron/MarkUP/releases/latest">Download MarkUP</xref>.</li><li>Unzip <b>MarkUP</b>.</li></ol></section><section><title>Usage</title><ol><li>In a terminal app, run: <codeph>markup &lt;source&gt; &lt;conversion_type&gt; --output &lt;output_dir&gt;</codeph><br>
+ Where:<ul><li><b>&lt;source&gt;</b> (required) is the file or directory that contains files that you want to convert.</li><li><b>&lt;conversion_type&gt;</b> (required) is one of the following:<ul><li><codeph>md_dita</codeph> - converts Markdown to DITA</li><li><codeph>html_dita</codeph> - converts HTML to DITA</li><li><codeph>md_html</codeph> - converts Markdown to HTML</li><li><codeph>html_md</codeph> - converts HTML to Markdown</li></ul></li><li><b>--output</b> or <b>-out</b> (optional) precedes the directory where you want to save the converted files.<br>
+<b>TIP:</b> By default the output directory is the same as the input directory.</li></ul></li><li>If needed, accept any security prompt. For more information, see <xref href="https://github.com/rafalkaron/MarkUP/wiki/Accepting-macOS-Security-Prompts">Accepting macOS Security Prompts</xref> or <xref href="https://github.com/rafalkaron/MarkUP/wiki/Accepting-Windows-Security-Prompts">Accepting Windows Security Prompts</xref>.</li></ol></section><section><title>Examples</title><p>The following converts every Markdown file to DITA in the <codeph>Downloads</codeph> directory.</p>
+<codeblock>MarkUP "/Users/user_name/Downloads" md_dita</codeblock><p>The following coverts the <codeph>README.html</codeph> file to DITA in the <codeph>Desktop</codeph> directory.</p>
+<codeblock>MarkUP "/Users/user_name/Desktop/README.html" html_dita</codeblock><p>The following converts every Markdown file from the <codeph>Downloads</codeph> directory to HTML and saves the HTML files to the <codeph>Destkop</codeph> directory.</p>
+<codeblock>MarkUP "/Users/user_name/Downloads" md_html -out "/Users/user_name/Desktop/"</codeblock></section>
+</conbody>
+</concept>

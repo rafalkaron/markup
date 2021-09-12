@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept xml:lang="en-us" id="concept-87d50346-3ef9-4310-b0f2-34ed66b5981e">
+<title>a</title>
+<shortdesc></shortdesc>
+<conbody>
+<section><title>MarkUP</title><p>Batch-convert Markdown and HTML files. CHANGED</p>
+</section><section><title>Before you begin</title><ol><li>Download the newest MarkUP version. See <xref href="https://github.com/rafalkaron/MarkUP/releases/latest">Download MarkUP</xref>.</li><li>Unzip <b>MarkUP</b>.</li></ol></section><section><title>Usage</title><p><li>In terminal, run: <codeph>markup &lt;input&gt; &lt;conversion_type&gt; -output_dir &lt;output_dir&gt;</codeph>
+ Where:<ul></p>
+<ol><li><b><input></b> (required) is the file or directory that contains files that you want to convert.
+<li><b><conversion_type></b> (required) is one of the following:<ul></li><li><codeph>md_dita</codeph> - converts Markdown to DITA</li><li><codeph>html_dita</codeph> - converts HTML to DITA</li><li><codeph>md_html</codeph> - Converts Markdown to HTML</li><li><codeph>html_md</codeph> - Converts HTML to Markdown
+&lt;/ul&gt;
+&lt;/li&gt;<li>**-output_dir** or **-out** (optional) precede the directory where you want to save the converted files.<br>
+**TIP:** By default the output directory is the same as the input directory.</li>
+</ul>
+</li></li><li>If needed, accept any security prompt.</li></ol></section><section><title>Examples</title><p>The following converts every Markdown file to DITA in the <codeph>Downloads</codeph> directory.</p>
+<codeblock>MarkUP "/Users/user_name/Downloads" md_dita</codeblock><p>The following coverts the <codeph>README.html</codeph> file to DITA in the <codeph>Desktop</codeph> directory.</p>
+<codeblock>MarkUP "/Users/user_name/Desktop/README.html" html_dita</codeblock><p>The following converts every Markdown file from the <codeph>Downloads</codeph> directory to HTML and saves the HTML files to the <codeph>Destkop</codeph> directory.</p>
+<codeblock>MarkUP "/Users/user_name/Downloads" md_html -out "/Users/user_name/Desktop/"</codeblock></section>
+</conbody>
+</concept>

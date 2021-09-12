@@ -7,6 +7,7 @@ import tomd
 import re
 import uuid
 import os
+import sys
 from lxml import etree
 from .files import (read_file,
                     save_str_as_file,
@@ -31,6 +32,10 @@ class Source:
                 self.output_dir = os.path.dirname(source)
             elif self.is_source_dir == True:
                 self.output_dir = source
+
+        # Create the output dir if needed
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
 
         # Set the conversion type
         if conversion == "md_dita":
@@ -90,8 +95,11 @@ class Source:
                     print(f" [i] Overwriting all target files.")
                     output_file = save_str_as_file(output_str, output_filepath)
                     output_files_list.append(output_file)
-                elif prompt_overwrite != "y" or prompt_overwrite != "Y" or boolean_prompt != "a" or prompt_overwrite != "A":
+                elif prompt_overwrite == "n" or prompt_overwrite == "N":
                     print(f" [i] Skipped: {output_filepath}")
+                else:
+                    print(f" [i] Aborting.")
+                    break
 
             elif not os.path.isfile(output_filepath) or convert_all == True:
                 output_file = save_str_as_file(output_str, output_filepath)
