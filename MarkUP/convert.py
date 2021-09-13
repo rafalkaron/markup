@@ -7,11 +7,18 @@ import tomd
 import re
 import uuid
 import os
-import sys
+import logging
 from lxml import etree
 from .files import (read_file,
                     save_str_as_file,
                     files_list)
+
+# Configure logger (file and console)
+logging.basicConfig(filename=f"MarkUP.log",
+                    format='%(asctime)s | %(message)s', filemode='w')
+l = logging.getLogger()
+l.setLevel(logging.INFO)
+logging.getLogger().addHandler(logging.StreamHandler())
 
 
 class Source:
@@ -69,6 +76,8 @@ class Source:
             if not os.path.exists(os.path.dirname(output_filepath)):
                 os.makedirs(os.path.dirname(output_filepath))
 
+            l.info(f"Converting {source_item} to {output_filepath}")
+
             if self.conversion == "md_dita":
                 output_str = self.markdown_str_to_dita_str(
                     source_file_str, output_filename)
@@ -82,20 +91,22 @@ class Source:
 
             if os.path.isfile(output_filepath) and convert_all == False:
                 prompt_overwrite = input(
-                    f" [?] Do you want to overwrite {output_filepath} [y/a/n]? ")
+                    f"Do you want to overwrite {output_filepath} [y/a/n]? ")
 
                 if prompt_overwrite == "y" or prompt_overwrite == "Y":
+                    l.info(f"Overwriting the {output_filepath} file")
                     output_file = save_str_as_file(output_str, output_filepath)
                     output_files_list.append(output_file)
                 elif prompt_overwrite == "a" or prompt_overwrite == "A":
                     convert_all = True
-                    print(f" [i] Overwriting all target files.")
+                    l.info(
+                        f"Overwriting all output files: {source_files_list}")
                     output_file = save_str_as_file(output_str, output_filepath)
                     output_files_list.append(output_file)
                 elif prompt_overwrite == "n" or prompt_overwrite == "N":
-                    print(f" [i] Skipped: {output_filepath}")
+                    l.info(f"Skipped the {output_filepath} file")
                 else:
-                    print(f" [i] Aborting.")
+                    l.info(f"Exiting...")
                     break
 
             elif not os.path.isfile(output_filepath) or convert_all == True:

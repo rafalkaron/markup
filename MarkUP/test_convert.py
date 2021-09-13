@@ -251,3 +251,20 @@ class TestPromptOverwrite(unittest.TestCase):
         with mock.patch('builtins.input', return_value="na"):
             output_filepath = source.convert()
         self.assertEqual(output_filepath, [])
+
+
+class TestLogging(unittest.TestCase):
+
+    def test_log_creation(self):
+
+        source = Source(html_a_filepath, "html_dita")
+
+        with mock.patch('builtins.input', return_value="y"):
+            output_filepath = source.convert()[0]
+
+        self.assertTrue(os.path.isfile("MarkUP.log"))
+        os.remove("MarkUP.log")
+
+
+if __name__ == '__main__':
+    unittest.main()
