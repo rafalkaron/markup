@@ -10,17 +10,14 @@ Batch-convert Markdown and HTML files.
 
 ## Convert documents
 
-1. In a terminal, enter `markup <input> <conversion_type> -out <output_dir>`,  
-    where:
-    * **&lt;input&gt;** (required) is a path to a file or a directory that contains files to convert.
-    * **&lt;conversion_type&gt;** (required) is one of the following:
-        * `md_dita` - converts Markdown to DITA.
-        * `html_dita` - converts HTML to DITA.
-        * `md_html` - converts Markdown to HTML.
-        * `html_md` - converts HTML to Markdown.
-    * **-out &lt;output_dir&gt;** (optional) precedes the directory for the converted files.  
-    **TIP:** By default, the output directory is the same as the input directory.
-2. If needed, accept any security prompt.  
+1. In terminal, enter `markup` followed by these parameters:
+    | Parameter              | Required | Description                                           |
+    |------------------------|----------|-------------------------------------------------------|
+    | **`<input>`**          | Yes      | Path to a file or directory containing files to convert. |
+    | **`<conversion_type>`** | Yes      | One of the following conversion modes: <ul><li>`md_dita` - Converts Markdown to DITA.</li><li>`html_dita` - Converts HTML to DITA.</li><li>`md_html` - Converts Markdown to HTML.</li><li>`html_md` - Converts HTML to Markdown.</li></ul> |
+    | **`-out <output_dir>`** | No       | Directory for the converted files (defaults to the input directory). |
+
+2. If needed, accept any security prompts.  
 For more information, see [Accepting macOS Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-macOS-Security-Prompts) or [Accepting Windows Security Prompts](https://github.com/rafalkaron/MarkUP/wiki/Accepting-Windows-Security-Prompts).
 
 ## Examples
